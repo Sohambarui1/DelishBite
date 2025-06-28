@@ -213,61 +213,55 @@
   </div>
 
   <script>
-  const user = JSON.parse(localStorage.getItem('delishUser'));
+    const user = JSON.parse(localStorage.getItem('delishUser'));
+    const order = JSON.parse(localStorage.getItem(`delishOrder_${user?.email}`)) || [];
+    const cart = JSON.parse(localStorage.getItem(`delishCart_${user?.email}`)) || [];
+    const totalSpan = document.getElementById('orderTotal');
+    const totalContainer = document.getElementById('totalContainer');
+    const orderDetailsDiv = document.getElementById('orderDetails');
+    const proceedBtn = document.getElementById('proceedBtn');
+    const emptyMessage = document.getElementById('emptyMessage');
 
-  // Safely fallback if no user (e.g., not logged in)
-  const userEmail = user?.email || 'guest';
+    let total = 0;
 
-  const order = JSON.parse(localStorage.getItem(`delishOrder_${userEmail}`)) || [];
-  const cart = JSON.parse(localStorage.getItem(`delishCart_${userEmail}`)) || {};
-  const totalSpan = document.getElementById('orderTotal');
-  const totalContainer = document.getElementById('totalContainer');
-  const orderDetailsDiv = document.getElementById('orderDetails');
-  const proceedBtn = document.getElementById('proceedBtn');
-  const emptyMessage = document.getElementById('emptyMessage');
+    if (order.length === 0) {
+      emptyMessage.style.display = 'block';
+    } else {
+      order.forEach((item, index) => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'order-item';
+        itemEl.innerHTML = `
+          <span>${item.name} × ${item.qty}</span>
+          <span>₹${item.price * item.qty}</span>
+          <button onclick="removeItem(${index})" style="margin-left:10px;color:red;background:none;border:none;font-size:16px;cursor:pointer;">✖</button>
+        `;
+        total += item.price * item.qty;
+        orderDetailsDiv.appendChild(itemEl);
+      });
 
-  let total = 0;
-
-  if (order.length === 0) {
-    emptyMessage.style.display = 'block';
-  } else {
-    order.forEach((item, index) => {
-      const itemEl = document.createElement('div');
-      itemEl.className = 'order-item';
-      itemEl.innerHTML = `
-        <span>${item.name} × ${item.qty}</span>
-        <span>₹${item.price * item.qty}</span>
-        <button onclick="removeItem(${index})" style="margin-left:10px;color:red;background:none;border:none;font-size:16px;cursor:pointer;">✖</button>
-      `;
-      total += item.price * item.qty;
-      orderDetailsDiv.appendChild(itemEl);
-    });
-
-    totalSpan.textContent = total;
-    totalContainer.style.display = 'block';
-    proceedBtn.style.display = 'inline-block';
-  }
-
-  function proceedOrder() {
-    window.location.href = "order_checkout.html";
-  }
-
-  function removeItem(index) {
-    let order = JSON.parse(localStorage.getItem(`delishOrder_${userEmail}`)) || [];
-    const removed = order.splice(index, 1)[0];
-
-    // Update cart
-    let cart = JSON.parse(localStorage.getItem(`delishCart_${userEmail}`)) || {};
-    if (removed && cart[removed.name]) {
-      delete cart[removed.name];
-      localStorage.setItem(`delishCart_${userEmail}`, JSON.stringify(cart));
+      totalSpan.textContent = total;
+      totalContainer.style.display = 'block';
+      proceedBtn.style.display = 'inline-block';
     }
 
-    // Save updated order
-    localStorage.setItem(`delishOrder_${userEmail}`, JSON.stringify(order));
-    location.reload();
-  }
-</script>
+    function proceedOrder() {
+      window.location.href = "order_checkout.html";
+    }
 
+    function removeItem(index) {
+      let order = JSON.parse(localStorage.getItem('delishOrder')) || [];
+      const removed = order.splice(index, 1)[0];
+
+      // Also update the cart if it exists
+      let cart = JSON.parse(localStorage.getItem('delishCart')) || {};
+      if (removed && cart[removed.name]) {
+        delete cart[removed.name];
+        localStorage.setItem('delishCart', JSON.stringify(cart));
+      }
+
+      localStorage.setItem('delishOrder', JSON.stringify(order));
+      location.reload();
+    }
+  </script>
 </body>
 </html>
