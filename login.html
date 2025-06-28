@@ -6,124 +6,186 @@
   <title>Login / Signup - DelishBite</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-  }
+    :root {
+      --primary: #e14cf5;
+      --primary-dark: #c13dd9;
+      --accent: #7e22ce;
+      --gradient: linear-gradient(135deg, #f7d5fc, #eb8cfc);
+      --gradient-dark: linear-gradient(135deg, #c13dd9, #a12fb9);
+      --bg: #faf5ff;
+      --text: #333;
+      --subtext: #777;
+    }
 
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(to right, #faeafc, #f4b3ff);
-    padding: 1rem;
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
 
-  .container {
-    width: 100%;
-    max-width: 380px;
-    background: #fff;
-    padding: 2rem 1.5rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    animation: slideIn 0.7s ease forwards;
-  }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+      background: linear-gradient(to right, #fce4fd, #f2b7ff);
+      color: var(--text);
+    }
 
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #7e22ce;
-    font-size: 1.8rem;
-  }
-
-  .input-box {
-    position: relative;
-    margin-bottom: 1.2rem;
-  }
-
-  .input-box input {
-    width: 100%;
-    padding: 0.85rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-    transition: 0.3s;
-    font-size: 1rem;
-  }
-
-  .input-box input:focus {
-    border-color: #e14cf5;
-  }
-
-  .input-box label {
-    position: absolute;
-    top: -12px;
-    left: 14px;
-    background: white;
-    padding: 0 6px;
-    font-size: 0.8rem;
-    color: #888;
-  }
-
-  .btn {
-    width: 100%;
-    padding: 0.95rem;
-    background: linear-gradient(135deg, #f7d5fc, #eb8cfc);
-    border: none;
-    color: white;
-    border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: 0.3s ease-in-out;
-  }
-
-  .btn:hover {
-    background: linear-gradient(135deg, #c13dd9, #a12fb9);
-  }
-
-  .switch,
-  .forgot {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #555;
-  }
-
-  .switch a,
-  .forgot a {
-    color: #e14cf5;
-    text-decoration: none;
-    font-weight: 500;
-    cursor: pointer;
-  }
-
-  @media (max-width: 400px) {
     .container {
-      padding: 1.5rem 1.2rem;
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      padding: 2rem 1.8rem;
+      border-radius: 18px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      width: 60px;
+      display: block;
+      margin: 0 auto 1rem;
     }
 
     h2 {
-      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+      font-size: 1.9rem;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 1.3rem;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 0.85rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      transition: border 0.3s;
+    }
+
+    .input-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(225, 76, 245, 0.2);
+    }
+
+    .input-box label {
+      position: absolute;
+      top: -11px;
+      left: 14px;
+      background: white;
+      padding: 0 6px;
+      font-size: 0.8rem;
+      color: #888;
     }
 
     .btn {
-      font-size: 0.95rem;
+      width: 100%;
+      padding: 0.95rem;
+      background: var(--gradient);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
-  }
-</style>
 
+    .btn:hover {
+      background: var(--gradient-dark);
+      transform: translateY(-1px);
+    }
+
+    .social-login {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .social-login button {
+      margin-top: 0.5rem;
+      background: white;
+      border: 1px solid #ddd;
+      color: #333;
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .social-login button:hover {
+      background: #f2f2f2;
+    }
+
+    .social-login img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .switch,
+    .forgot {
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 1.3rem;
+      font-size: 0.9rem;
+      color: var(--subtext);
+    }
+
+    .switch a,
+    .forgot a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .switch a:hover,
+    .forgot a:hover {
+      color: var(--primary-dark);
+    }
+
+    @media (max-width: 400px) {
+      .container {
+        padding: 1.5rem 1.2rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      .btn {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container" id="formContainer">
+    <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Logo" class="logo">
     <h2 id="formTitle">Login</h2>
     <form id="authForm">
       <div id="nameField" class="input-box" style="display: none;">
@@ -131,25 +193,32 @@
         <input type="text" id="nameInput" />
       </div>
       <div class="input-box">
-        <label>Email</label>
-        <input type="email" id="emailInput" required />
+        <label>Phone Number or Email</label>
+        <input type="text" id="emailInput" required />
       </div>
       <div class="input-box">
         <label>Password</label>
         <input type="password" id="passwordInput" required />
       </div>
       <div class="forgot">
-        <a onclick="forgotPassword()">Forgot Password?</a>
+        <a href="javascript:void(0)" onclick="forgotPassword()">Forgot Password?</a>
       </div>
       <button class="btn" type="submit" id="submitBtn">Login</button>
     </form>
+
+    <div class="social-login">
+      <p style="margin: 1rem 0 0.5rem; font-size: 0.9rem;">or</p>
+      <button onclick="alert('Mock Gmail login (OAuth not implemented)')">
+        <img src="https://cdn-icons-png.flaticon.com/512/2702/2702602.png" alt="Gmail Icon"> Continue with Gmail
+      </button>
+    </div>
+
     <div class="switch" id="switchText">
-      Don't have an account? <a onclick="toggleForm()">Sign Up</a>
+      Don't have an account? <a href="javascript:void(0)" onclick="toggleForm()">Sign Up</a>
     </div>
   </div>
 
   <script>
-    // Redirect if already logged in
     if (localStorage.getItem('isLoggedIn') === 'true') {
       window.location.href = 'index.html';
     }
@@ -170,8 +239,8 @@
       nameField.style.display = isLogin ? 'none' : 'block';
       submitBtn.textContent = isLogin ? 'Login' : 'Sign Up';
       switchText.innerHTML = isLogin
-        ? `Don't have an account? <a onclick="toggleForm()">Sign Up</a>`
-        : `Already have an account? <a onclick="toggleForm()">Login</a>`;
+        ? `Don't have an account? <a href="javascript:void(0)" onclick="toggleForm()">Sign Up</a>`
+        : `Already have an account? <a href="javascript:void(0)" onclick="toggleForm()">Login</a>`;
     }
 
     authForm.addEventListener('submit', function (e) {
@@ -186,11 +255,11 @@
           localStorage.setItem('delishUser', JSON.stringify(users[email]));
           window.location.href = 'index.html';
         } else {
-          alert('Invalid email or password.');
+          alert('Invalid email/phone or password.');
         }
       } else {
         if (users[email]) {
-          alert('Email already registered. Please login.');
+          alert('Already registered. Please login.');
         } else {
           const name = document.getElementById('nameInput').value.trim();
           users[email] = { name, email, password };
@@ -203,7 +272,7 @@
     });
 
     function forgotPassword() {
-      const email = prompt("Enter your registered email:");
+      const email = prompt("Enter your registered phone/email:");
       let users = JSON.parse(localStorage.getItem('users') || '{}');
 
       if (users[email]) {
@@ -214,7 +283,7 @@
           alert("Password updated successfully.");
         }
       } else {
-        alert("Email not found.");
+        alert("Account not found.");
       }
     }
   </script>

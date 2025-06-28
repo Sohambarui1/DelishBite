@@ -7,181 +7,205 @@
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
 
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+  :root {
+    --primary: #d946ef;
+    --secondary: #fce7f3;
+    --accent: #a21caf;
+    --text-dark: #2e2e2e;
+    --text-light: #6b7280;
+    --bg: #fff;
+    --bg-card: #fdf4ff;
+  }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: #fff;
-      color: #333;
-    }
+  html {
+    scroll-behavior: smooth;
+  }
 
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+  }
+
+  header {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  header a {
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  header a:hover {
+    opacity: 0.85;
+  }
+
+  section {
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .food-item {
+    background: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .food-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+  }
+
+  .food-item img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .food-item h3 {
+    font-size: 1.1rem;
+    margin: 1rem 0 0.3rem;
+  }
+
+  .unit-price {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+
+  .price-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    width: 90%;
+    margin: 0.7rem auto 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  }
+
+  .price-bar span.price {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--accent);
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .price-bar button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .price-bar button:hover {
+    background: var(--accent);
+  }
+
+  .order-bar {
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    flex-wrap: wrap;
+  }
+
+  .order-bar span.total {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .place-order-btn {
+    background-color: white;
+    color: var(--primary);
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0.5rem;
+  }
+
+  .place-order-btn:hover {
+    background-color: #fce7f3;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 480px) {
     header {
-      background-color: #e14cf5;
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    header a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 1.6rem;
-    }
-
-    section {
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-
-    .food-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.2rem;
-      margin-top: 2rem;
-    }
-
-    .food-item {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s;
-      padding-bottom: 1rem;
-    }
-
-    .food-item:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
+      padding: 1rem;
     }
 
     .food-item img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      object-position: center 40%;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .food-item h3 {
-      margin: 1rem 0 0.5rem;
-      font-size: 1.1rem;
-    }
-
-    .unit-price {
-      font-size: 0.9rem;
-      color: #7a5e79;
-      margin: 0;
-      font-weight: 500;
+      height: 160px;
     }
 
     .price-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #f3e6f9;
-      padding: 0.5rem 1rem;
-      border-radius: 30px;
-      width: 90%;
-      margin: 0.7rem auto;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
-
-    .price-bar span.price {
-      font-weight: bold;
-      font-size: 1rem;
-      color: #4a154b;
-      flex-grow: 1;
-      text-align: center;
-    }
-
-    .price-bar button {
-      background: #e14cf5;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      width: 32px;
-      height: 32px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      font-weight: bold;
-    }
-
-    .price-bar button:hover {
-      background: #c13dd9;
+      width: 95%;
     }
 
     .order-bar {
-      position: sticky;
-      bottom: 0;
-      background: linear-gradient(to right, #e14cf5, #c13dd9);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
       padding: 1rem 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-      flex-wrap: wrap;
     }
 
-    .order-bar span.total {
-      color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
+    .order-bar .place-order-btn {
+      width: 100%;
+      text-align: center;
     }
+  }
+</style>
 
-    .place-order-btn {
-      background-color: #fff;
-      color: #e14cf5;
-      font-size: 1.1rem;
-      font-weight: bold;
-      padding: 0.6rem 1.5rem;
-      border: none;
-      border-radius: 50px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 0.5rem;
-    }
-
-    .place-order-btn:hover {
-      background-color: #f9e4fd;
-      transform: translateY(-2px);
-    }
-
-    @media (max-width: 480px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem;
-      }
-
-      .food-item img {
-        height: 160px;
-      }
-
-      .price-bar {
-        width: 95%;
-      }
-
-      .order-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-    }
-  </style>
 
 </head>
 <body>
@@ -362,11 +386,10 @@
 
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
-  AOS.init({
-    duration: 800,
-    offset: 100,
-    once: true
-  });
+  AOS.init({ duration: 800, offset: 100, once: true });
+
+  const user = JSON.parse(localStorage.getItem('delishUser'));
+  const userId = user?.email || 'guest';
 
   function increase(btn) {
     const container = btn.closest('.price-bar');
@@ -374,7 +397,7 @@
     let qty = parseInt(span.dataset.qty || 0) + 1;
     span.dataset.qty = qty;
     span.textContent = `Qty: ${qty}`;
-    updateTotal(); // auto-save
+    updateTotal();
   }
 
   function decrease(btn) {
@@ -384,7 +407,7 @@
     if (qty > 0) qty--;
     span.dataset.qty = qty;
     span.textContent = `Qty: ${qty}`;
-    updateTotal(); // auto-save
+    updateTotal();
   }
 
   function updateTotal(save = true) {
@@ -398,23 +421,20 @@
 
       if (qty > 0) {
         cart[name] = { qty, price };
-        total += price * qty;
+        total += qty * price;
       }
     });
 
-    // Update total in DOM
-    const totalDisplay = document.getElementById('totalAmount');
-    if (totalDisplay) totalDisplay.textContent = total;
+    document.getElementById('totalAmount').textContent = total;
 
-    // Save cart state and total if needed
     if (save) {
-      localStorage.setItem('delishCart', JSON.stringify(cart));
-      localStorage.setItem('delishTotal', total);
+      localStorage.setItem(`cart-${userId}`, JSON.stringify(cart));
+      localStorage.setItem(`total-${userId}`, total);
     }
   }
 
   function restoreCart() {
-    const savedCart = JSON.parse(localStorage.getItem('delishCart')) || {};
+    const savedCart = JSON.parse(localStorage.getItem(`cart-${userId}`)) || {};
 
     document.querySelectorAll('.food-item').forEach(item => {
       const name = item.querySelector('h3').textContent.trim();
@@ -425,7 +445,7 @@
       }
     });
 
-    updateTotal(false); // Don't overwrite while restoring
+    updateTotal(false);
   }
 
   function placeOrder() {
@@ -448,35 +468,25 @@
       return;
     }
 
-    // Save order, total, and updated cart
-localStorage.setItem('delishOrder', JSON.stringify(orderItems));
-localStorage.setItem('delishTotal', total);
+    localStorage.setItem(`order-${userId}`, JSON.stringify(orderItems));
+    localStorage.setItem(`total-${userId}`, total);
+    localStorage.setItem(`cart-${userId}`, JSON.stringify(
+      Object.fromEntries(orderItems.map(i => [i.name, { qty: i.qty, price: i.price }]))
+    ));
 
-// Reconstruct cart based on orderItems
-const cart = {};
-orderItems.forEach(item => {
-  cart[item.name] = {
-    qty: item.qty,
-    price: item.price
-  };
-});
-
-localStorage.setItem('delishCart', JSON.stringify(cart));
-
-
-    // Delay to ensure data is saved before navigating
-    setTimeout(() => {
-      window.location.href = 'order-summary.html';
-    }, 100);
+    setTimeout(() => window.location.href = 'order-summary.html', 100);
   }
 
-  // Initialize on page load
   window.onload = () => {
+    if (!user) {
+      alert("Please log in to place orders.");
+      return;
+    }
     restoreCart();
-    const orderBtn = document.querySelector('.place-order-btn');
-    if (orderBtn) orderBtn.addEventListener('click', placeOrder);
+    document.querySelector('.place-order-btn')?.addEventListener('click', placeOrder);
   };
 </script>
+
 
 
 </body>
