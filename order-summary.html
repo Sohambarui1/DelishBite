@@ -5,135 +5,181 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Order Summary - DelishBite</title>
   <style>
-    :root {
-      --primary: #e14cf5;
-      --primary-dark: #c13dd9;
-      --text-dark: #333;
-      --text-light: #555;
-      --bg-light: #fafafa;
-    }
+  :root {
+    --primary: #e14cf5;
+    --primary-dark: #c13dd9;
+    --text-dark: #333;
+    --text-light: #555;
+    --bg-light: #fafafa;
+  }
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f3f3f3;
-      color: var(--text-dark);
-    }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f3f3f3;
+    color: var(--text-dark);
+  }
+
+  header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 1.6rem;
+  }
+
+  header a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s;
+  }
+
+  header a:hover {
+    opacity: 0.85;
+  }
+
+  .container {
+    max-width: 750px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1.05rem;
+  }
+
+  .order-item:last-child {
+    border-bottom: none;
+  }
+
+  .order-item span:first-child {
+    font-weight: 500;
+    color: var(--text-light);
+  }
+
+  .order-item span:last-child {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .order-item button {
+    color: red;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  .total {
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    color: var(--primary-dark);
+  }
+
+  .empty-msg {
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 2rem 0;
+    color: #999;
+  }
+
+  .proceed-section {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  .proceed-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .proceed-btn:hover {
+    background: linear-gradient(135deg, #d03ae3, #a42fc1);
+    transform: translateY(-3px);
+  }
+
+  @media (max-width: 600px) {
     header {
-      background-color: var(--primary);
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.6rem;
-    }
-
-    header a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: opacity 0.2s;
-    }
-
-    header a:hover {
-      opacity: 0.85;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
     }
 
     .container {
-      max-width: 750px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+      margin: 1rem;
+      padding: 1.5rem;
     }
 
     .order-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid #eee;
-      font-size: 1.05rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3rem;
     }
 
-    .order-item:last-child {
-      border-bottom: none;
+    .order-item span:first-child,
+    .order-item span:last-child {
+      width: 100%;
+      text-align: left;
     }
 
-    .order-item span:first-child {
-      font-weight: 500;
-      color: var(--text-light);
+    .order-item button {
+      font-size: 1rem;
     }
 
     .total {
-      text-align: right;
-      font-weight: bold;
-      font-size: 1.4rem;
-      margin-top: 1.5rem;
-      color: var(--primary-dark);
-    }
-
-    .empty-msg {
-      text-align: center;
-      font-size: 1.1rem;
-      padding: 2rem 0;
-      color: #999;
-    }
-
-    .proceed-section {
-      text-align: center;
-      margin-top: 2.5rem;
+      text-align: left;
+      font-size: 1.2rem;
     }
 
     .proceed-btn {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
-      padding: 1rem 2.5rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
+      width: 100%;
+      font-size: 1.1rem;
     }
 
-    .proceed-btn:hover {
-      background: linear-gradient(135deg, #d03ae3, #a42fc1);
-      transform: translateY(-3px);
+    header h1 {
+      font-size: 1.5rem;
     }
 
-    @media (max-width: 600px) {
-      .container {
-        margin: 1.2rem;
-        padding: 1.5rem;
-      }
-
-      .proceed-btn {
-        width: 100%;
-        font-size: 1.1rem;
-      }
-
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.4rem;
-      }
-
-      .total {
-        text-align: left;
-      }
+    header a {
+      font-size: 0.9rem;
     }
-  </style>
+  }
+</style>
+
 </head>
 <body>
 

@@ -5,139 +5,176 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Checkout - DelishBite</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    :root {
-      --primary-color: #e14cf5;
-      --gradient: linear-gradient(135deg, #e14cf5, #c13dd9);
-    }
+  :root {
+    --primary-color: #e14cf5;
+    --gradient: linear-gradient(135deg, #e14cf5, #c13dd9);
+  }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background-color: #f3f3f3;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background-color: #f3f3f3;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
 
+  header {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.2rem;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  header a {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  }
+
+  h2 {
+    margin-bottom: 1rem;
+    color: #444;
+    font-size: 1.3rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+  }
+
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: #555;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  .save-address {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    color: #555;
+  }
+
+  .save-address input {
+    width: auto;
+    margin: 0;
+  }
+
+  .confirm-btn {
+    background: var(--gradient);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 12px rgba(225, 76, 245, 0.2);
+  }
+
+  .confirm-btn:hover {
+    background: linear-gradient(135deg, #d03ae3, #a42fc1);
+    transform: translateY(-2px);
+  }
+
+  .payment-fields {
+    display: none;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 600px) {
     header {
-      width: 100%;
-      background-color: var(--primary-color);
-      color: white;
-      padding: 0.3rem 1.5rem;
+      flex-direction: column;
+      padding: 1rem;
       text-align: center;
-      position: relative;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 1.3rem;
     }
 
     header a {
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: white;
-      font-size: 1.1rem;
-      text-decoration: none;
-      font-weight: bold;
+      font-size: 0.9rem;
+      top: 1.2rem;
     }
 
     .container {
-      width: 100%;
-      max-width: 600px;
-      margin: 2.5rem auto;
-      padding: 2rem;
-      border-radius: 16px;
-      background: white;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+      margin: 1.5rem 1rem;
+      padding: 1.5rem;
     }
 
     h2 {
-      margin-bottom: 1rem;
-      color: #444;
-      font-size: 1.3rem;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 0.5rem;
+      font-size: 1.15rem;
     }
 
-    .section {
-      margin-bottom: 2rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.4rem;
-      font-weight: 600;
-      color: #555;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      margin-bottom: 1.1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-
-     .save-address {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: -0.5rem;
-      margin-bottom: 1.5rem;
+    input,
+    select,
+    textarea {
       font-size: 0.95rem;
-      color: #555;
-    }
-
-    .save-address input {
-      width: auto;
-      margin: 0;
     }
 
     .confirm-btn {
-      background: var(--gradient);
-      color: white;
-      font-size: 1.1rem;
-      font-weight: bold;
-      padding: 1rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      width: 100%;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 12px rgba(225, 76, 245, 0.2);
+      font-size: 1rem;
+      padding: 0.85rem;
     }
 
-    .confirm-btn:hover {
-      background: linear-gradient(135deg, #d03ae3, #a42fc1);
-      transform: translateY(-2px);
+    .save-address {
+      font-size: 0.85rem;
     }
+  }
+</style>
 
-    .payment-fields {
-      display: none;
-      margin-top: 1rem;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        margin: 1.5rem 1rem;
-        padding: 1.5rem;
-      }
-
-      header a {
-        font-size: 1rem;
-      }
-
-      h2 {
-        font-size: 1.15rem;
-      }
-    }
-  </style>
 </head>
 <body>
 
