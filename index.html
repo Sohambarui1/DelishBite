@@ -8,212 +8,57 @@
   <!-- AOS CSS -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
   
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      background-color: #fff;
-      color: #333;
-    }
-
-    header {
-      background: #ee82fd;
-      padding: 0.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: white;
-    }
-
-   header h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #fff;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    }
-
-
-    nav a {
-      color: white;
-      margin-left: 1.5rem;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .hero {
-      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
-      height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      padding: 0 2rem;
-    }
-
-    .hero h2 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    }
-
-    .hero button {
-      background: #f156fa;
-      color: white;
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .hero button:hover {
-      background: #f9d0fa;
-    }
-
-    section {
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    .food-items {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .food-card {
-      background: #f9f9f9;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.3s;
-    }
-
-    .food-card:hover {
-      transform: translateY(-10px);
-    }
-
-    .food-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .food-card h3 {
-      margin: 1rem 0;
-    }
-
-    #contact {
-      background-color: #fef0ff;
-    }
-
-    #contact a {
-      color: #e14cf5;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    #contact p {
-      margin: 0.5rem 0;
-      font-size: 1.1rem;
-    }
-
-    footer {
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 1.5rem;
-      margin-top: 4rem;
-    }
-
-    /* Dashboard styles */
-    .dashboard-panel {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 320px;
-  height: 100%;
-  background: #fff;
-  box-shadow: -4px 0 12px rgba(0,0,0,0.15);
-  z-index: 999;
-  transition: right 0.4s ease;
+<style>
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.dashboard-panel.active {
-  right: 0;
+html {
+  scroll-behavior: smooth;
 }
 
-.dashboard-content {
-  padding: 2rem 1.5rem;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  color: #333;
+  line-height: 1.6;
 }
 
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 20px;
-  font-size: 1.7rem;
-  font-weight: bold;
-  color: #999;
-  cursor: pointer;
-}
-
-  .scroll-container {
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 1rem 0;
-    scrollbar-width: thin;
-  }
-
-  .scroll-content {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .scroll-container::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  .scroll-container::-webkit-scrollbar-thumb {
-    background-color: #e14cf5;
-    border-radius: 4px;
-  }
-
-  .scroll-container::-webkit-scrollbar-track {
-    background-color: #f2f2f2;
-  }
-
-  .food-card {
-    min-width: 250px;
-    flex-shrink: 0;
-  }
-
-  nav a {
+header {
+  background: #ee82fd;
+  padding: 0.8rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   color: white;
-  margin-left: 1.5rem;
-  text-decoration: none;
+}
+
+header h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  flex: 1 1 100%;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  flex: 1 1 100%;
+}
+
+nav a {
+  color: white;
   font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
   position: relative;
   transition: transform 0.2s ease, color 0.3s ease;
 }
@@ -242,6 +87,200 @@ nav a:active::after {
   width: 100%;
 }
 
+/* Hero */
+.hero {
+  background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 1rem;
+}
+
+.hero h2 {
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  margin-bottom: 1.5rem;
+}
+
+.hero button {
+  background: #f156fa;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.hero button:hover {
+  background: #f9d0fa;
+}
+
+/* Sections */
+section {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.food-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.food-card {
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  min-width: 220px;
+}
+
+.food-card:hover {
+  transform: translateY(-6px);
+}
+
+.food-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.food-card h3 {
+  margin: 1rem 0;
+}
+
+/* Scrollable food section */
+.scroll-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 1rem;
+  scrollbar-width: thin;
+  margin-top: 1.5rem;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 1rem;
+}
+
+.scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #e14cf5;
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background-color: #f2f2f2;
+}
+
+/* Contact */
+#contact {
+  background-color: #fef0ff;
+}
+
+#contact a {
+  color: #e14cf5;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#contact p {
+  font-size: 1.1rem;
+  margin: 0.3rem 0;
+}
+
+/* Footer */
+footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 1.2rem;
+  margin-top: 3rem;
+}
+
+/* Dashboard Panel */
+.dashboard-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 320px;
+  height: 100%;
+  background: white;
+  z-index: 999;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+  transition: right 0.4s ease;
+}
+
+.dashboard-panel.active {
+  right: 0;
+}
+
+.dashboard-content {
+  padding: 2rem 1.5rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 1.7rem;
+  color: #999;
+  cursor: pointer;
+}
+
+/* Dashboard inside content can be customized as needed */
+
+/* Media Queries */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero button {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+    margin: 0.5rem;
+  }
+
+  .dashboard-panel {
+    width: 100%;
+  }
+
+  .food-card img {
+    height: 160px;
+  }
+}
 </style>
 
 </head>
