@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DelishBite - Online Food Order</title>
+
+  <!-- AOS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+  
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+    }
+
+    header {
+      background: #ee82fd;
+      padding: 0.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+   header h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 0 2rem;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+
+    .hero button {
+      background: #f156fa;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .hero button:hover {
+      background: #f9d0fa;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .food-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .food-card {
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .food-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .food-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .food-card h3 {
+      margin: 1rem 0;
+    }
+
+    #contact {
+      background-color: #fef0ff;
+    }
+
+    #contact a {
+      color: #e14cf5;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    #contact p {
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    /* Dashboard styles */
+    .dashboard-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 320px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+  z-index: 999;
+  transition: right 0.4s ease;
+}
+
+.dashboard-panel.active {
+  right: 0;
+}
+
+.dashboard-content {
+  padding: 2rem 1.5rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #999;
+  cursor: pointer;
+}
+
+  .scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 1rem 0;
+    scrollbar-width: thin;
+  }
+
+  .scroll-content {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .scroll-container::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .scroll-container::-webkit-scrollbar-thumb {
+    background-color: #e14cf5;
+    border-radius: 4px;
+  }
+
+  .scroll-container::-webkit-scrollbar-track {
+    background-color: #f2f2f2;
+  }
+
+  .food-card {
+    min-width: 250px;
+    flex-shrink: 0;
+  }
+
+  nav a {
+  color: white;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+nav a:hover,
+nav a:focus,
+nav a:active {
+  transform: scale(1.1);
+  color: #ffd6fc;
+}
+
+nav a:hover::after,
+nav a:focus::after,
+nav a:active::after {
+  width: 100%;
+}
+
+</style>
+
+</head>
+<body>
+
+  <header data-aos="fade-down">
+    <h1>DelishBite</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="#">Order</a>
+      <a href="#contact">Contact</a>
+      <a href="#" onclick="openDashboard()">Dashboard</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2 data-aos="fade-up" data-aos-delay="100">Delicious Food, Delivered Fast</h2>
+    <p data-aos="fade-up" data-aos-delay="300">Get your favorite meals at your doorstep with just a click.</p>
+    <button data-aos="zoom-in" data-aos-delay="500" onclick="window.location.href='menu.html'">Order Now</button>
+
+  </section>
+
+  <section>
+  <h2 data-aos="fade-up">Popular Picks</h2>
+  <div class="scroll-container" id="popularScroll">
+    <div class="food-items scroll-content">
+      <div class="food-card" data-aos="zoom-in" data-aos-delay="100">
+        <img src="https://images.unsplash.com/photo-1598023696416-0193a0bcd302?auto=format&fit=crop&q=60" alt="Pizza">
+        <h3>Cheesy Pizza</h3>
+      </div>
+      <div class="food-card" data-aos="zoom-in" data-aos-delay="200">
+        <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&q=80" alt="Burger">
+        <h3>Juicy Burger</h3>
+      </div>
+      <div class="food-card" data-aos="zoom-in" data-aos-delay="300">
+        <img src="https://media.istockphoto.com/id/1084512928/photo/pasta.jpg?b=1&s=170667a&w=0&k=20&c=ITXDgHyer1qHrlJJkE5baeOf9tKR0gPwNXeUSCgWd30=" alt="Pasta">
+        <h3>Italian Pasta</h3>
+      </div>
+      <div class="food-card" data-aos="zoom-in" data-aos-delay="400">
+        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=60" alt="Dessert">
+        <h3>Chocolate Desserts</h3>
+      </div>
+      <!-- NEW ITEMS BELOW -->
+
+      <div class="food-card" data-aos="zoom-in" data-aos-delay="500">
+        <img src="https://images.unsplash.com/photo-1701579231305-d84d8af9a3fd?auto=format&fit=crop&q=60" alt="Biryani">
+        <h3>Spicy Biryani</h3>
+      </div>
+
+      <div class="food-card" data-aos="zoom-in" data-aos-delay="600">
+        <img src="https://images.unsplash.com/photo-1631215060641-b9e8e55859a8?auto=format&fit=crop&q=80" alt="Salad">
+        <h3>Garden Salad</h3>
+      </div>
+
+      <div class="food-card" data-aos="zoom-in" data-aos-delay="700">
+        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80" alt="Milkshake">
+        <h3>Choco Milkshake</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <section id="contact">
+    <h2 data-aos="fade-down">Get in Touch</h2>
+    <div data-aos="fade-up" data-aos-delay="200">
+      <p>Email: <a href="mailto:support@delishbite.com">support@delishbite.com</a></p>
+      <p>Phone: +91-7501482141</p>
+      <p>Address: MG Road, Kolkata, India</p>
+    </div>
+  </section>
+
+  <footer data-aos="fade-up">
+    &copy; 2025 DelishBite. All rights reserved.
+  </footer>
+
+  <!-- Dashboard Panel -->
+<div id="dashboardPanel" class="dashboard-panel">
+  <div class="dashboard-content">
+    <span class="close-btn" onclick="closeDashboard()">&times;</span>
+
+    <div style="text-align: center;">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+           alt="User Avatar"
+           width="90"
+           style="border-radius: 50%; margin-bottom: 1rem;"/>
+
+      <h3 id="dashboardGreeting" style="margin-bottom: 0.3rem; font-size: 1.25rem; font-weight: 600; color: #222;">
+        Welcome, Guest
+      </h3>
+      <p id="dashboardNote" style="color: #777; font-size: 0.9rem; margin-bottom: 1rem;">
+        Login to access your account
+      </p>
+
+      <p id="loginBtn" onclick="window.location.href='login.html'" style="
+        color: #e14cf5;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        margin: 0.5rem 0;
+        text-decoration:none;
+      ">
+         Log In / Sign Up
+      </p>
+
+      <p id="logoutBtn" style="
+        color: #fc77f1;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        margin: 0.5rem 0;
+        display: none;
+        text-decoration: none;
+      ">
+         Log Out
+      </p>
+    </div>
+
+    <hr style="margin: 2rem 0; border: 0; height: 1px; background: #eee;" />
+
+    <div style="text-align: left; font-size: 0.95rem; color: #333; line-height: 1.8;">
+      <p style="cursor: pointer;">📦 <strong>Order History</strong></p>
+      <p style="cursor: pointer;">🏠 <strong>Saved Addresses</strong></p>
+      <p style="cursor: pointer;">🎁 <strong>Offers</strong></p>
+      <p style="cursor: pointer;">⚙️ <strong>Settings</strong></p>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+  AOS.init({ duration: 1000, once: true });
+
+  function openDashboard() {
+    document.getElementById('dashboardPanel').classList.add('active');
+  }
+
+  function closeDashboard() {
+    document.getElementById('dashboardPanel').classList.remove('active');
+  }
+
+  window.addEventListener('click', function(e) {
+    const panel = document.getElementById('dashboardPanel');
+    if (e.target === panel) {
+      panel.classList.remove('active');
+    }
+  });
+
+  // ✅ Fetch user session data from localStorage
+const user = JSON.parse(localStorage.getItem('delishUser'));
+const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+// ✅ Access dashboard UI elements safely
+const greetingEl = document.getElementById('dashboardGreeting');
+const noteEl = document.getElementById('dashboardNote');
+const loginBtn = document.getElementById('loginBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+
+// ✅ Update UI if user is logged in
+if (isLoggedIn && user && greetingEl && noteEl && loginBtn && logoutBtn) {
+  greetingEl.textContent = `Welcome, ${user.name}`;
+  noteEl.style.display = 'none';
+  loginBtn.style.display = 'none';
+  logoutBtn.style.display = 'inline-block';
+}
+
+// ✅ Log out functionality
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('delishUser');
+    window.location.reload();
+  });
+}
+
+
+</script>
+
+<script>
+  // Auto-scroll popular picks after a short delay
+  window.addEventListener('load', function () {
+    const scrollContainer = document.getElementById('popularScroll');
+    let scrollSpeed = 1; // pixels per frame
+    let delayBeforeScroll = 2500; // 2.5 seconds
+    let scrollInterval;
+
+    function startAutoScroll() {
+      scrollInterval = setInterval(() => {
+        if (scrollContainer.scrollLeft < scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+          scrollContainer.scrollLeft += scrollSpeed;
+        } else {
+          scrollContainer.scrollLeft = 0; // loop back to start
+        }
+      }, 20); // scroll every 20ms
+    }
+
+    setTimeout(startAutoScroll, delayBeforeScroll);
+  });
+</script>
+<script>
+  const navLinks = document.querySelectorAll("nav a");
+  navLinks.forEach(link => {
+    link.addEventListener("touchstart", () => {
+      link.classList.add("tapped");
+      setTimeout(() => link.classList.remove("tapped"), 200);
+    });
+  });
+</script>
+
+<style>
+  nav a.tapped {
+    transform: scale(1.1);
+    color: #ffd6fc;
+  }
+</style>
+
+
+
+</body>
+</html>

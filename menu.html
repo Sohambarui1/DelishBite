@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DelishBite Menu</title>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+
+    header {
+      background-color: #e14cf5;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    h1 { margin: 0; }
+
+    section {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .food-item {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      padding-bottom: 1rem;
+    }
+
+    .food-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    }
+
+    .food-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: center 40%;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+
+    .food-item h3 {
+      margin: 1rem 0 0.5rem;
+    }
+
+    .price-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f3e6f9;
+      padding: 0.6rem 1rem;
+      border-radius: 30px;
+      width: 80%;
+      margin: 0.5rem auto 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .price-bar span.price {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #4a154b;
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .price-bar button {
+      background: #e14cf5;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-weight: bold;
+    }
+
+    .price-bar button:hover {
+      background: #c13dd9;
+    }
+
+    .order-bar {
+      position: sticky;
+      bottom: 0;
+      background: linear-gradient(to right, #e14cf5, #c13dd9);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .order-bar span.total {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .place-order-btn {
+      background-color: #fff;
+      color: #e14cf5;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 0.6rem 1.8rem;
+      border: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .place-order-btn:hover {
+      background-color: #f9e4fd;
+      transform: translateY(-2px);
+    }
+
+    .unit-price {
+      font-size: 0.95rem;
+      color: #7a5e79;
+      margin: 0;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DelishBite Menu</h1>
+    <a href="index.html">Back to Home</a>
+  </header>
+
+  <section>
+  <h2 data-aos="fade-up">Explore Our Delicious Range</h2>
+  <div class="food-grid">
+    <!-- Food Items -->
+
+    <!-- Cheesy Pizza -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="100" data-aos-once="true" data-price="299">
+      <img src="https://images.unsplash.com/photo-1598023696416-0193a0bcd302?auto=format&fit=crop&q=60" alt="Pizza">
+      <h3>Cheesy Pizza</h3>
+      <p class="unit-price">₹299 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- Classic Burger -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="150" data-aos-once="true" data-price="199">
+      <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&q=80" alt="Burger">
+      <h3>Classic Burger</h3>
+      <p class="unit-price">₹199 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- Italian Pasta -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="200" data-aos-once="true" data-price="249">
+      <img src="https://media.istockphoto.com/id/1084512928/photo/pasta.jpg?b=1&s=170667a&w=0&k=20&c=ITXDgHyer1qHrlJJkE5baeOf9tKR0gPwNXeUSCgWd30=" alt="Pasta">
+      <h3>Italian Pasta</h3>
+      <p class="unit-price">₹249 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- Fresh Sushi -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="250" data-aos-once="true" data-price="399">
+      <img src="https://media.istockphoto.com/photos/sushi-picture-id135849804?b=1&k=20&m=135849804&s=170667a&w=0&h=ssJ24AIse0ExehHxPRlM_eSP_b5oEAtNYd8McXXY-Yo=" alt="Sushi">
+      <h3>Fresh Sushi</h3>
+      <p class="unit-price">₹399 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- Garden Salad -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="300" data-aos-once="true" data-price="149">
+      <img src="https://images.unsplash.com/photo-1631215060641-b9e8e55859a8?auto=format&fit=crop&q=80" alt="Salad">
+      <h3>Garden Salad</h3>
+      <p class="unit-price">₹149 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- Chocolate Cake -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="350" data-aos-once="true" data-price="199">
+      <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=max&q=80" alt="Cake">
+      <h3>Chocolate Cake</h3>
+      <p class="unit-price">₹199 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- Spicy Biryani -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="400" data-aos-once="true" data-price="299">
+      <img src="https://images.unsplash.com/photo-1701579231305-d84d8af9a3fd?auto=format&fit=crop&q=60" alt="Biryani">
+      <h3>Spicy Biryani</h3>
+      <p class="unit-price">₹299 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- Choco Milkshake -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="450" data-aos-once="true" data-price="120">
+      <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80" alt="Milkshake">
+      <h3>Choco Milkshake</h3>
+      <p class="unit-price">₹120 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- NEW: Veggie Wrap -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="500" data-aos-once="true" data-price="179">
+      <img src="https://images.media-allrecipes.com/userphotos/4548031.jpg" alt="Wrap">
+      <h3>Veggie Wrap</h3>
+      <p class="unit-price">₹179 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- NEW: Paneer Tikka -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="550" data-aos-once="true" data-price="220">
+      <img src="https://media.istockphoto.com/id/1252422687/photo/tandoori-paneer-tikka.jpg?b=1&s=170667a&w=0&k=20&c=GGUHmRBCjjNaXuEiptrN2_5BUGInLF1xEq8aScSDAUE=" alt="Paneer Tikka">
+      <h3>Paneer Tikka</h3>
+      <p class="unit-price">₹220 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- NEW: Fried Rice -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="600" data-aos-once="true" data-price="190">
+      <img src="https://images.unsplash.com/photo-1665332111329-dd9d7fa46c74?mark=https:%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzMyNzkxNTI3fA&ixlib=rb-4.0.3" alt="Fried Rice">
+      <h3>Veg Fried Rice</h3>
+      <p class="unit-price">₹190 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- NEW: Chicken Wings -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="650" data-aos-once="true" data-price="260">
+      <img src="https://media.istockphoto.com/photos/chicken-wings-picture-id532607409?b=1&k=20&m=532607409&s=170667a&w=0&h=e3HUexMEWPDUXjMxwdG-osA8TMR9K8Y-VM2mHUzpvhU=" alt="Chicken Wings">
+      <h3>Chicken Wings</h3>
+      <p class="unit-price">₹260 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+    <!-- NEW: Strawberry Smoothie -->
+    <div class="food-item" data-aos="fade-up" data-aos-delay="700" data-aos-once="true" data-price="130">
+      <img src="https://media.istockphoto.com/photos/strawberry-smoothies-juice-picture-id951214942?b=1&k=20&m=951214942&s=170667a&w=0&h=PQqwkOXhBATUh6KN5YtiYM3H4JmdAXJABMwXzPQMyaE=" alt="Smoothie">
+      <h3>Strawberry Smoothie</h3>
+      <p class="unit-price">₹130 each</p>
+      <div class="price-bar">
+        <button onclick="decrease(this)">−</button>
+        <span class="price" data-qty="0">Qty: 0</span>
+        <button onclick="increase(this)">+</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <div class="order-bar" data-aos="fade-up">
+    <span class="total">Total: ₹<span id="totalAmount">0</span></span>
+    <button class="place-order-btn">🛒 Place Order</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    offset: 100,
+    once: true
+  });
+
+  function increase(btn) {
+    const container = btn.closest('.price-bar');
+    const span = container.querySelector('.price');
+    let qty = parseInt(span.dataset.qty || 0) + 1;
+    span.dataset.qty = qty;
+    span.textContent = `Qty: ${qty}`;
+    updateTotal(); // auto-save
+  }
+
+  function decrease(btn) {
+    const container = btn.closest('.price-bar');
+    const span = container.querySelector('.price');
+    let qty = parseInt(span.dataset.qty || 0);
+    if (qty > 0) qty--;
+    span.dataset.qty = qty;
+    span.textContent = `Qty: ${qty}`;
+    updateTotal(); // auto-save
+  }
+
+  function updateTotal(save = true) {
+    let total = 0;
+    const cart = {};
+
+    document.querySelectorAll('.food-item').forEach(item => {
+      const name = item.querySelector('h3').textContent.trim();
+      const price = parseInt(item.getAttribute('data-price'));
+      const qty = parseInt(item.querySelector('.price').dataset.qty || 0);
+
+      if (qty > 0) {
+        cart[name] = { qty, price };
+        total += price * qty;
+      }
+    });
+
+    // Update total in DOM
+    const totalDisplay = document.getElementById('totalAmount');
+    if (totalDisplay) totalDisplay.textContent = total;
+
+    // Save cart state and total if needed
+    if (save) {
+      localStorage.setItem('delishCart', JSON.stringify(cart));
+      localStorage.setItem('delishTotal', total);
+    }
+  }
+
+  function restoreCart() {
+    const savedCart = JSON.parse(localStorage.getItem('delishCart')) || {};
+
+    document.querySelectorAll('.food-item').forEach(item => {
+      const name = item.querySelector('h3').textContent.trim();
+      if (savedCart[name]) {
+        const span = item.querySelector('.price');
+        span.dataset.qty = savedCart[name].qty;
+        span.textContent = `Qty: ${savedCart[name].qty}`;
+      }
+    });
+
+    updateTotal(false); // Don't overwrite while restoring
+  }
+
+  function placeOrder() {
+    const orderItems = [];
+    let total = 0;
+
+    document.querySelectorAll('.food-item').forEach(item => {
+      const qty = parseInt(item.querySelector('.price').dataset.qty || 0);
+      const name = item.querySelector('h3').textContent.trim();
+      const price = parseInt(item.getAttribute('data-price'));
+
+      if (qty > 0) {
+        orderItems.push({ name, qty, price });
+        total += price * qty;
+      }
+    });
+
+    if (orderItems.length === 0) {
+      alert("Please add at least one item to place your order.");
+      return;
+    }
+
+    // Save order, total, and updated cart
+localStorage.setItem('delishOrder', JSON.stringify(orderItems));
+localStorage.setItem('delishTotal', total);
+
+// Reconstruct cart based on orderItems
+const cart = {};
+orderItems.forEach(item => {
+  cart[item.name] = {
+    qty: item.qty,
+    price: item.price
+  };
+});
+
+localStorage.setItem('delishCart', JSON.stringify(cart));
+
+
+    // Delay to ensure data is saved before navigating
+    setTimeout(() => {
+      window.location.href = 'order-summary.html';
+    }, 100);
+  }
+
+  // Initialize on page load
+  window.onload = () => {
+    restoreCart();
+    const orderBtn = document.querySelector('.place-order-btn');
+    if (orderBtn) orderBtn.addEventListener('click', placeOrder);
+  };
+</script>
+
+
+</body>
+</html>

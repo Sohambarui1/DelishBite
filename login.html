@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Signup - DelishBite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(to right, #f5d4fa, #e894f7);
+    }
+    .container {
+      width: 360px;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      animation: slideIn 0.7s ease forwards;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 { text-align: center; margin-bottom: 1.5rem; color: #7e22ce; }
+    .input-box {
+      position: relative; margin-bottom: 1.2rem;
+    }
+    .input-box input {
+      width: 100%; padding: 0.8rem; border: 1px solid #ccc;
+      border-radius: 8px; outline: none; transition: 0.3s;
+    }
+    .input-box input:focus { border-color: #e14cf5; }
+    .input-box label {
+      position: absolute; top: -12px; left: 12px;
+      background: white; padding: 0 5px; font-size: 0.8rem; color: #888;
+    }
+    .btn {
+      width: 100%; padding: 0.9rem;
+      background: linear-gradient(135deg, #f7d5fc, #eb8cfc);
+      border: none; color: white; border-radius: 50px;
+      font-weight: bold; cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #c13dd9, #a12fb9);
+    }
+    .switch, .forgot {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .switch a, .forgot a {
+      color: #e14cf5;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="formContainer">
+    <h2 id="formTitle">Login</h2>
+    <form id="authForm">
+      <div id="nameField" class="input-box" style="display: none;">
+        <label>Full Name</label>
+        <input type="text" id="nameInput" />
+      </div>
+      <div class="input-box">
+        <label>Email</label>
+        <input type="email" id="emailInput" required />
+      </div>
+      <div class="input-box">
+        <label>Password</label>
+        <input type="password" id="passwordInput" required />
+      </div>
+      <div class="forgot">
+        <a onclick="forgotPassword()">Forgot Password?</a>
+      </div>
+      <button class="btn" type="submit" id="submitBtn">Login</button>
+    </form>
+    <div class="switch" id="switchText">
+      Don't have an account? <a onclick="toggleForm()">Sign Up</a>
+    </div>
+  </div>
+
+  <script>
+    // Redirect if already logged in
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      window.location.href = 'index.html';
+    }
+
+    let isLogin = true;
+
+    const formTitle = document.getElementById('formTitle');
+    const nameField = document.getElementById('nameField');
+    const emailInput = document.getElementById('emailInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const authForm = document.getElementById('authForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const switchText = document.getElementById('switchText');
+
+    function toggleForm() {
+      isLogin = !isLogin;
+      formTitle.textContent = isLogin ? 'Login' : 'Sign Up';
+      nameField.style.display = isLogin ? 'none' : 'block';
+      submitBtn.textContent = isLogin ? 'Login' : 'Sign Up';
+      switchText.innerHTML = isLogin
+        ? `Don't have an account? <a onclick="toggleForm()">Sign Up</a>`
+        : `Already have an account? <a onclick="toggleForm()">Login</a>`;
+    }
+
+    authForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      let users = JSON.parse(localStorage.getItem('users') || '{}');
+
+      if (isLogin) {
+        if (users[email] && users[email].password === password) {
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('delishUser', JSON.stringify(users[email]));
+          window.location.href = 'index.html';
+        } else {
+          alert('Invalid email or password.');
+        }
+      } else {
+        if (users[email]) {
+          alert('Email already registered. Please login.');
+        } else {
+          const name = document.getElementById('nameInput').value.trim();
+          users[email] = { name, email, password };
+          localStorage.setItem('users', JSON.stringify(users));
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('delishUser', JSON.stringify(users[email]));
+          window.location.href = 'index.html';
+        }
+      }
+    });
+
+    function forgotPassword() {
+      const email = prompt("Enter your registered email:");
+      let users = JSON.parse(localStorage.getItem('users') || '{}');
+
+      if (users[email]) {
+        const newPassword = prompt("Enter new password:");
+        if (newPassword) {
+          users[email].password = newPassword;
+          localStorage.setItem('users', JSON.stringify(users));
+          alert("Password updated successfully.");
+        }
+      } else {
+        alert("Email not found.");
+      }
+    }
+  </script>
+</body>
+</html>
