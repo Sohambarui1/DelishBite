@@ -3,635 +3,1669 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DelishBite - Online Food Order</title>
-
+  <title>DelishBite - Premium Online Food Ordering</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <!-- AOS CSS -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
- 
-<style>
-
-  :root {
-  --primary-color: #e14cf5;
-  --secondary-color: #f9f1fb;
-  --accent-color: #c13dd9;
-  --text-color: #333;
-  --bg-color: #fff;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-header {
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-  padding: 0.8rem 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  position: relative;
-  box-shadow: var(--shadow);
-}
-
-header h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2.2rem;
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-  flex: 1 1 100%;
-  text-align: center;
-}
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
-
-nav a {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 1rem;
-  position: relative;
-  transition: transform 0.2s ease, color 0.3s ease;
-}
-
-nav a::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background-color: white;
-  transition: width 0.3s ease;
-}
-
-nav a:hover,
-nav a:focus {
-  transform: scale(1.1);
-  color: #ffd6fc;
-}
-
-nav a:hover::after,
-nav a:focus::after {
-  width: 100%;
-}
-
-/* Hero Section */
-.hero {
-  background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center center / cover no-repeat;
-  height: 80vh;
-  max-height: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white;
-  padding: 1rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  z-index: 0;
-}
-
-.hero h2,
-.hero p,
-.hero button {
-  position: relative;
-  z-index: 1;
-}
-
-.hero h2 {
-  font-size: 2.8rem;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-  margin-bottom: 1rem;
-}
-
-.hero p {
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
-}
-
-.hero button {
-  background: #ffffffcc;
-  color: var(--accent-color);
-  padding: 0.8rem 1.8rem;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  box-shadow: var(--shadow);
-  transition: background 0.3s ease, transform 0.2s ease;
-  cursor: pointer;
-}
-
-.hero button:hover {
-  background: #ffd6fc;
-  transform: translateY(-2px);
-}
-
-/* Sections */
-section {
-  padding: 3rem 1rem;
-  text-align: center;
-  background-color: var(--secondary-color);
-}
-
-/* Food Items */
-.food-items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.food-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  min-width: 220px;
-  flex-shrink: 0;
-}
-
-.food-card:hover {
-  transform: translateY(-6px);
-}
-
-.food-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.food-card h3 {
-  margin: 1rem 0;
-  font-size: 1.1rem;
-}
-
-/* Scrollable Section */
-.scroll-container {
-  overflow-x: auto;
-  white-space: nowrap;
-  padding-bottom: 1rem;
-  margin-top: 1.5rem;
-}
-
-.scroll-content {
-  display: flex;
-  gap: 1rem;
-}
-
-.scroll-container::-webkit-scrollbar {
-  height: 6px;
-}
-
-.scroll-container::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
-  border-radius: 4px;
-}
-
-.scroll-container::-webkit-scrollbar-track {
-  background-color: #f2f2f2;
-}
-
-/* Contact */
-#contact {
-  background-color: #fff0fd;
-}
-
-#contact a {
-  color: var(--primary-color);
-  font-weight: bold;
-  text-decoration: none;
-}
-
-#contact p {
-  font-size: 1.1rem;
-  margin: 0.3rem 0;
-}
-
-/* Footer */
-footer {
-  background: #333;
-  color: white;
-  text-align: center;
-  padding: 1.2rem;
-  margin-top: 3rem;
-}
-
-/* Profile Icon */
-.profile-icon {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  overflow: hidden;
-  cursor: pointer;
-  border: 2px solid white;
-}
-
-.profile-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Dashboard Panel */
-.dashboard-panel {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 320px;
-  max-width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, #fff8fd, #f9e0fb);
-  box-shadow: -6px 0 20px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  transition: right 0.4s ease;
-}
-
-.dashboard-panel.active {
-  right: 0;
-}
-
-.dashboard-content {
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 20px;
-  font-size: 1.8rem;
-  color: #999;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.close-btn:hover {
-  color: var(--primary-color);
-}
-
-.user-info {
-  text-align: center;
-  padding-bottom: 1.5rem;
-}
-
-.user-info img {
-  width: 90px;
-  height: 90px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.user-info h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.3rem;
-  color: #4b1557;
-}
-
-.user-info p {
-  font-size: 0.95rem;
-  color: #777;
-  margin-bottom: 1.2rem;
-}
-
-.dashboard-btn {
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-  color: white;
-  padding: 0.6rem 1.5rem;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 0.95rem;
-  margin: 0.5rem auto;
-  display: block;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.dashboard-btn:hover {
-  background: linear-gradient(135deg, #d03ae3, #a42fc1);
-  transform: scale(1.02);
-}
-
-.dashboard-btn.logout {
-  background: #ffe9fa;
-  color: var(--accent-color);
-  border: 1px solid #f5ccfa;
-}
-
-.dashboard-btn.logout:hover {
-  background: #f7daf8;
-  color: #a12fb9;
-}
-
-hr {
-  margin: 1.5rem 0;
-  border: 0;
-  height: 1px;
-  background: #eee;
-}
-
-.dashboard-links {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  font-size: 1rem;
-  color: #444;
-  padding-bottom: 1rem;
-}
-
-.dashboard-links p {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.4rem 0;
-  border-radius: 6px;
-  transition: background 0.2s ease;
-}
-
-.dashboard-links p:hover {
-  background: rgba(225, 76, 245, 0.08);
-  padding-left: 0.5rem;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hero {
-    height: 60vh;
-    background-position: top center;
-    padding: 0.5rem;
-  }
-
-  .hero h2 {
-    font-size: 1.8rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .hero button {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.95rem;
-  }
-
-  nav a {
-    font-size: 0.9rem;
-    margin: 0.5rem;
-  }
-
-  .dashboard-panel {
-    width: 100%;
-  }
-
-  .food-card img {
-    height: 160px;
-  }
-
-  .profile-icon {
-    top: 1.5rem;
-    right: 0.7rem;
-    width: 36px;
-    height: 36px;
-  }
-}
-
-
-
-</style>
-
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/5787/5787100.png">
+  
+  <style>
+    :root {
+      --primary-color: #e16bff;
+      --secondary-color: #4ecdc4;
+      --accent-color: #ffbe76;
+      --dark-color: #2d3436;
+      --light-color: #f7f1e3;
+      --text-color: #2d3436;
+      --text-light: #636e72;
+      --bg-color: #ffffff;
+      --section-bg: #f9f9f9;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+    }
+
+    /* Header with responsive menu */
+    header {
+      background: var(--gradient);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+
+    header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      letter-spacing: 1px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      transition: var(--transition);
+    }
+
+    nav a {
+      color: white;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: white;
+      transition: var(--transition);
+    }
+
+    nav a:hover,
+    nav a:focus {
+      transform: translateY(-2px);
+    }
+
+    nav a:hover::after,
+    nav a:focus::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
+      height: 90vh;
+      max-height: 800px;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: min(800px, 90%);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h2 {
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      margin-bottom: 2.5rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+    }
+
+    .cta-button {
+      background: white;
+      color: var(--primary-color);
+      padding: 1rem 2.5rem;
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cta-button:hover {
+      background: var(--light-color);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Sections */
+    section {
+      padding: clamp(3rem, 5vw, 5rem) clamp(1rem, 2vw, 2rem);
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+
+    /* Food Items */
+    .food-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .food-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .food-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .food-card img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      aspect-ratio: 1/1;
+    }
+
+    .food-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .food-card-content {
+      padding: 1.5rem;
+    }
+
+    .food-card h3 {
+      font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+      margin-bottom: 0.5rem;
+      color: var(--dark-color);
+    }
+
+    .food-card p {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+    }
+
+    .food-card .price {
+      font-weight: 600;
+      color: var(--primary-color);
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
+    }
+
+    .food-card .rating {
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .food-card .add-to-cart {
+      background: var(--gradient);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 0.5rem;
+      width: 100%;
+      font-size: clamp(0.9rem, 1vw, 1rem);
+    }
+
+    .food-card .add-to-cart:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    /* Scrollable Section */
+    .scroll-container {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding-bottom: 1.5rem;
+      margin-top: 2rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-color) #f1f1f1;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .scroll-content {
+      display: inline-flex;
+      gap: 2rem;
+      padding: 0.5rem;
+    }
+
+    .scroll-container::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .scroll-container::-webkit-scrollbar-thumb {
+      background-color: var(--primary-color);
+      border-radius: 10px;
+    }
+
+    .scroll-container::-webkit-scrollbar-track {
+      background-color: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    /* Features Section */
+    .features {
+      background-color: var(--section-bg);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: clamp(2rem, 2.5vw, 2.5rem);
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: clamp(1.2rem, 1.4vw, 1.4rem);
+      margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+      color: var(--text-light);
+      font-size: clamp(0.9rem, 1vw, 1rem);
+    }
+
+    /* Contact Section */
+    #contact {
+      background-color: var(--section-bg);
+    }
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .contact-icon {
+      font-size: clamp(1.8rem, 2vw, 2rem);
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .contact-card h3 {
+      font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+      margin-bottom: 1rem;
+    }
+
+    .contact-card a, .contact-card p {
+      color: var(--secondary-color);
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: clamp(0.9rem, 1vw, 1rem);
+    }
+
+    .contact-card a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-color);
+      color: white;
+      padding: 3rem clamp(1rem, 2vw, 2rem) 1.5rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-column h3 {
+      font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-column h3::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--primary-color);
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-column a {
+      color: #dfe6e9;
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: clamp(0.9rem, 1vw, 1rem);
+    }
+
+    .footer-column a:hover {
+      color: var(--primary-color);
+      padding-left: 5px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #f0f0f0;
+      border-radius: 50%;
+      color: #555;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .social-links i {
+      font-size: 1rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .newsletter-form input {
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .newsletter-form button {
+      background: var(--gradient);
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .newsletter-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #b2bec3;
+      font-size: 0.9rem;
+    }
+
+    /* Profile Icon */
+    .profile-icon {
+      width: clamp(40px, 50px, 50px);
+      height: clamp(40px, 50px, 50px);
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid white;
+      transition: var(--transition);
+    }
+
+    .profile-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+
+    .profile-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Dashboard Panel */
+    .dashboard-panel {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(350px, 90%);
+      height: 100%;
+      background: white;
+      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      overflow-y: auto;
+    }
+
+    .dashboard-panel.active {
+      right: 0;
+    }
+
+    .dashboard-content {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 2rem;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .close-btn:hover {
+      color: var(--primary-color);
+      transform: rotate(90deg);
+    }
+
+    .user-info {
+      text-align: center;
+      padding: 1rem 0 2rem;
+    }
+
+    .user-info img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border: 3px solid var(--primary-color);
+    }
+
+    .user-info h3 {
+      font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+      margin-bottom: 0.5rem;
+      color: var(--dark-color);
+    }
+
+    .user-info p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      font-size: clamp(0.9rem, 1vw, 1rem);
+    }
+
+    .dashboard-btn {
+      background: var(--gradient);
+      color: white;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 0.5rem auto;
+      display: block;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .dashboard-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+    }
+
+    .dashboard-btn.logout {
+      background: white;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .dashboard-btn.logout:hover {
+      background: rgba(255, 107, 107, 0.1);
+    }
+
+    .dashboard-divider {
+      margin: 1.5rem 0;
+      border: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #ddd, transparent);
+    }
+
+    .dashboard-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .dashboard-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      color: var(--text-color);
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: clamp(0.9rem, 1vw, 1rem);
+    }
+
+    .dashboard-link:hover {
+      background: rgba(78, 205, 196, 0.1);
+      transform: translateX(5px);
+    }
+
+    .dashboard-link i {
+      width: 24px;
+      text-align: center;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+
+    /* Floating Action Button */
+    .fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      background: var(--gradient);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+      z-index: 999;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .fab:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: var(--dark-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-color);
+      transform: translateY(-3px);
+    }
+
+    /* Cart Badge */
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--accent-color);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: var(--gradient);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.3s ease;
+      }
+
+      nav.active {
+        right: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .hero {
+        height: 70vh;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        height: 60vh;
+      }
+
+      .food-card img {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero {
+        height: 70vh;
+      }
+
+      .food-card img {
+        height: 200px;
+      }
+
+      .dashboard-panel {
+        width: 100%;
+      }
+    }
+
+    /* Animation Classes */
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .slide-up {
+      animation: slideUp 0.8s ease forwards;
+    }
+
+    @keyframes slideUp {
+      from { 
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Toast Notifications */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 24px;
+      border-radius: 4px;
+      color: white;
+      background-color: #333;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+      opacity: 1;
+      transition: opacity 0.5s;
+    }
+
+    .toast.success { background-color: #4CAF50; }
+    .toast.error { background-color: #F44336; }
+    .toast.warning { background-color: #FF9800; }
+    .toast.fade-out { opacity: 0; }
+
+    /* Mobile Tap Feedback */
+    nav a.tapped {
+      transform: scale(1.1);
+      color: #ffd6fc;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    /* Lazy Load Fade-in */
+    .lazy-load {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .lazy-load.loaded {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
 
   <header data-aos="fade-down">
+    <button class="menu-toggle" aria-label="Toggle menu">
+      <i class="fas fa-bars"></i>
+    </button>
     <h1>DelishBite</h1>
     <nav>
-      <a href="#">Home</a>
+      <a href="#" class="active">Home</a>
       <a href="menu.html">Menu</a>
       <a href="#">Order</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="profile-icon" onclick="openDashboard()">
       <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
+      <span class="cart-badge" id="cartBadge">0</span>
     </div>
   </header>
 
   <section class="hero">
-    <h2 data-aos="fade-up" data-aos-delay="100">Delicious Food, Delivered Fast</h2>
-    <p data-aos="fade-up" data-aos-delay="300">Get your favorite meals at your doorstep with just a click.</p>
-    <button data-aos="zoom-in" data-aos-delay="500" onclick="window.location.href='menu.html'">Order Now</button>
-
+    <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+      <h2>Artisanal Cuisine, Delivered to Your Door</h2>
+      <p>Experience gourmet dining at home with our chef-crafted meals</p>
+      <button class="cta-button" onclick="window.location.href='menu.html'">
+        Order Now <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
   </section>
 
   <section>
-  <h2 data-aos="fade-up">Popular Picks</h2>
-  <div class="scroll-container" id="popularScroll">
-    <div class="food-items scroll-content">
-      <div class="food-card" data-aos="zoom-in" data-aos-delay="100">
-        <img src="https://images.unsplash.com/photo-1598023696416-0193a0bcd302?auto=format&fit=crop&q=60" alt="Pizza">
-        <h3>Cheesy Pizza</h3>
+    <h2 class="section-title" data-aos="fade-up">Our Signature Dishes</h2>
+    <div class="scroll-container" id="popularScroll">
+      <div class="food-items scroll-content">
+        <div class="food-card" data-aos="zoom-in" data-aos-delay="100">
+          <img class="lazy-load" data-src="https://images.unsplash.com/photo-1598023696416-0193a0bcd302?auto=format&fit=crop&q=60" alt="Pizza" loading="lazy">
+          <div class="food-card-content">
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(48)</span>
+            </div>
+            <h3>Truffle Mushroom Pizza</h3>
+            <p>Wood-fired crust with wild mushrooms and truffle oil</p>
+            <div class="price">₹499</div>
+            <button class="add-to-cart" data-id="1" data-name="Truffle Mushroom Pizza" data-price="499">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        
+        <div class="food-card" data-aos="zoom-in" data-aos-delay="200">
+          <img class="lazy-load" data-src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&q=80" alt="Burger" loading="lazy">
+          <div class="food-card-content">
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <span>(36)</span>
+            </div>
+            <h3>Gourmet Chicken Burger</h3>
+            <p>Angus chicken patty with aged cheddar and caramelized onions</p>
+            <div class="price">₹399</div>
+            <button class="add-to-cart" data-id="2" data-name="Gourmet Chicken Burger" data-price="399">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        
+        <div class="food-card" data-aos="zoom-in" data-aos-delay="300">
+          <img class="lazy-load" data-src="https://media.istockphoto.com/id/1084512928/photo/pasta.jpg?b=1&s=170667a&w=0&k=20&c=ITXDgHyer1qHrlJJkE5baeOf9tKR0gPwNXeUSCgWd30=" alt="Pasta" loading="lazy">
+          <div class="food-card-content">
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span>(52)</span>
+            </div>
+            <h3>Truffle Cream Pasta</h3>
+            <p>Handmade pasta with wild mushrooms and truffle cream sauce</p>
+            <div class="price">₹449</div>
+            <button class="add-to-cart" data-id="3" data-name="Truffle Cream Pasta" data-price="449">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        
+        <div class="food-card" data-aos="zoom-in" data-aos-delay="400">
+          <img class="lazy-load" data-src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=60" alt="Dessert" loading="lazy">
+          <div class="food-card-content">
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span>(64)</span>
+            </div>
+            <h3>Chocolate Soufflé</h3>
+            <p>Warm chocolate soufflé with vanilla bean ice cream</p>
+            <div class="price">₹349</div>
+            <button class="add-to-cart" data-id="4" data-name="Chocolate Soufflé" data-price="349">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        
+        <div class="food-card" data-aos="zoom-in" data-aos-delay="500">
+          <img class="lazy-load" data-src="https://images.unsplash.com/photo-1701579231305-d84d8af9a3fd?auto=format&fit=crop&q=60" alt="Biryani" loading="lazy">
+          <div class="food-card-content">
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(41)</span>
+            </div>
+            <h3>Hyderabadi Dum Biryani</h3>
+            <p>Authentic Hyderabadi biryani with raita and mirchi ka salan</p>
+            <div class="price">₹379</div>
+            <button class="add-to-cart" data-id="5" data-name="Hyderabadi Dum Biryani" data-price="379">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        
+        <div class="food-card" data-aos="zoom-in" data-aos-delay="600">
+          <img class="lazy-load" data-src="https://images.unsplash.com/photo-1631215060641-b9e8e55859a8?auto=format&fit=crop&q=80" alt="Salad" loading="lazy">
+          <div class="food-card-content">
+            <div class="rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <span>(28)</span>
+            </div>
+            <h3>Mediterranean Salad</h3>
+            <p>Fresh greens with feta, olives, and balsamic glaze</p>
+            <div class="price">₹299</div>
+            <button class="add-to-cart" data-id="6" data-name="Mediterranean Salad" data-price="299">
+              Add to Cart
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="food-card" data-aos="zoom-in" data-aos-delay="200">
-        <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&q=80" alt="Burger">
-        <h3>Juicy Burger</h3>
-      </div>
-      <div class="food-card" data-aos="zoom-in" data-aos-delay="300">
-        <img src="https://media.istockphoto.com/id/1084512928/photo/pasta.jpg?b=1&s=170667a&w=0&k=20&c=ITXDgHyer1qHrlJJkE5baeOf9tKR0gPwNXeUSCgWd30=" alt="Pasta">
-        <h3>Italian Pasta</h3>
-      </div>
-      <div class="food-card" data-aos="zoom-in" data-aos-delay="400">
-        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=60" alt="Dessert">
-        <h3>Chocolate Desserts</h3>
-      </div>
-      <!-- NEW ITEMS BELOW -->
-
-      <div class="food-card" data-aos="zoom-in" data-aos-delay="500">
-        <img src="https://images.unsplash.com/photo-1701579231305-d84d8af9a3fd?auto=format&fit=crop&q=60" alt="Biryani">
-        <h3>Spicy Biryani</h3>
-      </div>
-
-      <div class="food-card" data-aos="zoom-in" data-aos-delay="600">
-        <img src="https://images.unsplash.com/photo-1631215060641-b9e8e55859a8?auto=format&fit=crop&q=80" alt="Salad">
-        <h3>Garden Salad</h3>
-      </div>
-
-      <div class="food-card" data-aos="zoom-in" data-aos-delay="700">
-        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80" alt="Milkshake">
-        <h3>Choco Milkshake</h3>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <section id="contact">
-    <h2 data-aos="fade-down">Get in Touch</h2>
-    <div data-aos="fade-up" data-aos-delay="200">
-      <p>Email: <a href="mailto:support@delishbite.com">support@delishbite.com</a></p>
-      <p>Phone: +91-7501482141</p>
-      <p>Address: MG Road, Kolkata, India</p>
     </div>
   </section>
 
-  <footer data-aos="fade-up">
-    &copy; 2025 DelishBite. All rights reserved.
+  <section class="features">
+    <h2 class="section-title" data-aos="fade-up">Why Choose DelishBite</h2>
+    <div class="feature-grid">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3>Fast Delivery</h3>
+        <p>Get your food delivered in under 30 minutes or get it for free</p>
+      </div>
+      
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-icon">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h3>Fresh Ingredients</h3>
+        <p>We source only the freshest, highest quality ingredients</p>
+      </div>
+      
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="feature-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <h3>Chef-Crafted</h3>
+        <p>All dishes are created by our award-winning culinary team</p>
+      </div>
+      
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="feature-icon">
+          <i class="fas fa-recycle"></i>
+        </div>
+        <h3>Eco-Friendly</h3>
+        <p>We use sustainable packaging to reduce environmental impact</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
+    <div class="contact-info">
+      <div class="contact-card" data-aos="zoom-in" data-aos-delay="100">
+        <div class="contact-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <h3>Email</h3>
+        <a href="mailto:support@delishbite.com">support@delishbite.com</a>
+      </div>
+      
+      <div class="contact-card" data-aos="zoom-in" data-aos-delay="200">
+        <div class="contact-icon">
+          <i class="fas fa-phone-alt"></i>
+        </div>
+        <h3>Phone</h3>
+        <a href="tel:+917501482141">+91-7501482141</a>
+      </div>
+      
+      <div class="contact-card" data-aos="zoom-in" data-aos-delay="300">
+        <div class="contact-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h3>Address</h3>
+        <p>123 MG Road, Kolkata, India</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>DelishBite</h3>
+        <p>Bringing gourmet dining experiences to your home since 2020.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="#">Order Online</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Information</h3>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Newsletter</h3>
+        <p>Subscribe to get updates on special offers and new dishes.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" placeholder="Your Email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      &copy; 2025 DelishBite. All rights reserved.
+    </div>
   </footer>
 
+  <!-- Floating Action Button -->
+  <div class="fab" onclick="window.location.href='menu.html'">
+    <i class="fas fa-utensils"></i>
+  </div>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
   <!-- Dashboard Panel -->
-<div id="dashboardPanel" class="dashboard-panel">
-  <div class="dashboard-content">
-    <span class="close-btn" onclick="closeDashboard()">&times;</span>
+  <div id="dashboardPanel" class="dashboard-panel">
+    <div class="dashboard-content">
+      <span class="close-btn" onclick="closeDashboard()">&times;</span>
 
-    <div class="user-info">
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User Avatar" />
-      <h3 id="dashboardGreeting">Welcome, Guest</h3>
-      <p id="dashboardNote">Login to access your account</p>
+      <div class="user-info">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User Avatar" />
+        <h3 id="dashboardGreeting">Welcome, Guest</h3>
+        <p id="dashboardNote">Login to access your account</p>
 
-      <button id="loginBtn" class="dashboard-btn" onclick="window.location.href='login.html'">Log In / Sign Up</button>
-      <button id="logoutBtn" class="dashboard-btn logout" style="display: none;">Log Out</button>
-    </div>
+        <button id="loginBtn" class="dashboard-btn" onclick="window.location.href='login.html'">
+          <i class="fas fa-sign-in-alt"></i> Log In / Sign Up
+        </button>
+        <button id="logoutBtn" class="dashboard-btn logout" style="display: none;">
+          <i class="fas fa-sign-out-alt"></i> Log Out
+        </button>
+      </div>
 
-    <hr />
+      <div class="dashboard-divider"></div>
 
-    <div class="dashboard-links">
-      <p><span>📦</span> Order History</p>
-      <p><span>🏠</span> Saved Addresses</p>
-      <p><span>🎁</span> Offers</p>
-      <p><span>⚙️</span> Settings</p>
+      <div class="dashboard-links">
+        <a href="#" class="dashboard-link">
+          <i class="fas fa-history"></i>
+          <span>Order History</span>
+        </a>
+        
+        <a href="#" class="dashboard-link">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Saved Addresses</span>
+        </a>
+        
+        <a href="#" class="dashboard-link">
+          <i class="fas fa-tag"></i>
+          <span>Offers & Promotions</span>
+        </a>
+        
+        <a href="#" class="dashboard-link">
+          <i class="fas fa-heart"></i>
+          <span>Favorites</span>
+        </a>
+        
+        <a href="#" class="dashboard-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span>My Cart (<span id="dashboardCartCount">0</span>)</span>
+        </a>
+      </div>
     </div>
   </div>
-</div>
-
-
 
   <!-- AOS JS -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
   <script>
-  AOS.init({ duration: 1000, once: true });
-
-  function openDashboard() {
-    document.getElementById('dashboardPanel').classList.add('active');
-  }
-
-  function closeDashboard() {
-    document.getElementById('dashboardPanel').classList.remove('active');
-  }
-
-  window.addEventListener('click', function(e) {
-    const panel = document.getElementById('dashboardPanel');
-    if (e.target === panel) {
-      panel.classList.remove('active');
-    }
-  });
-
-  // ✅ Fetch user session data from localStorage
-const user = JSON.parse(localStorage.getItem('delishUser'));
-const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
-// ✅ Access dashboard UI elements safely
-const greetingEl = document.getElementById('dashboardGreeting');
-const noteEl = document.getElementById('dashboardNote');
-const loginBtn = document.getElementById('loginBtn');
-const logoutBtn = document.getElementById('logoutBtn');
-
-// ✅ Update UI if user is logged in
-if (isLoggedIn && user && greetingEl && noteEl && loginBtn && logoutBtn) {
-  greetingEl.textContent = `Welcome, ${user.name}`;
-  noteEl.style.display = 'none';
-  loginBtn.style.display = 'none';
-  logoutBtn.style.display = 'inline-block';
-}
-
-// ✅ Log out functionality
-if (logoutBtn) {
-  logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('delishUser');
-    window.location.reload();
-  });
-}
-
-
-</script>
-
-<script>
-  // Auto-scroll popular picks after a short delay
-  window.addEventListener('load', function () {
-    const scrollContainer = document.getElementById('popularScroll');
-    let scrollSpeed = 1; // pixels per frame
-    let delayBeforeScroll = 2500; // 2.5 seconds
-    let scrollInterval;
-
-    function startAutoScroll() {
-      scrollInterval = setInterval(() => {
-        if (scrollContainer.scrollLeft < scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-          scrollContainer.scrollLeft += scrollSpeed;
-        } else {
-          scrollContainer.scrollLeft = 0; // loop back to start
-        }
-      }, 20); // scroll every 20ms
+    // Initialize AOS with error handling
+    try {
+      AOS.init({ 
+        duration: 1000, 
+        once: true,
+        disable: window.innerWidth < 768 // Disable on mobile if needed
+      });
+    } catch (e) {
+      console.error("AOS initialization failed:", e);
     }
 
-    setTimeout(startAutoScroll, delayBeforeScroll);
-  });
-</script>
-<script>
-  const navLinks = document.querySelectorAll("nav a");
-  navLinks.forEach(link => {
-    link.addEventListener("touchstart", () => {
-      link.classList.add("tapped");
-      setTimeout(() => link.classList.remove("tapped"), 200);
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      menuToggle.innerHTML = nav.classList.contains('active') ? 
+        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
     });
-  });
-</script>
 
-<style>
-  nav a.tapped {
-    transform: scale(1.1);
-    color: #ffd6fc;
-  }
-</style>
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
 
+    // Dashboard Panel Functions with enhanced safety
+    function openDashboard() {
+      try {
+        const panel = document.getElementById('dashboardPanel');
+        if (panel) {
+          panel.classList.add('active');
+          updateDashboardUI();
+          updateCartCount();
+        }
+      } catch (e) {
+        console.error("Error opening dashboard:", e);
+      }
+    }
 
+    function closeDashboard() {
+      try {
+        const panel = document.getElementById('dashboardPanel');
+        if (panel) panel.classList.remove('active');
+      } catch (e) {
+        console.error("Error closing dashboard:", e);
+      }
+    }
 
+    // Robust dashboard UI updater
+    function updateDashboardUI() {
+      try {
+        const user = JSON.parse(localStorage.getItem('delishUser')) || {};
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        
+        const elements = {
+          greeting: document.getElementById('dashboardGreeting'),
+          note: document.getElementById('dashboardNote'),
+          loginBtn: document.getElementById('loginBtn'),
+          logoutBtn: document.getElementById('logoutBtn'),
+          links: document.querySelectorAll('.dashboard-link')
+        };
+
+        // Null check all elements
+        if (!elements.greeting || !elements.note || !elements.loginBtn || !elements.logoutBtn) {
+          throw new Error("Dashboard elements not found");
+        }
+
+        if (isLoggedIn) {
+          elements.greeting.textContent = `Welcome, ${user.name || 'User'}`;
+          elements.note.style.display = 'none';
+          elements.loginBtn.style.display = 'none';
+          elements.logoutBtn.style.display = 'block';
+          
+          elements.links.forEach(link => {
+            link.style.pointerEvents = 'auto';
+            link.style.opacity = '1';
+          });
+        } else {
+          elements.greeting.textContent = 'Welcome, Guest';
+          elements.note.style.display = 'block';
+          elements.loginBtn.style.display = 'block';
+          elements.logoutBtn.style.display = 'none';
+          
+          elements.links.forEach(link => {
+            link.style.pointerEvents = 'none';
+            link.style.opacity = '0.5';
+          });
+        }
+      } catch (error) {
+        console.error('Dashboard UI update failed:', error);
+        // Fallback: Ensure dashboard is closed if error occurs
+        closeDashboard();
+      }
+    }
+
+    // Safe event listener for outside clicks
+    function setupDashboardCloseHandler() {
+      try {
+        window.addEventListener('click', function(e) {
+          try {
+            const panel = document.getElementById('dashboardPanel');
+            if (panel && e.target === panel) {
+              closeDashboard();
+            }
+          } catch (e) {
+            console.error("Error in click handler:", e);
+          }
+        });
+      } catch (e) {
+        console.error("Failed to setup dashboard close handler:", e);
+      }
+    }
+
+    // Enhanced logout functionality
+    function setupLogoutHandler() {
+      try {
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (!logoutBtn) return;
+
+        logoutBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          try {
+            const user = JSON.parse(localStorage.getItem('delishUser') || '{}');
+            const userId = user.email || 'guest';
+
+            // Clear all user data safely
+            ['isLoggedIn', 'delishUser', 
+             `delishCart_${userId}`, 
+             `delishOrder_${userId}`, 
+             `delishTotal_${userId}`].forEach(key => {
+              try {
+                localStorage.removeItem(key);
+              } catch (e) {
+                console.warn(`Failed to remove ${key}:`, e);
+              }
+            });
+
+            updateDashboardUI();
+            closeDashboard();
+            
+            // Refresh with fallback
+            try {
+              setTimeout(() => {
+                try {
+                  window.location.reload();
+                } catch {
+                  window.location.href = window.location.href;
+                }
+              }, 500);
+            } catch (e) {
+              console.error("Refresh failed:", e);
+            }
+          } catch (error) {
+            console.error('Logout failed:', error);
+            showToast("Logout failed. Please try again.", "error");
+          }
+        });
+      } catch (e) {
+        console.error("Failed to setup logout handler:", e);
+      }
+    }
+
+    // Shopping cart functionality
+    function setupCart() {
+      try {
+        // Initialize cart if not exists
+        const user = JSON.parse(localStorage.getItem('delishUser')) || {};
+        const userId = user.email || 'guest';
+        const cartKey = `delishCart_${userId}`;
+        
+        if (!localStorage.getItem(cartKey)) {
+          localStorage.setItem(cartKey, JSON.stringify([]));
+        }
+        
+        // Add to cart buttons
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+          button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const name = this.getAttribute('data-name');
+            const price = parseFloat(this.getAttribute('data-price'));
+            
+            addToCart(id, name, price);
+          });
+        });
+        
+        // Update cart count on page load
+        updateCartCount();
+      } catch (e) {
+        console.error("Cart setup failed:", e);
+      }
+    }
+    
+    function addToCart(id, name, price) {
+      try {
+        const user = JSON.parse(localStorage.getItem('delishUser')) || {};
+        const userId = user.email || 'guest';
+        const cartKey = `delishCart_${userId}`;
+        
+        const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+        const existingItem = cart.find(item => item.id === id);
+        
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({
+            id,
+            name,
+            price,
+            quantity: 1
+          });
+        }
+        
+        localStorage.setItem(cartKey, JSON.stringify(cart));
+        updateCartCount();
+        showToast(`${name} added to cart!`, "success");
+        
+        // Update dashboard cart count if open
+        const dashboardCartCount = document.getElementById('dashboardCartCount');
+        if (dashboardCartCount) {
+          dashboardCartCount.textContent = getCartItemCount();
+        }
+      } catch (e) {
+        console.error("Failed to add to cart:", e);
+        showToast("Failed to add item to cart", "error");
+      }
+    }
+    
+    function getCartItemCount() {
+      try {
+        const user = JSON.parse(localStorage.getItem('delishUser')) || {};
+        const userId = user.email || 'guest';
+        const cartKey = `delishCart_${userId}`;
+        
+        const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+        return cart.reduce((total, item) => total + item.quantity, 0);
+      } catch (e) {
+        console.error("Failed to get cart count:", e);
+        return 0;
+      }
+    }
+    
+    function updateCartCount() {
+      try {
+        const count = getCartItemCount();
+        const badge = document.getElementById('cartBadge');
+        if (badge) {
+          badge.textContent = count;
+          badge.style.display = count > 0 ? 'flex' : 'none';
+        }
+      } catch (e) {
+        console.error("Failed to update cart count:", e);
+      }
+    }
+
+    // Auto-scroll with safety checks
+    function setupAutoScroll() {
+      try {
+        const scrollContainer = document.getElementById('popularScroll');
+        if (!scrollContainer) return;
+
+        let scrollSpeed = 1;
+        let delayBeforeScroll = 2500;
+        let scrollInterval = null;
+        let isScrolling = false;
+
+        function startAutoScroll() {
+          if (isScrolling) return;
+          isScrolling = true;
+          
+          scrollInterval = setInterval(() => {
+            try {
+              if (scrollContainer.scrollLeft < scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+                scrollContainer.scrollLeft += scrollSpeed;
+              } else {
+                scrollContainer.scrollLeft = 0;
+              }
+            } catch (e) {
+              console.error("Scroll error:", e);
+              stopAutoScroll();
+            }
+          }, 20);
+        }
+
+        function stopAutoScroll() {
+          clearInterval(scrollInterval);
+          isScrolling = false;
+        }
+
+        // Start after delay
+        const scrollTimeout = setTimeout(startAutoScroll, delayBeforeScroll);
+
+        // Pause on hover/touch
+        scrollContainer.addEventListener('mouseenter', stopAutoScroll);
+        scrollContainer.addEventListener('touchstart', stopAutoScroll);
+        scrollContainer.addEventListener('mouseleave', () => {
+          setTimeout(startAutoScroll, 1000);
+        });
+
+        // Cleanup on unmount
+        window.addEventListener('beforeunload', () => {
+          clearTimeout(scrollTimeout);
+          stopAutoScroll();
+        });
+      } catch (e) {
+        console.error("Auto-scroll setup failed:", e);
+      }
+    }
+
+    // Touch feedback with safety
+    function setupTouchFeedback() {
+      try {
+        const navLinks = document.querySelectorAll("nav a");
+        if (!navLinks.length) return;
+
+        navLinks.forEach(link => {
+          link.addEventListener("touchstart", () => {
+            try {
+              link.classList.add("tapped");
+              setTimeout(() => {
+                try {
+                  link.classList.remove("tapped");
+                } catch (e) {
+                  console.warn("Failed to remove tapped class:", e);
+                }
+              }, 200);
+            } catch (e) {
+              console.error("Touch feedback error:", e);
+            }
+          }, { passive: true });
+        });
+      } catch (e) {
+        console.error("Touch feedback setup failed:", e);
+      }
+    }
+
+    // Toast notification system
+    function showToast(message, type = "success") {
+      try {
+        // Remove existing toasts
+        document.querySelectorAll('.toast').forEach(toast => toast.remove());
+        
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          try {
+            toast.classList.add("fade-out");
+            setTimeout(() => {
+              try {
+                toast.remove();
+              } catch (e) {
+                console.warn("Toast removal failed:", e);
+              }
+            }, 500);
+          } catch (e) {
+            console.warn("Toast fade failed:", e);
+          }
+        }, 3000);
+      } catch (e) {
+        console.error("Toast creation failed:", e);
+        alert(message); // Fallback
+      }
+    }
+
+    // Back to top button behavior
+    function setupBackToTop() {
+      const backToTop = document.querySelector('.back-to-top');
+      
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      });
+    }
+
+    // Lazy load images
+    function lazyLoadImages() {
+      const lazyImages = document.querySelectorAll('.lazy-load');
+      
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.getAttribute('data-src');
+            img.classList.add('loaded');
+            observer.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '0px 0px 200px 0px'
+      });
+
+      lazyImages.forEach(img => {
+        imageObserver.observe(img);
+      });
+    }
+
+    // Newsletter form handling
+    function setupNewsletterForm() {
+      const form = document.getElementById('newsletterForm');
+      if (!form) return;
+      
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        
+        // Simulate form submission
+        setTimeout(() => {
+          showToast('Thank you for subscribing!', 'success');
+          this.reset();
+        }, 1000);
+      });
+    }
+
+    // Initialize everything safely
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        updateDashboardUI();
+        setupDashboardCloseHandler();
+        setupLogoutHandler();
+        setupCart();
+        setupAutoScroll();
+        setupTouchFeedback();
+        setupBackToTop();
+        lazyLoadImages();
+        setupNewsletterForm();
+        
+        // Simulate user login for demo (remove in production)
+        if (window.location.search.includes('demo=1')) {
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('delishUser', JSON.stringify({
+            name: 'Demo User',
+            email: 'demo@delishbite.com'
+          }));
+          updateDashboardUI();
+        }
+      } catch (e) {
+        console.error("Initialization failed:", e);
+      }
+    });
+  </script>
 </body>
 </html>
