@@ -15,882 +15,799 @@
   
   <!-- AOS CSS -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/5787/5787100.png">
-  
-  <style>
-    :root {
-      --primary-color: #e16bff;
-      --secondary-color: #4ecdc4;
-      --accent-color: #ffbe76;
-      --dark-color: #2d3436;
-      --light-color: #f7f1e3;
-      --text-color: #2d3436;
-      --text-light: #636e72;
-      --bg-color: #ffffff;
-      --section-bg: #f9f9f9;
-      --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    }
+ 
+<style>
+  :root {
+    --primary-color: #e16bff;
+    --secondary-color: #4ecdc4;
+    --accent-color: #ffbe76;
+    --dark-color: #2d3436;
+    --light-color: #f7f1e3;
+    --text-color: #2d3436;
+    --text-light: #636e72;
+    --bg-color: #ffffff;
+    --section-bg: #f9f9f9;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    html {
-      scroll-behavior: smooth;
-    }
+  html {
+    scroll-behavior: smooth;
+  }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      overflow-x: hidden;
-      position: relative;
-    }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
 
-    h1, h2, h3, h4 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-    }
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+  }
 
-    /* Header with responsive menu */
+  header {
+    background: var(--gradient);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+  }
+
+  header h1 {
+    font-size: 2.4rem;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+  }
+
+  nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav a {
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 1.1rem;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: var(--transition);
+  }
+
+  nav a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: white;
+    transition: var(--transition);
+  }
+
+  nav a:hover,
+  nav a:focus {
+    transform: translateY(-2px);
+  }
+
+  nav a:hover::after,
+  nav a:focus::after {
+    width: 100%;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
+    height: 90vh;
+    max-height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  }
+
+  .cta-button {
+    background: white;
+    color: var(--primary-color);
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cta-button:hover {
+    background: var(--light-color);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Sections */
+  section {
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--gradient);
+    border-radius: 2px;
+  }
+
+  /* Food Items */
+  .food-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .food-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .food-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .food-card img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.food-card:hover img {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+  .food-card-content {
+    padding: 1.5rem;
+  }
+
+  .food-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+  }
+
+  .food-card p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .food-card .price {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+  }
+
+  .food-card .rating {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .food-card .add-to-cart {
+    background: var(--gradient);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .food-card .add-to-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+  }
+
+  /* Scrollable Section */
+  .scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 1.5rem;
+    margin-top: 2rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) #f1f1f1;
+  }
+
+  .scroll-content {
+    display: inline-flex;
+    gap: 2rem;
+    padding: 0.5rem;
+  }
+
+  .scroll-container::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .scroll-container::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+  }
+
+  .scroll-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  /* Features Section */
+  .features {
+    background-color: var(--section-bg);
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-card p {
+    color: var(--text-light);
+  }
+
+  /* Contact Section */
+  #contact {
+    background-color: var(--section-bg);
+  }
+
+  .contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .contact-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    min-width: 250px;
+    transition: var(--transition);
+  }
+
+  .contact-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .contact-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .contact-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .contact-card a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .contact-card a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--dark-color);
+    color: white;
+    padding: 3rem 2rem 1.5rem;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-column h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .footer-column h3::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--primary-color);
+  }
+
+  .footer-column ul {
+    list-style: none;
+  }
+
+  .footer-column li {
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-column a {
+    color: #dfe6e9;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .footer-column a:hover {
+    color: var(--primary-color);
+    padding-left: 5px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #f0f0f0;
+  border-radius: 50%; /* Makes it circular */
+  color: #555;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background: #ff6b6b; /* Change color on hover */
+  color: white;
+  transform: translateY(-3px); /* Slight lift effect */
+}
+
+/* Font Awesome icons adjustment */
+.social-links i {
+  font-size: 1rem;
+}
+
+  .copyright {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #b2bec3;
+    font-size: 0.9rem;
+  }
+
+  /* Profile Icon */
+  .profile-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid white;
+    transition: var(--transition);
+  }
+
+  .profile-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+
+  .profile-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Dashboard Panel */
+  .dashboard-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 350px;
+    max-width: 90%;
+    height: 100%;
+    background: white;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow-y: auto;
+  }
+
+  .dashboard-panel.active {
+    right: 0;
+  }
+
+  .dashboard-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .close-btn:hover {
+    color: var(--primary-color);
+    transform: rotate(90deg);
+  }
+
+  .user-info {
+    text-align: center;
+    padding: 1rem 0 2rem;
+  }
+
+  .user-info img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 3px solid var(--primary-color);
+  }
+
+  .user-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+  }
+
+  .user-info p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+  }
+
+  .dashboard-btn {
+    background: var(--gradient);
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 0.5rem auto;
+    display: block;
+    transition: var(--transition);
+    width: 100%;
+  }
+
+  .dashboard-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+  }
+
+  .dashboard-btn.logout {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+  }
+
+  .dashboard-btn.logout:hover {
+    background: rgba(255, 107, 107, 0.1);
+  }
+
+  .dashboard-divider {
+    margin: 1.5rem 0;
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ddd, transparent);
+  }
+
+  .dashboard-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .dashboard-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .dashboard-link:hover {
+    background: rgba(78, 205, 196, 0.1);
+    transform: translateX(5px);
+  }
+
+  .dashboard-link i {
+    width: 24px;
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+  }
+
+  /* Floating Action Button */
+  .fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+    z-index: 999;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .fab:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+  }
+
+  /* Back to Top Button */
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: var(--dark-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 992px) {
     header {
-      background: var(--gradient);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: var(--shadow);
+      flex-direction: column;
+      padding: 1rem;
     }
 
     header h1 {
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      color: white;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-      letter-spacing: 1px;
-    }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-      z-index: 1001;
+      margin-bottom: 1rem;
     }
 
     nav {
-      display: flex;
-      gap: 2rem;
-      transition: var(--transition);
-    }
-
-    nav a {
-      color: white;
-      font-weight: 500;
-      text-decoration: none;
-      font-size: clamp(0.95rem, 1.1vw, 1.1rem);
-      position: relative;
-      padding: 0.5rem 0;
-      transition: var(--transition);
-    }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background-color: white;
-      transition: var(--transition);
-    }
-
-    nav a:hover,
-    nav a:focus {
-      transform: translateY(-2px);
-    }
-
-    nav a:hover::after,
-    nav a:focus::after {
-      width: 100%;
-    }
-
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                  url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
-      height: 90vh;
-      max-height: 800px;
-      min-height: 500px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      padding: 2rem;
-      position: relative;
-    }
-
-    .hero-content {
-      max-width: min(800px, 90%);
-      position: relative;
-      z-index: 1;
+      gap: 1.5rem;
     }
 
     .hero h2 {
-      font-size: clamp(1.8rem, 5vw, 3.5rem);
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      font-size: 2.8rem;
     }
 
     .hero p {
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      margin-bottom: 2.5rem;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      height: 70vh;
     }
 
-    .cta-button {
-      background: white;
-      color: var(--primary-color);
-      padding: 1rem 2.5rem;
-      font-size: clamp(1rem, 1.2vw, 1.2rem);
-      border: none;
-      border-radius: 50px;
-      font-weight: 600;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+    .hero h2 {
+      font-size: 2.2rem;
     }
 
-    .cta-button:hover {
-      background: var(--light-color);
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Sections */
-    section {
-      padding: clamp(3rem, 5vw, 5rem) clamp(1rem, 2vw, 2rem);
-      text-align: center;
+    .hero p {
+      font-size: 1.1rem;
     }
 
     .section-title {
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      margin-bottom: 3rem;
-      position: relative;
-      display: inline-block;
+      font-size: 2rem;
     }
 
-    .section-title::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
-      background: var(--gradient);
-      border-radius: 2px;
-    }
-
-    /* Food Items */
     .food-items {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-
-    .food-card {
-      background: white;
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .food-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-    }
-
-    .food-card img {
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-      aspect-ratio: 1/1;
-    }
-
-    .food-card:hover img {
-      transform: scale(1.05);
-    }
-
-    .food-card-content {
-      padding: 1.5rem;
-    }
-
-    .food-card h3 {
-      font-size: clamp(1.1rem, 1.3vw, 1.3rem);
-      margin-bottom: 0.5rem;
-      color: var(--dark-color);
-    }
-
-    .food-card p {
-      color: var(--text-light);
-      margin-bottom: 1rem;
-      font-size: clamp(0.85rem, 0.95vw, 0.95rem);
-    }
-
-    .food-card .price {
-      font-weight: 600;
-      color: var(--primary-color);
-      font-size: clamp(1rem, 1.2vw, 1.2rem);
-    }
-
-    .food-card .rating {
-      color: var(--accent-color);
-      margin-bottom: 0.5rem;
-    }
-
-    .food-card .add-to-cart {
-      background: var(--gradient);
-      color: white;
-      border: none;
-      padding: 0.6rem 1.5rem;
-      border-radius: 30px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: var(--transition);
-      margin-top: 0.5rem;
-      width: 100%;
-      font-size: clamp(0.9rem, 1vw, 1rem);
-    }
-
-    .food-card .add-to-cart:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-    }
-
-    /* Scrollable Section */
-    .scroll-container {
-      overflow-x: auto;
-      white-space: nowrap;
-      padding-bottom: 1.5rem;
-      margin-top: 2rem;
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary-color) #f1f1f1;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .scroll-content {
-      display: inline-flex;
-      gap: 2rem;
-      padding: 0.5rem;
-    }
-
-    .scroll-container::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .scroll-container::-webkit-scrollbar-thumb {
-      background-color: var(--primary-color);
-      border-radius: 10px;
-    }
-
-    .scroll-container::-webkit-scrollbar-track {
-      background-color: #f1f1f1;
-      border-radius: 10px;
-    }
-
-    /* Features Section */
-    .features {
-      background-color: var(--section-bg);
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-
-    .feature-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .feature-icon {
-      font-size: clamp(2rem, 2.5vw, 2.5rem);
-      color: var(--primary-color);
-      margin-bottom: 1.5rem;
-    }
-
-    .feature-card h3 {
-      font-size: clamp(1.2rem, 1.4vw, 1.4rem);
-      margin-bottom: 1rem;
-    }
-
-    .feature-card p {
-      color: var(--text-light);
-      font-size: clamp(0.9rem, 1vw, 1rem);
-    }
-
-    /* Contact Section */
-    #contact {
-      background-color: var(--section-bg);
-    }
-
-    .contact-info {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
-      margin-top: 3rem;
-    }
-
-    .contact-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-
-    .contact-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .contact-icon {
-      font-size: clamp(1.8rem, 2vw, 2rem);
-      color: var(--primary-color);
-      margin-bottom: 1rem;
-    }
-
-    .contact-card h3 {
-      font-size: clamp(1.1rem, 1.3vw, 1.3rem);
-      margin-bottom: 1rem;
-    }
-
-    .contact-card a, .contact-card p {
-      color: var(--secondary-color);
-      text-decoration: none;
-      transition: var(--transition);
-      font-size: clamp(0.9rem, 1vw, 1rem);
-    }
-
-    .contact-card a:hover {
-      color: var(--primary-color);
-      text-decoration: underline;
-    }
-
-    /* Footer */
-    footer {
-      background: var(--dark-color);
-      color: white;
-      padding: 3rem clamp(1rem, 2vw, 2rem) 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
 
     .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
+      grid-template-columns: 1fr;
     }
 
-    .footer-column h3 {
-      font-size: clamp(1.1rem, 1.3vw, 1.3rem);
-      margin-bottom: 1.5rem;
-      position: relative;
-      display: inline-block;
-    }
-
-    .footer-column h3::after {
-      content: "";
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 40px;
-      height: 3px;
-      background: var(--primary-color);
-    }
-
-    .footer-column ul {
-      list-style: none;
-    }
-
-    .footer-column li {
-      margin-bottom: 0.8rem;
-    }
-
-    .footer-column a {
-      color: #dfe6e9;
-      text-decoration: none;
-      transition: var(--transition);
-      font-size: clamp(0.9rem, 1vw, 1rem);
-    }
-
-    .footer-column a:hover {
-      color: var(--primary-color);
-      padding-left: 5px;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .social-links a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background: #f0f0f0;
-      border-radius: 50%;
-      color: #555;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .social-links a:hover {
-      background: var(--primary-color);
-      color: white;
-      transform: translateY(-3px);
-    }
-
-    .social-links i {
-      font-size: 1rem;
-    }
-
-    .newsletter-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .newsletter-form input {
-      padding: 0.8rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 0.9rem;
-    }
-
-    .newsletter-form button {
-      background: var(--gradient);
-      color: white;
-      border: none;
-      padding: 0.8rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .newsletter-form button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-    }
-
-    .copyright {
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: #b2bec3;
-      font-size: 0.9rem;
-    }
-
-    /* Profile Icon */
     .profile-icon {
-      width: clamp(40px, 50px, 50px);
-      height: clamp(40px, 50px, 50px);
-      border-radius: 50%;
-      overflow: hidden;
-      cursor: pointer;
-      border: 2px solid white;
-      transition: var(--transition);
+      width: 45px;
+      height: 45px;
     }
+  }
 
-    .profile-icon:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
-    }
-
-    .profile-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Dashboard Panel */
-    .dashboard-panel {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: min(350px, 90%);
-      height: 100%;
-      background: white;
-      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-      transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-      overflow-y: auto;
-    }
-
-    .dashboard-panel.active {
-      right: 0;
-    }
-
-    .dashboard-content {
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
+  @media (max-width: 576px) {
+    nav {
       gap: 1rem;
-      height: 100%;
     }
 
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 2rem;
-      color: var(--text-light);
-      cursor: pointer;
-      transition: var(--transition);
+    nav a {
+      font-size: 0.95rem;
     }
 
-    .close-btn:hover {
-      color: var(--primary-color);
-      transform: rotate(90deg);
+    .hero {
+      height: 60vh;
+      padding: 1rem;
     }
 
-    .user-info {
-      text-align: center;
-      padding: 1rem 0 2rem;
+    .hero h2 {
+      font-size: 1.8rem;
     }
 
-    .user-info img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      border: 3px solid var(--primary-color);
-    }
-
-    .user-info h3 {
-      font-size: clamp(1.2rem, 1.5vw, 1.5rem);
-      margin-bottom: 0.5rem;
-      color: var(--dark-color);
-    }
-
-    .user-info p {
-      color: var(--text-light);
-      margin-bottom: 1.5rem;
-      font-size: clamp(0.9rem, 1vw, 1rem);
-    }
-
-    .dashboard-btn {
-      background: var(--gradient);
-      color: white;
-      padding: 0.8rem 2rem;
-      border: none;
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
+    .cta-button {
+      padding: 0.8rem 1.8rem;
       font-size: 1rem;
-      margin: 0.5rem auto;
-      display: block;
-      transition: var(--transition);
+    }
+
+    section {
+      padding: 3rem 1rem;
+    }
+
+    .food-card img {
+      height: 180px;
+    }
+
+    .dashboard-panel {
       width: 100%;
     }
+  }
 
-    .dashboard-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
-    }
+  /* Animation Classes */
+  .fade-in {
+    animation: fadeIn 0.8s ease forwards;
+  }
 
-    .dashboard-btn.logout {
-      background: white;
-      color: var(--primary-color);
-      border: 2px solid var(--primary-color);
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 
-    .dashboard-btn.logout:hover {
-      background: rgba(255, 107, 107, 0.1);
-    }
+  .slide-up {
+    animation: slideUp 0.8s ease forwards;
+  }
 
-    .dashboard-divider {
-      margin: 1.5rem 0;
-      border: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, #ddd, transparent);
-    }
-
-    .dashboard-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .dashboard-link {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.8rem 1rem;
-      border-radius: 8px;
-      color: var(--text-color);
-      text-decoration: none;
-      transition: var(--transition);
-      font-size: clamp(0.9rem, 1vw, 1rem);
-    }
-
-    .dashboard-link:hover {
-      background: rgba(78, 205, 196, 0.1);
-      transform: translateX(5px);
-    }
-
-    .dashboard-link i {
-      width: 24px;
-      text-align: center;
-      color: var(--primary-color);
-      font-size: 1.2rem;
-    }
-
-    /* Floating Action Button */
-    .fab {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 60px;
-      height: 60px;
-      background: var(--gradient);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
-      z-index: 999;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .fab:hover {
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
-    }
-
-    /* Back to Top Button */
-    .back-to-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 50px;
-      height: 50px;
-      background: var(--dark-color);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      z-index: 999;
-      cursor: pointer;
+  @keyframes slideUp {
+    from { 
       opacity: 0;
-      visibility: hidden;
-      transition: var(--transition);
+      transform: translateY(30px);
     }
-
-    .back-to-top.visible {
+    to { 
       opacity: 1;
-      visibility: visible;
+      transform: translateY(0);
     }
-
-    .back-to-top:hover {
-      background: var(--primary-color);
-      transform: translateY(-3px);
-    }
-
-    /* Cart Badge */
-    .cart-badge {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background: var(--accent-color);
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: bold;
-    }
-
-    /* Loading Spinner */
-    .spinner {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255,255,255,.3);
-      border-radius: 50%;
-      border-top-color: white;
-      animation: spin 1s ease-in-out infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Responsive Design */
-    @media (max-width: 992px) {
-      nav {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 70%;
-        height: 100vh;
-        background: var(--gradient);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
-        transition: right 0.3s ease;
-      }
-
-      nav.active {
-        right: 0;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .hero {
-        height: 70vh;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        height: 60vh;
-      }
-
-      .food-card img {
-        height: 250px;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .hero {
-        height: 70vh;
-      }
-
-      .food-card img {
-        height: 200px;
-      }
-
-      .dashboard-panel {
-        width: 100%;
-      }
-    }
-
-    /* Animation Classes */
-    .fade-in {
-      animation: fadeIn 0.8s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .slide-up {
-      animation: slideUp 0.8s ease forwards;
-    }
-
-    @keyframes slideUp {
-      from { 
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to { 
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Toast Notifications */
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 12px 24px;
-      border-radius: 4px;
-      color: white;
-      background-color: #333;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      z-index: 1000;
-      opacity: 1;
-      transition: opacity 0.5s;
-    }
-
-    .toast.success { background-color: #4CAF50; }
-    .toast.error { background-color: #F44336; }
-    .toast.warning { background-color: #FF9800; }
-    .toast.fade-out { opacity: 0; }
-
-    /* Mobile Tap Feedback */
-    nav a.tapped {
-      transform: scale(1.1);
-      color: #ffd6fc;
-      transition: transform 0.2s, color 0.2s;
-    }
-
-    /* Lazy Load Fade-in */
-    .lazy-load {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .lazy-load.loaded {
-      opacity: 1;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
   <header data-aos="fade-down">
-    <button class="menu-toggle" aria-label="Toggle menu">
-      <i class="fas fa-bars"></i>
-    </button>
     <h1>DelishBite</h1>
     <nav>
       <a href="#" class="active">Home</a>
@@ -900,7 +817,6 @@
     </nav>
     <div class="profile-icon" onclick="openDashboard()">
       <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
-      <span class="cart-badge" id="cartBadge">0</span>
     </div>
   </header>
 
@@ -919,7 +835,7 @@
     <div class="scroll-container" id="popularScroll">
       <div class="food-items scroll-content">
         <div class="food-card" data-aos="zoom-in" data-aos-delay="100">
-          <img class="lazy-load" data-src="https://images.unsplash.com/photo-1598023696416-0193a0bcd302?auto=format&fit=crop&q=60" alt="Pizza" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1598023696416-0193a0bcd302?auto=format&fit=crop&q=60" alt="Pizza">
           <div class="food-card-content">
             <div class="rating">
               <i class="fas fa-star"></i>
@@ -932,14 +848,12 @@
             <h3>Truffle Mushroom Pizza</h3>
             <p>Wood-fired crust with wild mushrooms and truffle oil</p>
             <div class="price">₹499</div>
-            <button class="add-to-cart" data-id="1" data-name="Truffle Mushroom Pizza" data-price="499">
-              Add to Cart
-            </button>
+            <button class="add-to-cart">Add to Cart</button>
           </div>
         </div>
         
         <div class="food-card" data-aos="zoom-in" data-aos-delay="200">
-          <img class="lazy-load" data-src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&q=80" alt="Burger" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&q=80" alt="Burger">
           <div class="food-card-content">
             <div class="rating">
               <i class="fas fa-star"></i>
@@ -952,14 +866,12 @@
             <h3>Gourmet Chicken Burger</h3>
             <p>Angus chicken patty with aged cheddar and caramelized onions</p>
             <div class="price">₹399</div>
-            <button class="add-to-cart" data-id="2" data-name="Gourmet Chicken Burger" data-price="399">
-              Add to Cart
-            </button>
+            <button class="add-to-cart">Add to Cart</button>
           </div>
         </div>
         
         <div class="food-card" data-aos="zoom-in" data-aos-delay="300">
-          <img class="lazy-load" data-src="https://media.istockphoto.com/id/1084512928/photo/pasta.jpg?b=1&s=170667a&w=0&k=20&c=ITXDgHyer1qHrlJJkE5baeOf9tKR0gPwNXeUSCgWd30=" alt="Pasta" loading="lazy">
+          <img src="https://media.istockphoto.com/id/1084512928/photo/pasta.jpg?b=1&s=170667a&w=0&k=20&c=ITXDgHyer1qHrlJJkE5baeOf9tKR0gPwNXeUSCgWd30=" alt="Pasta">
           <div class="food-card-content">
             <div class="rating">
               <i class="fas fa-star"></i>
@@ -972,14 +884,12 @@
             <h3>Truffle Cream Pasta</h3>
             <p>Handmade pasta with wild mushrooms and truffle cream sauce</p>
             <div class="price">₹449</div>
-            <button class="add-to-cart" data-id="3" data-name="Truffle Cream Pasta" data-price="449">
-              Add to Cart
-            </button>
+            <button class="add-to-cart">Add to Cart</button>
           </div>
         </div>
         
         <div class="food-card" data-aos="zoom-in" data-aos-delay="400">
-          <img class="lazy-load" data-src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=60" alt="Dessert" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=60" alt="Dessert">
           <div class="food-card-content">
             <div class="rating">
               <i class="fas fa-star"></i>
@@ -992,14 +902,12 @@
             <h3>Chocolate Soufflé</h3>
             <p>Warm chocolate soufflé with vanilla bean ice cream</p>
             <div class="price">₹349</div>
-            <button class="add-to-cart" data-id="4" data-name="Chocolate Soufflé" data-price="349">
-              Add to Cart
-            </button>
+            <button class="add-to-cart">Add to Cart</button>
           </div>
         </div>
         
         <div class="food-card" data-aos="zoom-in" data-aos-delay="500">
-          <img class="lazy-load" data-src="https://images.unsplash.com/photo-1701579231305-d84d8af9a3fd?auto=format&fit=crop&q=60" alt="Biryani" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1701579231305-d84d8af9a3fd?auto=format&fit=crop&q=60" alt="Biryani">
           <div class="food-card-content">
             <div class="rating">
               <i class="fas fa-star"></i>
@@ -1012,14 +920,12 @@
             <h3>Hyderabadi Dum Biryani</h3>
             <p>Authentic Hyderabadi biryani with raita and mirchi ka salan</p>
             <div class="price">₹379</div>
-            <button class="add-to-cart" data-id="5" data-name="Hyderabadi Dum Biryani" data-price="379">
-              Add to Cart
-            </button>
+            <button class="add-to-cart">Add to Cart</button>
           </div>
         </div>
         
         <div class="food-card" data-aos="zoom-in" data-aos-delay="600">
-          <img class="lazy-load" data-src="https://images.unsplash.com/photo-1631215060641-b9e8e55859a8?auto=format&fit=crop&q=80" alt="Salad" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1631215060641-b9e8e55859a8?auto=format&fit=crop&q=80" alt="Salad">
           <div class="food-card-content">
             <div class="rating">
               <i class="fas fa-star"></i>
@@ -1032,9 +938,7 @@
             <h3>Mediterranean Salad</h3>
             <p>Fresh greens with feta, olives, and balsamic glaze</p>
             <div class="price">₹299</div>
-            <button class="add-to-cart" data-id="6" data-name="Mediterranean Salad" data-price="299">
-              Add to Cart
-            </button>
+            <button class="add-to-cart">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -1109,16 +1013,17 @@
 
   <footer>
     <div class="footer-content">
-      <div class="footer-column">
-        <h3>DelishBite</h3>
-        <p>Bringing gourmet dining experiences to your home since 2020.</p>
-        <div class="social-links">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-        </div>
-      </div>
+  <div class="footer-column">
+    <h3>DelishBite</h3>
+    <p>Bringing gourmet dining experiences to your home since 2020.</p>
+    <div class="social-links">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+</div>
       
       <div class="footer-column">
         <h3>Quick Links</h3>
@@ -1143,7 +1048,7 @@
       <div class="footer-column">
         <h3>Newsletter</h3>
         <p>Subscribe to get updates on special offers and new dishes.</p>
-        <form class="newsletter-form" id="newsletterForm">
+        <form class="newsletter-form">
           <input type="email" placeholder="Your Email" required>
           <button type="submit">Subscribe</button>
         </form>
@@ -1206,466 +1111,321 @@
           <span>Favorites</span>
         </a>
         
-        <a href="#" class="dashboard-link">
-          <i class="fas fa-shopping-cart"></i>
-          <span>My Cart (<span id="dashboardCartCount">0</span>)</span>
-        </a>
       </div>
     </div>
   </div>
 
+
   <!-- AOS JS -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <!-- AOS JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
-  <script>
-    // Initialize AOS with error handling
+<script>
+  // Initialize AOS with error handling
+  try {
+    AOS.init({ 
+      duration: 1000, 
+      once: true,
+      disable: window.innerWidth < 768 // Disable on mobile if needed
+    });
+  } catch (e) {
+    console.error("AOS initialization failed:", e);
+  }
+
+  // Dashboard Panel Functions with enhanced safety
+  function openDashboard() {
     try {
-      AOS.init({ 
-        duration: 1000, 
-        once: true,
-        disable: window.innerWidth < 768 // Disable on mobile if needed
+      const panel = document.getElementById('dashboardPanel');
+      if (panel) {
+        panel.classList.add('active');
+        updateDashboardUI();
+      }
+    } catch (e) {
+      console.error("Error opening dashboard:", e);
+    }
+  }
+
+  function closeDashboard() {
+    try {
+      const panel = document.getElementById('dashboardPanel');
+      if (panel) panel.classList.remove('active');
+    } catch (e) {
+      console.error("Error closing dashboard:", e);
+    }
+  }
+
+  // Robust dashboard UI updater
+  function updateDashboardUI() {
+    try {
+      const user = JSON.parse(localStorage.getItem('delishUser')) || {};
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      
+      const elements = {
+        greeting: document.getElementById('dashboardGreeting'),
+        note: document.getElementById('dashboardNote'),
+        loginBtn: document.getElementById('loginBtn'),
+        logoutBtn: document.getElementById('logoutBtn'),
+        links: document.querySelectorAll('.dashboard-link')
+      };
+
+      // Null check all elements
+      if (!elements.greeting || !elements.note || !elements.loginBtn || !elements.logoutBtn) {
+        throw new Error("Dashboard elements not found");
+      }
+
+      if (isLoggedIn) {
+        elements.greeting.textContent = `Welcome, ${user.name || 'User'}`;
+        elements.note.style.display = 'none';
+        elements.loginBtn.style.display = 'none';
+        elements.logoutBtn.style.display = 'block';
+        
+        elements.links.forEach(link => {
+          link.style.pointerEvents = 'auto';
+          link.style.opacity = '1';
+        });
+      } else {
+        elements.greeting.textContent = 'Welcome, Guest';
+        elements.note.style.display = 'block';
+        elements.loginBtn.style.display = 'block';
+        elements.logoutBtn.style.display = 'none';
+        
+        elements.links.forEach(link => {
+          link.style.pointerEvents = 'none';
+          link.style.opacity = '0.5';
+        });
+      }
+    } catch (error) {
+      console.error('Dashboard UI update failed:', error);
+      // Fallback: Ensure dashboard is closed if error occurs
+      closeDashboard();
+    }
+  }
+
+  // Safe event listener for outside clicks
+  function setupDashboardCloseHandler() {
+    try {
+      window.addEventListener('click', function(e) {
+        try {
+          const panel = document.getElementById('dashboardPanel');
+          if (panel && e.target === panel) {
+            closeDashboard();
+          }
+        } catch (e) {
+          console.error("Error in click handler:", e);
+        }
       });
     } catch (e) {
-      console.error("AOS initialization failed:", e);
+      console.error("Failed to setup dashboard close handler:", e);
     }
+  }
 
-    // Mobile menu toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
-    
-    menuToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      menuToggle.innerHTML = nav.classList.contains('active') ? 
-        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    });
+  // Enhanced logout functionality
+  function setupLogoutHandler() {
+    try {
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (!logoutBtn) return;
 
-    // Close mobile menu when clicking a link
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('active');
-        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-      });
-    });
+      logoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        try {
+          const user = JSON.parse(localStorage.getItem('delishUser') || '{}');
+          const userId = user.email || 'guest';
 
-    // Dashboard Panel Functions with enhanced safety
-    function openDashboard() {
-      try {
-        const panel = document.getElementById('dashboardPanel');
-        if (panel) {
-          panel.classList.add('active');
+          // Clear all user data safely
+          ['isLoggedIn', 'delishUser', 
+           `delishCart_${userId}`, 
+           `delishOrder_${userId}`, 
+           `delishTotal_${userId}`].forEach(key => {
+            try {
+              localStorage.removeItem(key);
+            } catch (e) {
+              console.warn(`Failed to remove ${key}:`, e);
+            }
+          });
+
           updateDashboardUI();
-          updateCartCount();
-        }
-      } catch (e) {
-        console.error("Error opening dashboard:", e);
-      }
-    }
-
-    function closeDashboard() {
-      try {
-        const panel = document.getElementById('dashboardPanel');
-        if (panel) panel.classList.remove('active');
-      } catch (e) {
-        console.error("Error closing dashboard:", e);
-      }
-    }
-
-    // Robust dashboard UI updater
-    function updateDashboardUI() {
-      try {
-        const user = JSON.parse(localStorage.getItem('delishUser')) || {};
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        
-        const elements = {
-          greeting: document.getElementById('dashboardGreeting'),
-          note: document.getElementById('dashboardNote'),
-          loginBtn: document.getElementById('loginBtn'),
-          logoutBtn: document.getElementById('logoutBtn'),
-          links: document.querySelectorAll('.dashboard-link')
-        };
-
-        // Null check all elements
-        if (!elements.greeting || !elements.note || !elements.loginBtn || !elements.logoutBtn) {
-          throw new Error("Dashboard elements not found");
-        }
-
-        if (isLoggedIn) {
-          elements.greeting.textContent = `Welcome, ${user.name || 'User'}`;
-          elements.note.style.display = 'none';
-          elements.loginBtn.style.display = 'none';
-          elements.logoutBtn.style.display = 'block';
+          closeDashboard();
           
-          elements.links.forEach(link => {
-            link.style.pointerEvents = 'auto';
-            link.style.opacity = '1';
-          });
-        } else {
-          elements.greeting.textContent = 'Welcome, Guest';
-          elements.note.style.display = 'block';
-          elements.loginBtn.style.display = 'block';
-          elements.logoutBtn.style.display = 'none';
-          
-          elements.links.forEach(link => {
-            link.style.pointerEvents = 'none';
-            link.style.opacity = '0.5';
-          });
-        }
-      } catch (error) {
-        console.error('Dashboard UI update failed:', error);
-        // Fallback: Ensure dashboard is closed if error occurs
-        closeDashboard();
-      }
-    }
-
-    // Safe event listener for outside clicks
-    function setupDashboardCloseHandler() {
-      try {
-        window.addEventListener('click', function(e) {
+          // Refresh with fallback
           try {
-            const panel = document.getElementById('dashboardPanel');
-            if (panel && e.target === panel) {
-              closeDashboard();
-            }
-          } catch (e) {
-            console.error("Error in click handler:", e);
-          }
-        });
-      } catch (e) {
-        console.error("Failed to setup dashboard close handler:", e);
-      }
-    }
-
-    // Enhanced logout functionality
-    function setupLogoutHandler() {
-      try {
-        const logoutBtn = document.getElementById('logoutBtn');
-        if (!logoutBtn) return;
-
-        logoutBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          try {
-            const user = JSON.parse(localStorage.getItem('delishUser') || '{}');
-            const userId = user.email || 'guest';
-
-            // Clear all user data safely
-            ['isLoggedIn', 'delishUser', 
-             `delishCart_${userId}`, 
-             `delishOrder_${userId}`, 
-             `delishTotal_${userId}`].forEach(key => {
-              try {
-                localStorage.removeItem(key);
-              } catch (e) {
-                console.warn(`Failed to remove ${key}:`, e);
-              }
-            });
-
-            updateDashboardUI();
-            closeDashboard();
-            
-            // Refresh with fallback
-            try {
-              setTimeout(() => {
-                try {
-                  window.location.reload();
-                } catch {
-                  window.location.href = window.location.href;
-                }
-              }, 500);
-            } catch (e) {
-              console.error("Refresh failed:", e);
-            }
-          } catch (error) {
-            console.error('Logout failed:', error);
-            showToast("Logout failed. Please try again.", "error");
-          }
-        });
-      } catch (e) {
-        console.error("Failed to setup logout handler:", e);
-      }
-    }
-
-    // Shopping cart functionality
-    function setupCart() {
-      try {
-        // Initialize cart if not exists
-        const user = JSON.parse(localStorage.getItem('delishUser')) || {};
-        const userId = user.email || 'guest';
-        const cartKey = `delishCart_${userId}`;
-        
-        if (!localStorage.getItem(cartKey)) {
-          localStorage.setItem(cartKey, JSON.stringify([]));
-        }
-        
-        // Add to cart buttons
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-          button.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
-            const name = this.getAttribute('data-name');
-            const price = parseFloat(this.getAttribute('data-price'));
-            
-            addToCart(id, name, price);
-          });
-        });
-        
-        // Update cart count on page load
-        updateCartCount();
-      } catch (e) {
-        console.error("Cart setup failed:", e);
-      }
-    }
-    
-    function addToCart(id, name, price) {
-      try {
-        const user = JSON.parse(localStorage.getItem('delishUser')) || {};
-        const userId = user.email || 'guest';
-        const cartKey = `delishCart_${userId}`;
-        
-        const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-        const existingItem = cart.find(item => item.id === id);
-        
-        if (existingItem) {
-          existingItem.quantity += 1;
-        } else {
-          cart.push({
-            id,
-            name,
-            price,
-            quantity: 1
-          });
-        }
-        
-        localStorage.setItem(cartKey, JSON.stringify(cart));
-        updateCartCount();
-        showToast(`${name} added to cart!`, "success");
-        
-        // Update dashboard cart count if open
-        const dashboardCartCount = document.getElementById('dashboardCartCount');
-        if (dashboardCartCount) {
-          dashboardCartCount.textContent = getCartItemCount();
-        }
-      } catch (e) {
-        console.error("Failed to add to cart:", e);
-        showToast("Failed to add item to cart", "error");
-      }
-    }
-    
-    function getCartItemCount() {
-      try {
-        const user = JSON.parse(localStorage.getItem('delishUser')) || {};
-        const userId = user.email || 'guest';
-        const cartKey = `delishCart_${userId}`;
-        
-        const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-        return cart.reduce((total, item) => total + item.quantity, 0);
-      } catch (e) {
-        console.error("Failed to get cart count:", e);
-        return 0;
-      }
-    }
-    
-    function updateCartCount() {
-      try {
-        const count = getCartItemCount();
-        const badge = document.getElementById('cartBadge');
-        if (badge) {
-          badge.textContent = count;
-          badge.style.display = count > 0 ? 'flex' : 'none';
-        }
-      } catch (e) {
-        console.error("Failed to update cart count:", e);
-      }
-    }
-
-    // Auto-scroll with safety checks
-    function setupAutoScroll() {
-      try {
-        const scrollContainer = document.getElementById('popularScroll');
-        if (!scrollContainer) return;
-
-        let scrollSpeed = 1;
-        let delayBeforeScroll = 2500;
-        let scrollInterval = null;
-        let isScrolling = false;
-
-        function startAutoScroll() {
-          if (isScrolling) return;
-          isScrolling = true;
-          
-          scrollInterval = setInterval(() => {
-            try {
-              if (scrollContainer.scrollLeft < scrollContainer.scrollWidth - scrollContainer.clientWidth) {
-                scrollContainer.scrollLeft += scrollSpeed;
-              } else {
-                scrollContainer.scrollLeft = 0;
-              }
-            } catch (e) {
-              console.error("Scroll error:", e);
-              stopAutoScroll();
-            }
-          }, 20);
-        }
-
-        function stopAutoScroll() {
-          clearInterval(scrollInterval);
-          isScrolling = false;
-        }
-
-        // Start after delay
-        const scrollTimeout = setTimeout(startAutoScroll, delayBeforeScroll);
-
-        // Pause on hover/touch
-        scrollContainer.addEventListener('mouseenter', stopAutoScroll);
-        scrollContainer.addEventListener('touchstart', stopAutoScroll);
-        scrollContainer.addEventListener('mouseleave', () => {
-          setTimeout(startAutoScroll, 1000);
-        });
-
-        // Cleanup on unmount
-        window.addEventListener('beforeunload', () => {
-          clearTimeout(scrollTimeout);
-          stopAutoScroll();
-        });
-      } catch (e) {
-        console.error("Auto-scroll setup failed:", e);
-      }
-    }
-
-    // Touch feedback with safety
-    function setupTouchFeedback() {
-      try {
-        const navLinks = document.querySelectorAll("nav a");
-        if (!navLinks.length) return;
-
-        navLinks.forEach(link => {
-          link.addEventListener("touchstart", () => {
-            try {
-              link.classList.add("tapped");
-              setTimeout(() => {
-                try {
-                  link.classList.remove("tapped");
-                } catch (e) {
-                  console.warn("Failed to remove tapped class:", e);
-                }
-              }, 200);
-            } catch (e) {
-              console.error("Touch feedback error:", e);
-            }
-          }, { passive: true });
-        });
-      } catch (e) {
-        console.error("Touch feedback setup failed:", e);
-      }
-    }
-
-    // Toast notification system
-    function showToast(message, type = "success") {
-      try {
-        // Remove existing toasts
-        document.querySelectorAll('.toast').forEach(toast => toast.remove());
-        
-        const toast = document.createElement("div");
-        toast.className = `toast ${type}`;
-        toast.textContent = message;
-        document.body.appendChild(toast);
-
-        setTimeout(() => {
-          try {
-            toast.classList.add("fade-out");
             setTimeout(() => {
               try {
-                toast.remove();
-              } catch (e) {
-                console.warn("Toast removal failed:", e);
+                window.location.reload();
+              } catch {
+                window.location.href = window.location.href;
               }
             }, 500);
           } catch (e) {
-            console.warn("Toast fade failed:", e);
+            console.error("Refresh failed:", e);
           }
-        }, 3000);
-      } catch (e) {
-        console.error("Toast creation failed:", e);
-        alert(message); // Fallback
-      }
-    }
-
-    // Back to top button behavior
-    function setupBackToTop() {
-      const backToTop = document.querySelector('.back-to-top');
-      
-      window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-          backToTop.classList.add('visible');
-        } else {
-          backToTop.classList.remove('visible');
+        } catch (error) {
+          console.error('Logout failed:', error);
+          showToast("Logout failed. Please try again.", "error");
         }
       });
+    } catch (e) {
+      console.error("Failed to setup logout handler:", e);
     }
+  }
 
-    // Lazy load images
-    function lazyLoadImages() {
-      const lazyImages = document.querySelectorAll('.lazy-load');
-      
-      const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.getAttribute('data-src');
-            img.classList.add('loaded');
-            observer.unobserve(img);
+  // Auto-scroll with safety checks
+  function setupAutoScroll() {
+    try {
+      const scrollContainer = document.getElementById('popularScroll');
+      if (!scrollContainer) return;
+
+      let scrollSpeed = 1;
+      let delayBeforeScroll = 2500;
+      let scrollInterval = null;
+      let isScrolling = false;
+
+      function startAutoScroll() {
+        if (isScrolling) return;
+        isScrolling = true;
+        
+        scrollInterval = setInterval(() => {
+          try {
+            if (scrollContainer.scrollLeft < scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+              scrollContainer.scrollLeft += scrollSpeed;
+            } else {
+              scrollContainer.scrollLeft = 0;
+            }
+          } catch (e) {
+            console.error("Scroll error:", e);
+            stopAutoScroll();
           }
-        });
-      }, {
-        rootMargin: '0px 0px 200px 0px'
-      });
-
-      lazyImages.forEach(img => {
-        imageObserver.observe(img);
-      });
-    }
-
-    // Newsletter form handling
-    function setupNewsletterForm() {
-      const form = document.getElementById('newsletterForm');
-      if (!form) return;
-      
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = this.querySelector('input[type="email"]').value;
-        
-        // Simulate form submission
-        setTimeout(() => {
-          showToast('Thank you for subscribing!', 'success');
-          this.reset();
-        }, 1000);
-      });
-    }
-
-    // Initialize everything safely
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        updateDashboardUI();
-        setupDashboardCloseHandler();
-        setupLogoutHandler();
-        setupCart();
-        setupAutoScroll();
-        setupTouchFeedback();
-        setupBackToTop();
-        lazyLoadImages();
-        setupNewsletterForm();
-        
-        // Simulate user login for demo (remove in production)
-        if (window.location.search.includes('demo=1')) {
-          localStorage.setItem('isLoggedIn', 'true');
-          localStorage.setItem('delishUser', JSON.stringify({
-            name: 'Demo User',
-            email: 'demo@delishbite.com'
-          }));
-          updateDashboardUI();
-        }
-      } catch (e) {
-        console.error("Initialization failed:", e);
+        }, 20);
       }
-    });
-  </script>
+
+      function stopAutoScroll() {
+        clearInterval(scrollInterval);
+        isScrolling = false;
+      }
+
+      // Start after delay
+      const scrollTimeout = setTimeout(startAutoScroll, delayBeforeScroll);
+
+      // Pause on hover/touch
+      scrollContainer.addEventListener('mouseenter', stopAutoScroll);
+      scrollContainer.addEventListener('touchstart', stopAutoScroll);
+      scrollContainer.addEventListener('mouseleave', () => {
+        setTimeout(startAutoScroll, 1000);
+      });
+
+      // Cleanup on unmount
+      window.addEventListener('beforeunload', () => {
+        clearTimeout(scrollTimeout);
+        stopAutoScroll();
+      });
+    } catch (e) {
+      console.error("Auto-scroll setup failed:", e);
+    }
+  }
+
+  // Touch feedback with safety
+  function setupTouchFeedback() {
+    try {
+      const navLinks = document.querySelectorAll("nav a");
+      if (!navLinks.length) return;
+
+      navLinks.forEach(link => {
+        link.addEventListener("touchstart", () => {
+          try {
+            link.classList.add("tapped");
+            setTimeout(() => {
+              try {
+                link.classList.remove("tapped");
+              } catch (e) {
+                console.warn("Failed to remove tapped class:", e);
+              }
+            }, 200);
+          } catch (e) {
+            console.error("Touch feedback error:", e);
+          }
+        }, { passive: true });
+      });
+    } catch (e) {
+      console.error("Touch feedback setup failed:", e);
+    }
+  }
+
+  // Toast notification system
+  function showToast(message, type = "success") {
+    try {
+      const toast = document.createElement("div");
+      toast.className = `toast ${type}`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        try {
+          toast.classList.add("fade-out");
+          setTimeout(() => {
+            try {
+              toast.remove();
+            } catch (e) {
+              console.warn("Toast removal failed:", e);
+            }
+          }, 500);
+        } catch (e) {
+          console.warn("Toast fade failed:", e);
+        }
+      }, 3000);
+    } catch (e) {
+      console.error("Toast creation failed:", e);
+      alert(message); // Fallback
+    }
+  }
+
+  // Initialize everything safely
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      updateDashboardUI();
+      setupDashboardCloseHandler();
+      setupLogoutHandler();
+      setupAutoScroll();
+      setupTouchFeedback();
+      
+      // Add toast styles if not present
+      if (!document.querySelector('style#toast-styles')) {
+        const style = document.createElement('style');
+        style.id = 'toast-styles';
+        style.textContent = `
+          .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            border-radius: 4px;
+            color: white;
+            background-color: #333;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.5s;
+          }
+          .toast.success { background-color: #4CAF50; }
+          .toast.error { background-color: #F44336; }
+          .toast.fade-out { opacity: 0; }
+        `;
+        document.head.appendChild(style);
+      }
+    } catch (e) {
+      console.error("Initialization failed:", e);
+    }
+  });
+</script>
+
+<style>
+  nav a.tapped {
+    transform: scale(1.1);
+    color: #ffd6fc;
+    transition: transform 0.2s, color 0.2s;
+  }
+</style>
+
+
+
 </body>
 </html>
