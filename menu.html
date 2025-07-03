@@ -11,16 +11,21 @@
 
   <style>
   :root {
-    --primary: #e16bff;  /* Warm coral for primary actions */
-    --primary-dark: #E05555;  /* Darker shade for hover */
-    --secondary: #4ECDC4;  /* Fresh teal for accents */
-    --light-bg: #F7FFF7;  /* Very light green background */
-    --card-bg: #FFFFFF;  /* Pure white cards */
-    --text-dark: #292F36;  /* Dark gray for text */
-    --text-light: #6B7280;  /* Medium gray for secondary text */
-    --success: #4CAF50;  /* Green for confirmation */
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    /* Updated Color Palette */
+    --primary: #e16bff;       /* Vibrant purple */
+    --primary-light: #b388ff; /* Lighter purple */
+    --primary-dark: #5c2dba;  /* Darker purple */
+    --secondary: #e16bff;     /* Teal accent */
+    --accent: #ff6b6b;        /* Coral accent */
+    --light: #f8f4ff;        /* Very light purple */
+    --dark: #2d3436;         /* Dark gray */
+    --text: #4a4a4a;         /* Dark text */
+    --text-light: #7e7e7e;   /* Light text */
+    --bg: #ffffff;           /* White background */
+    --section-bg: #f9f9f9;   /* Light gray background */
+    --shadow: 0 4px 20px rgba(138, 79, 255, 0.15);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
   }
 
   html {
@@ -30,13 +35,13 @@
   body {
     margin: 0;
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--light-bg);
-    color: var(--text-dark);
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.6;
   }
 
   header {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: var(--gradient);
     color: white;
     padding: 1.2rem 2.5rem;
     display: flex;
@@ -68,7 +73,6 @@
 
   header a:hover {
     background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
   }
 
   section {
@@ -80,7 +84,7 @@
   .section-title {
     font-size: 2.2rem;
     margin-bottom: 1.5rem;
-    color: var(--text-dark);
+    color: var(--primary-dark);
     position: relative;
     display: inline-block;
     font-weight: 600;
@@ -106,7 +110,7 @@
   }
 
   .food-item {
-    background: var(--card-bg);
+    background: var(--bg);
     border-radius: 16px;
     box-shadow: var(--shadow);
     overflow: hidden;
@@ -116,8 +120,8 @@
   }
 
   .food-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(138, 79, 255, 0.2);
   }
 
   .food-item img {
@@ -129,7 +133,7 @@
   }
 
   .food-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 
   .food-content {
@@ -140,7 +144,7 @@
   .food-item h3 {
     font-size: 1.3rem;
     margin: 0 0 0.5rem;
-    color: var(--text-dark);
+    color: var(--primary-dark);
     font-weight: 600;
   }
 
@@ -164,17 +168,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(78, 205, 196, 0.1);
+    background: rgba(138, 79, 255, 0.05);
     padding: 0.7rem 1.2rem;
     border-radius: 30px;
     margin: 0.5rem 0 0;
-    border: 1px solid rgba(78, 205, 196, 0.2);
+    border: 1px solid rgba(138, 79, 255, 0.1);
   }
 
   .price-bar span.price {
     font-weight: 600;
     font-size: 1.1rem;
-    color: var(--text-dark);
+    color: var(--text);
     flex-grow: 1;
     text-align: center;
   }
@@ -198,13 +202,12 @@
 
   .price-bar button:hover {
     background: var(--primary-dark);
-    transform: scale(1.1);
   }
 
   .order-bar {
     position: sticky;
     bottom: 0;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: var(--gradient);
     padding: 1.2rem 2.5rem;
     display: flex;
     justify-content: space-between;
@@ -245,13 +248,7 @@
   }
 
   .place-order-btn:hover {
-    background-color: var(--light-bg);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  }
-
-  .place-order-btn:active {
-    transform: translateY(0);
+    background-color: var(--light);
   }
 
   .item-count {
@@ -277,17 +274,6 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Animation for added items */
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-  }
-
-  .pulse {
-    animation: pulse 0.3s ease;
   }
 
   /* Responsive adjustments */
@@ -364,7 +350,7 @@
   </header>
 
   <section>
-    <h2 class="section-title" data-aos="fade-up">Our Culinary Selection</h2>
+    <h2 class="section-title" data-aos="fade-up">Our Delicious Selection</h2>
     <div class="food-grid">
       <!-- Food Items -->
 
@@ -579,8 +565,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
-<script>
+  <script>
   // Initialize AOS with error handling
   try {
     AOS.init({ duration: 800, offset: 100, once: true });
@@ -602,32 +587,96 @@
   const user = getUserData();
   const userId = user.email;
 
-  // Key definitions with versioning to handle cache issues
+  // Key definitions with versioning
   const cartKey = `delishCart_v2_${userId}`;
   const totalKey = `delishTotal_v2_${userId}`;
   const orderKey = `delishOrder_v2_${userId}`;
   const menuStateKey = `delishMenuState_v2_${userId}`;
 
-  // Main initialization with enhanced state handling
+  // Main initialization
   document.addEventListener('DOMContentLoaded', () => {
     try {
-      // Clear any legacy keys
       cleanupLegacyStorage();
-      
-      // Initialize the page based on its type
-      if (document.querySelector('.food-item')) {
-        initMenuPage();
-      } else if (document.getElementById('orderDetails')) {
-        initSummaryPage();
-      }
-      
-      // Setup navigation state listener
-      setupNavigationState();
+      initMenuPage();
+      setupCartSync(); // Add this line for real-time updates
     } catch (e) {
       console.error("Initialization error:", e);
       resetCartUI();
     }
+    setupCartSyncListener();
   });
+
+  function setupCartSyncListener() {
+  // Listen for storage events
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'cartUpdated') {
+      updateCartFromStorage();
+    }
+  });
+
+  // Also check when page becomes visible again
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      updateCartFromStorage();
+    }
+  });
+}
+
+  // Setup real-time cart synchronization
+  function setupCartSync() {
+    // Listen for storage events (cross-tab/window sync)
+    window.addEventListener('storage', (e) => {
+      if (e.key === cartKey || e.key === 'cartLastUpdate') {
+        updateCartFromStorage();
+      }
+    });
+
+    // Check for updates when page gains focus
+    window.addEventListener('focus', updateCartFromStorage);
+    
+    // Initial update
+    updateCartFromStorage();
+  }
+
+  // Update cart from storage
+  function updateCartFromStorage() {
+  try {
+    const { cartKey, totalKey } = getUserKeys();
+    const cart = getLocalStorage(cartKey, {});
+    const total = getLocalStorage(totalKey, 0);
+    let itemCount = 0;
+
+    // Update all quantity displays
+    document.querySelectorAll('.food-item').forEach(item => {
+      const nameElement = item.querySelector('h3');
+      const priceElement = item.querySelector('.price');
+      
+      if (nameElement && priceElement) {
+        const name = nameElement.textContent.trim();
+        const qty = cart[name]?.qty || 0;
+        priceElement.dataset.qty = qty;
+        priceElement.textContent = qty > 0 ? `Qty: ${qty}` : 'Qty: 0';
+        itemCount += qty;
+      }
+    });
+
+    // Update totals
+    const totalElement = document.getElementById('totalAmount');
+    const countElement = document.getElementById('itemCount');
+    
+    if (totalElement) totalElement.textContent = total;
+    if (countElement) countElement.textContent = itemCount;
+    
+    // Visual feedback
+    if (itemCount === 0) {
+      resetCartUI();
+    } else {
+      showToast("Cart updated", "success");
+    }
+  } catch (e) {
+    console.error("Cart update error:", e);
+  }
+}
 
   // Clean up old storage keys
   function cleanupLegacyStorage() {
@@ -647,148 +696,261 @@
 
   // Initialize menu page
   function initMenuPage() {
-    restoreCart();
+    // Setup quantity buttons
+    document.querySelectorAll('.increase-btn').forEach(btn => {
+      btn.addEventListener('click', () => increase(btn));
+    });
     
+    document.querySelectorAll('.decrease-btn').forEach(btn => {
+      btn.addEventListener('click', () => decrease(btn));
+    });
+
+    // Setup order button
     const orderBtn = document.querySelector('.place-order-btn');
     if (orderBtn) {
       orderBtn.addEventListener('click', placeOrder);
     }
+
+    // Restore cart state
+    restoreCart();
+  }
+
+  // Quantity increase function
+  function increase(btn) {
+    if (!btn) return;
     
-    // Save initial menu state
-    saveMenuState();
-  }
-
-  // Initialize summary page
-  function initSummaryPage() {
-    const order = getLocalStorage(orderKey, []);
-    const orderDetailsDiv = document.getElementById('orderDetails');
-    const proceedBtn = document.getElementById('proceedBtn');
-    const emptyMessage = document.getElementById('emptyMessage');
-    const orderSummary = document.getElementById('orderSummary');
-    const itemCount = document.getElementById('itemCount');
-    const subtotalEl = document.getElementById('subtotal');
-    const taxEl = document.getElementById('tax');
-    const totalEl = document.getElementById('orderTotal');
-
-    let subtotal = 0;
-    const taxRate = 0.05;
-    const deliveryFee = 49;
-
-    // Clear existing content
-    if (orderDetailsDiv) orderDetailsDiv.innerHTML = '';
-
-    if (!order || order.length === 0) {
-      if (emptyMessage) emptyMessage.style.display = 'block';
-      if (orderSummary) orderSummary.style.display = 'none';
-      if (proceedBtn) proceedBtn.style.display = 'none';
-      return;
-    }
-
-    if (emptyMessage) emptyMessage.style.display = 'none';
-    if (orderSummary) orderSummary.style.display = 'block';
-    if (proceedBtn) proceedBtn.style.display = 'inline-flex';
-
-    if (itemCount) {
-      itemCount.textContent = `${order.length} ${order.length === 1 ? 'item' : 'items'}`;
-    }
-
-    order.forEach((item, index) => {
-      if (!item || !item.name || !item.price || !item.qty) return;
-
-      const itemEl = document.createElement('div');
-      itemEl.className = 'order-item';
-      
-      const foodImage = getFoodImage(item.name);
-      const foodIcon = getFoodIcon(item.name);
-      const itemTotal = (item.price * item.qty).toFixed(2);
-      
-      itemEl.innerHTML = `
-        <div class="item-info">
-          <div class="item-img" style="background-image: url('${foodImage}'); background-size: cover;">
-            ${foodIcon}
-          </div>
-          <div class="item-details">
-            <h3>${item.name}</h3>
-            <p>${item.category || 'Main Course'}</p>
-          </div>
-        </div>
-        <div class="item-price">
-          <div class="item-qty">
-            <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
-            <span class="qty-value">${item.qty}</span>
-            <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
-          </div>
-          <span class="price">₹${itemTotal}</span>
-          <button class="remove-btn" onclick="removeItem(${index})" title="Remove item">×</button>
-        </div>
-      `;
-      
-      subtotal += item.price * item.qty;
-      if (orderDetailsDiv) orderDetailsDiv.appendChild(itemEl);
-    });
-
-    const tax = subtotal * taxRate;
-    const total = subtotal + tax + deliveryFee;
-    
-    if (subtotalEl) subtotalEl.textContent = `₹${subtotal.toFixed(2)}`;
-    if (taxEl) taxEl.textContent = `₹${tax.toFixed(2)}`;
-    if (totalEl) totalEl.textContent = `₹${total.toFixed(2)}`;
-  }
-
-  // Handle back/forward navigation
-  function setupNavigationState() {
-    window.addEventListener('pageshow', function(event) {
-      if (event.persisted) {
-        // Page was restored from bfcache, refresh data
-        location.reload();
-      }
-    });
-
-    // Save state before leaving menu page
-    window.addEventListener('beforeunload', function() {
-      if (document.querySelector('.food-item')) {
-        saveMenuState();
-      }
-    });
-  }
-
-  // Save current menu state
-  function saveMenuState() {
     try {
-      const state = {};
+      const container = btn.closest('.price-bar');
+      if (!container) return;
+      
+      const span = container.querySelector('.price');
+      if (!span) return;
+      
+      let qty = parseInt(span.dataset.qty || 0) + 1;
+      if (isNaN(qty)) qty = 1;
+      
+      span.dataset.qty = qty;
+      span.textContent = `Qty: ${qty}`;
+      updateCartAndTotal();
+      
+      // Add visual feedback
+      btn.classList.add('pulse');
+      setTimeout(() => btn.classList.remove('pulse'), 300);
+    } catch (e) {
+      console.error("Increase quantity error:", e);
+      showToast("Error increasing quantity", "error");
+    }
+  }
+
+  // Quantity decrease function
+  function decrease(btn) {
+    if (!btn) return;
+    
+    try {
+      const container = btn.closest('.price-bar');
+      if (!container) return;
+      
+      const span = container.querySelector('.price');
+      if (!span) return;
+      
+      let qty = parseInt(span.dataset.qty || 0);
+      if (isNaN(qty)) qty = 0;
+      if (qty > 0) qty--;
+      
+      span.dataset.qty = qty;
+      span.textContent = qty > 0 ? `Qty: ${qty}` : 'Qty: 0';
+      updateCartAndTotal();
+    } catch (e) {
+      console.error("Decrease quantity error:", e);
+      showToast("Error decreasing quantity", "error");
+    }
+  }
+
+  // Update cart and total
+  function updateCartAndTotal() {
+    try {
+      let total = 0;
+      let itemCount = 0;
+      const cart = {};
+      const orderItems = [];
+      
       document.querySelectorAll('.food-item').forEach(item => {
         const nameElement = item.querySelector('h3');
         const priceElement = item.querySelector('.price');
-        if (nameElement && priceElement) {
-          state[nameElement.textContent.trim()] = {
-            qty: parseInt(priceElement.dataset.qty || 0)
-          };
+        
+        if (!nameElement || !priceElement) return;
+        
+        const name = nameElement.textContent.trim();
+        const price = parseInt(item.getAttribute('data-price')) || 0;
+        const qty = parseInt(priceElement.dataset.qty || 0);
+        
+        if (qty > 0) {
+          cart[name] = { qty, price };
+          orderItems.push({ name, qty, price });
+          total += qty * price;
+          itemCount += qty;
         }
       });
-      setLocalStorage(menuStateKey, state);
+      
+      // Update UI
+      const totalElement = document.getElementById('totalAmount');
+      const countElement = document.getElementById('itemCount');
+      
+      if (totalElement) totalElement.textContent = total;
+      if (countElement) countElement.textContent = itemCount;
+      
+      // Save to storage
+      setLocalStorage(cartKey, cart);
+      setLocalStorage(totalKey, total);
+      setLocalStorage(orderKey, orderItems);
+      
+      // Broadcast update
+      localStorage.setItem('cartLastUpdate', Date.now());
+      
+      // If cart is empty, reset UI
+      if (itemCount === 0) {
+        resetCartUI();
+      }
     } catch (e) {
-      console.error("Error saving menu state:", e);
+      console.error("Update cart error:", e);
+      showToast("Error updating cart", "error");
+      resetCartUI();
     }
   }
 
-  // Restore menu state
-  function restoreMenuState() {
+  // Restore cart from storage
+  function restoreCart() {
     try {
-      const state = getLocalStorage(menuStateKey, {});
+      const cart = getLocalStorage(cartKey, {});
+      const total = getLocalStorage(totalKey, 0);
+      let itemCount = 0;
+      
       document.querySelectorAll('.food-item').forEach(item => {
         const nameElement = item.querySelector('h3');
         const priceElement = item.querySelector('.price');
-        if (nameElement && priceElement) {
-          const name = nameElement.textContent.trim();
-          if (state[name]) {
-            const qty = state[name].qty || 0;
-            priceElement.dataset.qty = qty;
-            priceElement.textContent = qty > 0 ? `Qty: ${qty}` : 'Qty: 0';
-          }
+        
+        if (!nameElement || !priceElement) return;
+        
+        const name = nameElement.textContent.trim();
+        const qty = cart[name]?.qty || 0;
+        
+        priceElement.dataset.qty = qty;
+        priceElement.textContent = qty > 0 ? `Qty: ${qty}` : 'Qty: 0';
+        itemCount += qty;
+      });
+      
+      // Update UI
+      const totalElement = document.getElementById('totalAmount');
+      const countElement = document.getElementById('itemCount');
+      
+      if (totalElement) totalElement.textContent = total;
+      if (countElement) countElement.textContent = itemCount;
+      
+      // If cart is empty, reset UI
+      if (itemCount === 0) {
+        resetCartUI();
+      }
+    } catch (e) {
+      console.error("Restore cart error:", e);
+      resetCartUI();
+    }
+  }
+
+  // Place order function
+  function placeOrder() {
+    try {
+      const orderItems = [];
+      let total = 0;
+      let itemCount = 0;
+      
+      document.querySelectorAll('.food-item').forEach(item => {
+        const nameElement = item.querySelector('h3');
+        const priceElement = item.querySelector('.price');
+        
+        if (!nameElement || !priceElement) return;
+        
+        const name = nameElement.textContent.trim();
+        const qty = parseInt(priceElement.dataset.qty || 0);
+        const price = parseInt(item.getAttribute('data-price')) || 0;
+        
+        if (qty > 0) {
+          orderItems.push({ name, qty, price });
+          total += qty * price;
+          itemCount += qty;
         }
       });
+      
+      if (orderItems.length === 0) {
+        showToast("🛑 Your cart is empty. Please add items before placing an order.", "error");
+        return;
+      }
+      
+      // Save order
+      const success = setLocalStorage(orderKey, orderItems) &&
+                     setLocalStorage(cartKey, orderItems.reduce((acc, item) => {
+                       acc[item.name] = { qty: item.qty, price: item.price };
+                       return acc;
+                     }, {})) &&
+                     setLocalStorage(totalKey, total);
+      
+      if (success) {
+        // Show loading state
+        const btn = document.querySelector('.place-order-btn');
+        if (btn) {
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+          btn.disabled = true;
+          
+          setTimeout(() => {
+            window.location.href = 'order-summary.html';
+          }, 800);
+        }
+      } else {
+        showToast("⚠️ Failed to save your order. Please try again.", "error");
+      }
     } catch (e) {
-      console.error("Error restoring menu state:", e);
+      console.error("Place order error:", e);
+      showToast("⚠️ An unexpected error occurred. Please try again.", "error");
+    }
+  }
+
+  // Reset cart UI
+  function resetCartUI() {
+    try {
+      const totalElement = document.getElementById('totalAmount');
+      const countElement = document.getElementById('itemCount');
+      
+      if (totalElement) totalElement.textContent = '0';
+      if (countElement) countElement.textContent = '0';
+      
+      document.querySelectorAll('.price').forEach(priceElement => {
+        priceElement.dataset.qty = '0';
+        priceElement.textContent = 'Qty: 0';
+      });
+      
+      setLocalStorage(cartKey, {});
+      setLocalStorage(totalKey, 0);
+      setLocalStorage(orderKey, []);
+    } catch (e) {
+      console.error("Reset cart UI error:", e);
+    }
+  }
+
+  // Show toast notification
+  function showToast(message, type = 'success') {
+    try {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.classList.add('fade-out');
+        setTimeout(() => toast.remove(), 500);
+      }, 3000);
+    } catch (e) {
+      console.error("Toast error:", e);
+      alert(message);
     }
   }
 
@@ -812,384 +974,6 @@
       return false;
     }
   }
-
-  // Quantity increase with validation
-  function increase(btn) {
-    if (!btn) return;
-    
-    try {
-      const container = btn.closest('.price-bar');
-      if (!container) return;
-      
-      const span = container.querySelector('.price');
-      if (!span) return;
-      
-      let qty = parseInt(span.dataset.qty || 0) + 1;
-      if (isNaN(qty)) qty = 1;
-      
-      span.dataset.qty = qty;
-      span.textContent = `Qty: ${qty}`;
-      updateCartAndTotal();
-      
-      btn.classList.add('pulse');
-      setTimeout(() => btn.classList.remove('pulse'), 300);
-    } catch (e) {
-      console.error("Increase quantity error:", e);
-    }
-  }
-
-  // Quantity decrease with validation
-  function decrease(btn) {
-    if (!btn) return;
-    
-    try {
-      const container = btn.closest('.price-bar');
-      if (!container) return;
-      
-      const span = container.querySelector('.price');
-      if (!span) return;
-      
-      let qty = parseInt(span.dataset.qty || 0);
-      if (isNaN(qty)) qty = 0;
-      if (qty > 0) qty--;
-      
-      span.dataset.qty = qty;
-      span.textContent = qty > 0 ? `Qty: ${qty}` : 'Qty: 0';
-      updateCartAndTotal();
-    } catch (e) {
-      console.error("Decrease quantity error:", e);
-    }
-  }
-
-  // Update cart and total with validation
-  function updateCartAndTotal() {
-    try {
-      let total = 0;
-      let itemCount = 0;
-      const cart = {};
-      const orderItems = [];
-      const foodItems = document.querySelectorAll('.food-item');
-      
-      if (!foodItems || foodItems.length === 0) {
-        resetCartUI();
-        return;
-      }
-      
-      foodItems.forEach(item => {
-        try {
-          const nameElement = item.querySelector('h3');
-          const priceElement = item.querySelector('.price');
-          
-          if (!nameElement || !priceElement) return;
-          
-          const name = nameElement.textContent.trim();
-          const price = parseInt(item.getAttribute('data-price')) || 0;
-          const qty = parseInt(priceElement.dataset.qty || 0);
-          
-          if (qty > 0) {
-            cart[name] = { qty, price };
-            orderItems.push({ name, qty, price });
-            total += qty * price;
-            itemCount += qty;
-          }
-        } catch (e) {
-          console.error("Error processing item:", e);
-        }
-      });
-      
-      // Update UI
-      const totalElement = document.getElementById('totalAmount');
-      const countElement = document.getElementById('itemCount');
-      
-      if (totalElement) totalElement.textContent = total;
-      if (countElement) countElement.textContent = itemCount;
-      
-      // Save to storage
-      setLocalStorage(cartKey, cart);
-      setLocalStorage(totalKey, total);
-      setLocalStorage(orderKey, orderItems);
-      saveMenuState();
-      
-      // If cart is empty, ensure total is 0
-      if (itemCount === 0) {
-        resetCartUI();
-      }
-    } catch (e) {
-      console.error("Update cart error:", e);
-      resetCartUI();
-    }
-  }
-
-  // Restore cart from storage with validation
-  function restoreCart() {
-    try {
-      const cart = getLocalStorage(cartKey, {});
-      const total = getLocalStorage(totalKey, 0);
-      let itemCount = 0;
-      
-      // First restore from menu state if available
-      restoreMenuState();
-      
-      // Then apply any cart updates
-      document.querySelectorAll('.food-item').forEach(item => {
-        try {
-          const nameElement = item.querySelector('h3');
-          const priceElement = item.querySelector('.price');
-          
-          if (!nameElement || !priceElement) return;
-          
-          const name = nameElement.textContent.trim();
-          
-          if (cart[name]) {
-            const qty = parseInt(cart[name].qty) || 0;
-            priceElement.dataset.qty = qty;
-            priceElement.textContent = qty > 0 ? `Qty: ${qty}` : 'Qty: 0';
-            itemCount += qty;
-          }
-        } catch (e) {
-          console.error("Error restoring item:", e);
-        }
-      });
-      
-      // Update UI
-      const totalElement = document.getElementById('totalAmount');
-      const countElement = document.getElementById('itemCount');
-      
-      if (totalElement) totalElement.textContent = total;
-      if (countElement) countElement.textContent = itemCount;
-      
-      // If cart is empty, ensure total is 0
-      if (itemCount === 0) {
-        resetCartUI();
-      }
-    } catch (e) {
-      console.error("Restore cart error:", e);
-      resetCartUI();
-    }
-  }
-
-  // Place order with validation
-  function placeOrder() {
-    try {
-      const orderItems = [];
-      let total = 0;
-      let itemCount = 0;
-      const foodItems = document.querySelectorAll('.food-item');
-      
-      if (!foodItems || foodItems.length === 0) {
-        showToast("🛑 No items available for ordering.", 'error');
-        return;
-      }
-      
-      foodItems.forEach(item => {
-        try {
-          const nameElement = item.querySelector('h3');
-          const priceElement = item.querySelector('.price');
-          
-          if (!nameElement || !priceElement) return;
-          
-          const name = nameElement.textContent.trim();
-          const qty = parseInt(priceElement.dataset.qty || 0);
-          const price = parseInt(item.getAttribute('data-price')) || 0;
-          
-          if (qty > 0) {
-            orderItems.push({ name, qty, price });
-            total += qty * price;
-            itemCount += qty;
-          }
-        } catch (e) {
-          console.error("Error processing order item:", e);
-        }
-      });
-      
-      if (orderItems.length === 0) {
-        showToast("🛑 Your cart is empty. Please add items before placing an order.", 'error');
-        return;
-      }
-      
-      // Save order with error handling
-      const success = setLocalStorage(orderKey, orderItems) &&
-                     setLocalStorage(cartKey, orderItems.reduce((acc, item) => {
-                       acc[item.name] = { qty: item.qty, price: item.price };
-                       return acc;
-                     }, {})) &&
-                     setLocalStorage(totalKey, total);
-      
-      if (success) {
-        // Show loading state
-        const btn = document.querySelector('.place-order-btn');
-        if (btn) {
-          const originalText = btn.innerHTML;
-          btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-          btn.disabled = true;
-          
-          setTimeout(() => {
-            window.location.href = 'order-summary.html';
-          }, 800);
-        } else {
-          window.location.href = 'order-summary.html';
-        }
-      } else {
-        showToast("⚠️ Failed to save your order. Please try again.", 'error');
-      }
-    } catch (e) {
-      console.error("Place order error:", e);
-      showToast("⚠️ An unexpected error occurred. Please try again.", 'error');
-    }
-  }
-
-  // Update item quantity in summary page
-  function updateQuantity(index, change) {
-    try {
-      const order = getLocalStorage(orderKey, []);
-      if (!order[index]) return;
-
-      const newQty = order[index].qty + change;
-      
-      if (newQty < 1) {
-        removeItem(index);
-        return;
-      }
-      
-      // Update order
-      order[index].qty = newQty;
-      
-      // Update cart and menu state
-      const cart = {};
-      order.forEach(item => {
-        cart[item.name] = { qty: item.qty, price: item.price };
-      });
-      
-      setLocalStorage(orderKey, order);
-      setLocalStorage(cartKey, cart);
-      saveMenuState();
-      
-      location.reload();
-    } catch (e) {
-      console.error("Update quantity error:", e);
-      showToast("⚠️ Failed to update quantity. Please try again.", 'error');
-    }
-  }
-
-  // Remove item from summary page
-  function removeItem(index) {
-    try {
-      const order = getLocalStorage(orderKey, []);
-      if (!order[index]) return;
-
-      const removedItem = order.splice(index, 1)[0];
-      
-      // Update cart and menu state
-      const cart = {};
-      order.forEach(item => {
-        cart[item.name] = { qty: item.qty, price: item.price };
-      });
-      
-      setLocalStorage(orderKey, order);
-      setLocalStorage(cartKey, cart);
-      saveMenuState();
-      
-      location.reload();
-    } catch (e) {
-      console.error("Remove item error:", e);
-      showToast("⚠️ Failed to remove item. Please try again.", 'error');
-    }
-  }
-
-  // Reset cart UI to zero state
-  function resetCartUI() {
-    try {
-      const totalElement = document.getElementById('totalAmount');
-      const countElement = document.getElementById('itemCount');
-      
-      if (totalElement) totalElement.textContent = '0';
-      if (countElement) countElement.textContent = '0';
-      
-      // Reset all quantity displays
-      document.querySelectorAll('.price').forEach(priceElement => {
-        priceElement.dataset.qty = '0';
-        priceElement.textContent = 'Qty: 0';
-      });
-      
-      // Clear storage
-      setLocalStorage(cartKey, {});
-      setLocalStorage(totalKey, 0);
-      setLocalStorage(orderKey, []);
-      saveMenuState();
-    } catch (e) {
-      console.error("Reset cart UI error:", e);
-    }
-  }
-
-  // Show toast notification
-  function showToast(message, type = 'success') {
-    try {
-      const toast = document.createElement('div');
-      toast.className = `toast ${type}`;
-      toast.textContent = message;
-      document.body.appendChild(toast);
-      
-      setTimeout(() => {
-        toast.classList.add('fade-out');
-        setTimeout(() => toast.remove(), 500);
-      }, 3000);
-    } catch (e) {
-      console.error("Toast error:", e);
-      alert(message); // Fallback to alert if toast fails
-    }
-  }
-
-  // Food image/icon helpers
-  function getFoodImage(itemName) {
-    if (!itemName || typeof itemName !== 'string') return foodImages.default;
-    
-    const lowerName = itemName.toLowerCase();
-    for (const [key, value] of Object.entries(foodImages)) {
-      if (lowerName.includes(key)) {
-        return value;
-      }
-    }
-    return foodImages.default;
-  }
-
-  function getFoodIcon(itemName) {
-    if (!itemName || typeof itemName !== 'string') return foodIcons.default;
-    
-    const lowerName = itemName.toLowerCase();
-    for (const [key, value] of Object.entries(foodIcons)) {
-      if (lowerName.includes(key)) {
-        return value;
-      }
-    }
-    return foodIcons.default;
-  }
-
-  // Food icon and image mappings
-  const foodIcons = {
-    'pizza': '🍕', 'burger': '🍔', 'pasta': '🍝', 'salad': '🥗', 
-    'sushi': '🍣', 'sandwich': '🥪', 'taco': '🌮', 'burrito': '🌯',
-    'ramen': '🍜', 'curry': '🍛', 'fried chicken': '🍗', 'steak': '🥩',
-    'soup': '🍲', 'ice cream': '🍨', 'cake': '🍰', 'default': '🍽️'
-  };
-
-  const foodImages = {
-    'pizza': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&auto=format&fit=crop',
-    'burger': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&auto=format&fit=crop',
-    'pasta': 'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=300&auto=format&fit=crop',
-    'salad': 'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=300&auto=format&fit=crop',
-    'sushi': 'https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=300&auto=format&fit=crop',
-    'sandwich': 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=300&auto=format&fit=crop',
-    'taco': 'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=300&auto=format&fit=crop',
-    'burrito': 'https://images.unsplash.com/photo-1558199141-391d935676f0?w=300&auto=format&fit=crop',
-    'ramen': 'https://images.unsplash.com/photo-1526318896980-cf78c088247c?w=300&auto=format&fit=crop',
-    'curry': 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&auto=format&fit=crop',
-    'fried chicken': 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=300&auto=format&fit=crop',
-    'steak': 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=300&auto=format&fit=crop',
-    'soup': 'https://images.unsplash.com/photo-1547592180-85f173990554?w=300&auto=format&fit=crop',
-    'ice cream': 'https://images.unsplash.com/photo-1560008581-09826d1de69e?w=300&auto=format&fit=crop',
-    'cake': 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&auto=format&fit=crop',
-    'default': 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&auto=format&fit=crop'
-  };
 </script>
 </body>
 </html>

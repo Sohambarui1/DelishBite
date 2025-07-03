@@ -4,22 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login / Signup - DelishBite</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #FF6B6B;
-      --primary-light: #8b85ff;
-      --primary-dark: #ffbe76;
-      --accent: #ff6584;
-      --accent-light: #ff8fa3;
-      --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-light));
-      --bg: #f8f9fa;
-      --card-bg: #ffffff;
-      --text: #2d3748;
-      --subtext: #718096;
-      --border: #e2e8f0;
+      --primary: #e16bff;       /* Vibrant purple */
+      --primary-light: #b388ff; /* Lighter purple */
+      --primary-dark: #5c2dba;  /* Darker purple */
+      --accent: #ff6b6b;        /* Coral accent */
+      --light: #f8f4ff;        /* Very light purple */
+      --dark: #2d3436;         /* Dark gray */
+      --text: #4a4a4a;         /* Dark text */
+      --text-light: #7e7e7e;   /* Light text */
+      --bg: #ffffff;           /* White background */
+      --section-bg: #f9f9f9;   /* Light gray background */
+      --border: #e2e2e2;
       --success: #48bb78;
       --error: #f56565;
       --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -28,6 +27,7 @@
       --radius-sm: 8px;
       --radius-md: 12px;
       --radius-lg: 16px;
+      --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
     }
 
     * {
@@ -44,7 +44,7 @@
       min-height: 100vh;
       padding: 1rem;
       background-color: var(--bg);
-      background-image: radial-gradient(circle at 10% 20%, rgba(107, 99, 255, 0.05) 0%, rgba(107, 99, 255, 0.05) 90%);
+      background-image: radial-gradient(circle at 10% 20%, rgba(225, 107, 255, 0.05) 0%, rgba(225, 107, 255, 0.05) 90%);
       color: var(--text);
       line-height: 1.6;
     }
@@ -52,13 +52,14 @@
     .container {
       width: 100%;
       max-width: 420px;
-      background: var(--card-bg);
+      background: var(--bg);
       padding: 2.5rem 2rem;
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-lg);
       animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       position: relative;
       overflow: hidden;
+      border: 1px solid var(--border);
     }
 
     .container::before {
@@ -83,12 +84,12 @@
     }
 
     .logo {
-      width: 70px;
-      height: 70px;
+      width: 80px;
+      height: 80px;
       display: block;
       margin: 0 auto 1.5rem;
       object-fit: contain;
-      filter: drop-shadow(0 2px 4px rgba(108, 99, 255, 0.2));
+      filter: drop-shadow(0 2px 4px rgba(225, 107, 255, 0.2));
       transition: transform 0.3s ease;
     }
 
@@ -103,6 +104,7 @@
       font-size: 1.9rem;
       font-weight: 600;
       position: relative;
+      font-family: 'Playfair Display', serif;
     }
 
     h2::after {
@@ -122,18 +124,18 @@
 
     .input-box input {
       width: 100%;
-      padding: 1rem 1rem 1rem 3rem;
+      padding: 1rem 3rem 1rem 3rem;
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       outline: none;
       font-size: 0.95rem;
       transition: all 0.3s ease;
-      background-color: #f8fafc;
+      background-color: var(--light);
     }
 
     .input-box input:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+      box-shadow: 0 0 0 3px rgba(225, 107, 255, 0.15);
       background-color: white;
     }
 
@@ -142,7 +144,7 @@
       left: 1rem;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--subtext);
+      color: var(--text-light);
       font-size: 1.1rem;
       transition: color 0.3s;
     }
@@ -155,10 +157,10 @@
       position: absolute;
       top: -10px;
       left: 2.8rem;
-      background: var(--card-bg);
+      background: var(--bg);
       padding: 0 6px;
       font-size: 0.8rem;
-      color: var(--subtext);
+      color: var(--text-light);
       font-weight: 500;
       transition: all 0.3s;
     }
@@ -174,14 +176,15 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(108, 99, 255, 0.2);
+      box-shadow: 0 4px 6px rgba(225, 107, 255, 0.2);
       position: relative;
       overflow: hidden;
+      margin-top: 0.5rem;
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(108, 99, 255, 0.25);
+      box-shadow: 0 6px 12px rgba(225, 107, 255, 0.25);
     }
 
     .btn:active {
@@ -204,120 +207,60 @@
       opacity: 1;
     }
 
-    .social-login {
-      margin: 2rem 0 1.5rem;
-      text-align: center;
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      margin: 1.5rem 0;
-      color: var(--subtext);
-      font-size: 0.85rem;
-    }
-
-    .divider::before,
-    .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-      margin: 0 1rem;
-    }
-
-    .social-buttons {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .social-btn {
-      flex: 1;
-      padding: 0.8rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      background: white;
-    }
-
-    .social-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .social-btn.google {
-      color: #DB4437;
-    }
-
-    .social-btn.facebook {
-      color: #4267B2;
-    }
-
-    .social-btn img {
-      width: 18px;
-      height: 18px;
-    }
-
-    .switch,
-    .forgot {
-      text-align: center;
-      margin-top: 1.5rem;
-      font-size: 0.9rem;
-      color: var(--subtext);
-    }
-
-    .switch a,
-    .forgot a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-      position: relative;
-    }
-
-    .switch a::after,
-    .forgot a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--primary);
-      transition: width 0.3s;
-    }
-
-    .switch a:hover::after,
-    .forgot a:hover::after {
-      width: 100%;
-    }
-
-    .switch a:hover,
-    .forgot a:hover {
-      color: var(--primary-dark);
-    }
-
-    .forgot {
-      margin: -0.5rem 0 1rem;
-      text-align: right;
-    }
-
     /* Password toggle */
     .password-toggle {
       position: absolute;
       right: 1rem;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--subtext);
+      color: var(--text-light);
       cursor: pointer;
       font-size: 1.1rem;
+      transition: color 0.3s;
+      background: none;
+      border: none;
+      outline: none;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .password-toggle:hover {
+      color: var(--primary);
+    }
+
+    /* Email with Google button */
+    .email-btn {
+      width: 100%;
+      padding: 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .email-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .email-btn i {
+      color: #DB4437;
+      font-size: 1.2rem;
     }
 
     /* Form validation */
@@ -388,15 +331,92 @@
       color: var(--success);
       margin-bottom: 1rem;
       font-weight: 500;
+      padding: 0.5rem;
+      background-color: rgba(72, 187, 120, 0.1);
+      border-radius: var(--radius-sm);
+    }
+
+    /* Floating notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+      transform: translateX(150%);
+      transition: transform 0.4s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .notification.success {
+      background-color: var(--success);
+      color: white;
+    }
+
+    .notification.error {
+      background-color: var(--error);
+      color: white;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .switch,
+    .forgot {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .switch a,
+    .forgot a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .switch a::after,
+    .forgot a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--primary);
+      transition: width 0.3s;
+    }
+
+    .switch a:hover::after,
+    .forgot a:hover::after {
+      width: 100%;
+    }
+
+    .switch a:hover,
+    .forgot a:hover {
+      color: var(--primary-dark);
+    }
+
+    .forgot {
+      margin: -0.5rem 0 1rem;
+      text-align: right;
     }
 
     @media (max-width: 480px) {
       .container {
         padding: 2rem 1.5rem;
       }
-      
-      .social-buttons {
-        flex-direction: column;
+
+      h2 {
+        font-size: 1.7rem;
       }
     }
   </style>
@@ -409,13 +429,13 @@
     <form id="authForm" novalidate>
       <div id="nameField" class="input-box" style="display: none;">
         <i class="fas fa-user"></i>
-        <input type="text" id="nameInput" placeholder="John Doe" />
+        <input type="text" id="nameInput" placeholder="Soham Barui" />
         <label>Full Name</label>
         <div class="error-message" id="nameError">Please enter your full name</div>
       </div>
       <div class="input-box">
         <i class="fas fa-envelope"></i>
-        <input type="text" id="emailInput" placeholder="example@email.com" required />
+        <input type="text" id="emailInput" placeholder="example@gmail.com" required />
         <label>Email Address</label>
         <div class="error-message" id="emailError">Please enter a valid email address</div>
       </div>
@@ -423,43 +443,33 @@
         <i class="fas fa-lock"></i>
         <input type="password" id="passwordInput" placeholder="••••••••" required />
         <label>Password</label>
-        <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+        <button type="button" class="password-toggle" id="togglePassword" aria-label="Toggle password visibility">
+          <i class="fas fa-eye"></i>
+        </button>
         <div class="error-message" id="passwordError">Password must be at least 6 characters</div>
       </div>
       <div class="forgot">
-        <a href="javascript:void(0)" onclick="forgotPassword()">Forgot Password?</a>
+        <a href="javascript:void(0)" id="forgotPasswordLink">Forgot Password?</a>
       </div>
       <button class="btn" type="submit" id="submitBtn">
         <span id="btnText">Log In</span>
       </button>
     </form>
 
-    <div class="social-login">
-      <div class="divider">or continue with</div>
-      <div class="social-buttons">
-        <button class="social-btn google" onclick="socialLogin('google')">
-          <i class="fab fa-google"></i>
-          <span class="sr-only">Google</span>
-        </button>
-        <button class="social-btn facebook" onclick="socialLogin('facebook')">
-          <i class="fab fa-facebook-f"></i>
-          <span class="sr-only">Facebook</span>
-        </button>
-      </div>
-    </div>
+    <button class="email-btn" onclick="continueWithEmail()">
+      <i class="fab fa-google"></i>
+      <span>Continue with Email</span>
+    </button>
 
     <div class="switch" id="switchText">
-      Don't have an account? <a href="javascript:void(0)" onclick="toggleForm()">Sign Up</a>
+      Don't have an account? <a href="javascript:void(0)" id="toggleFormLink">Sign Up</a>
     </div>
   </div>
 
-  <script>
-    // Check if user is already logged in
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-      window.location.href = 'index.html';
-    }
+  <div id="notification" class="notification" style="display: none;"></div>
 
-    let isLogin = true;
+  <script>
+    // DOM Elements
     const formTitle = document.getElementById('formTitle');
     const nameField = document.getElementById('nameField');
     const emailInput = document.getElementById('emailInput');
@@ -470,32 +480,74 @@
     const switchText = document.getElementById('switchText');
     const togglePassword = document.getElementById('togglePassword');
     const successMessage = document.getElementById('successMessage');
+    const toggleFormLink = document.getElementById('toggleFormLink');
+    const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+    const notification = document.getElementById('notification');
     
-    // Form elements for validation
+    // Form validation elements
     const nameError = document.getElementById('nameError');
     const emailError = document.getElementById('emailError');
     const passwordError = document.getElementById('passwordError');
 
+    // State
+    let isLogin = true;
+
+    // Check if user is already logged in
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      window.location.href = 'index.html';
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set up event listeners
+      togglePassword.addEventListener('click', togglePasswordVisibility);
+      toggleFormLink.addEventListener('click', toggleForm);
+      forgotPasswordLink.addEventListener('click', showForgotPasswordModal);
+      authForm.addEventListener('submit', handleFormSubmit);
+    });
+
     // Toggle password visibility
-    togglePassword.addEventListener('click', function() {
+    function togglePasswordVisibility() {
+      const icon = this.querySelector('i');
       const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
       passwordInput.setAttribute('type', type);
-      this.classList.toggle('fa-eye-slash');
-    });
+      
+      // Toggle eye icon
+      if (type === 'password') {
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      } else {
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      }
+      
+      // Change button label for accessibility
+      this.setAttribute('aria-label', type === 'password' ? 'Show password' : 'Hide password');
+    }
 
     // Toggle between login and signup forms
     function toggleForm() {
       isLogin = !isLogin;
       formTitle.textContent = isLogin ? 'Welcome Back' : 'Create Account';
       nameField.style.display = isLogin ? 'none' : 'block';
-      btnText.textContent = isLogin ? 'Sign In' : 'Sign Up';
+      btnText.textContent = isLogin ? 'Log In' : 'Sign Up';
       switchText.innerHTML = isLogin
-        ? `Don't have an account? <a href="javascript:void(0)" onclick="toggleForm()">Sign Up</a>`
-        : `Already have an account? <a href="javascript:void(0)" onclick="toggleForm()">Sign In</a>`;
+        ? `Don't have an account? <a href="javascript:void(0)" id="toggleFormLink">Sign Up</a>`
+        : `Already have an account? <a href="javascript:void(0)" id="toggleFormLink">Log In</a>`;
       
       // Reset form and validation
       authForm.reset();
       clearErrors();
+      
+      // Update the link reference
+      document.getElementById('toggleFormLink').addEventListener('click', toggleForm);
+    }
+
+    // Continue with Email button handler
+    function continueWithEmail() {
+      // Focus the email input field
+      emailInput.focus();
+      showNotification('Please enter your email to continue', 'error');
     }
 
     // Clear all error messages
@@ -504,7 +556,7 @@
         el.style.display = 'none';
       });
       document.querySelectorAll('.input-box').forEach(el => {
-        el.classList.remove('error');
+        el.classList.remove('error', 'success');
       });
       successMessage.style.display = 'none';
     }
@@ -513,12 +565,6 @@
     function validateEmail(email) {
       const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return re.test(String(email).toLowerCase());
-    }
-
-    // Validate phone number format (simple validation)
-    function validatePhone(phone) {
-      const re = /^[0-9]{10,15}$/;
-      return re.test(phone);
     }
 
     // Form validation
@@ -536,16 +582,16 @@
         }
       }
 
-      // Validate email/phone
+      // Validate email
       const email = emailInput.value.trim();
       if (!email) {
         emailInput.parentElement.classList.add('error');
         emailError.textContent = 'Email is required';
         emailError.style.display = 'block';
         isValid = false;
-      } else if (!validateEmail(email) && !validatePhone(email)) {
+      } else if (!validateEmail(email)) {
         emailInput.parentElement.classList.add('error');
-        emailError.textContent = 'Please enter a valid email or phone number';
+        emailError.textContent = 'Please enter a valid email address';
         emailError.style.display = 'block';
         isValid = false;
       }
@@ -567,8 +613,22 @@
       return isValid;
     }
 
+    // Show notification
+    function showNotification(message, type = 'success') {
+      notification.textContent = message;
+      notification.className = `notification ${type} show`;
+      notification.style.display = 'flex';
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          notification.style.display = 'none';
+        }, 400);
+      }, 3000);
+    }
+
     // Form submission
-    authForm.addEventListener('submit', async function(e) {
+    async function handleFormSubmit(e) {
       e.preventDefault();
       
       if (!validateForm()) return;
@@ -589,26 +649,27 @@
         if (users[email] && users[email].password === password) {
           loginSuccess(users[email]);
         } else {
-          showError('Invalid email/phone or password.');
+          showNotification('Invalid email or password.', 'error');
         }
       } else {
         // Signup logic
         const name = document.getElementById('nameInput').value.trim();
         if (users[email]) {
-          showError('This email/phone is already registered. Please login.');
+          showNotification('This email is already registered. Please login.', 'error');
         } else {
           users[email] = { name, email, password };
           localStorage.setItem('users', JSON.stringify(users));
-          loginSuccess(users[email]);
-          successMessage.textContent = 'Account created successfully!';
-          successMessage.style.display = 'block';
+          showNotification('Account created successfully!', 'success');
+          setTimeout(() => {
+            loginSuccess(users[email]);
+          }, 1500);
         }
       }
       
       // Reset loading state
       submitBtn.classList.remove('loading');
       btnText.style.visibility = 'visible';
-    });
+    }
 
     // Handle successful login
     function loginSuccess(user) {
@@ -621,49 +682,25 @@
       }, 800);
     }
 
-    // Show error message
-    function showError(message) {
-      const errorBox = document.createElement('div');
-      errorBox.className = 'error-message';
-      errorBox.style.display = 'block';
-      errorBox.style.textAlign = 'center';
-      errorBox.style.marginTop = '1rem';
-      errorBox.style.color = 'var(--error)';
-      errorBox.textContent = message;
-      
-      const existingError = authForm.querySelector('.global-error');
-      if (existingError) {
-        existingError.remove();
-      }
-      
-      errorBox.classList.add('global-error');
-      authForm.appendChild(errorBox);
-    }
-
-    // Forgot password functionality
-    function forgotPassword() {
-      const email = prompt("Enter your registered email or phone number:");
+    // Forgot password modal
+    function showForgotPasswordModal() {
+      const email = prompt("Enter your registered email address:");
       if (!email) return;
       
-      let users = JSON.parse(localStorage.getItem('users') || {});
+      let users = JSON.parse(localStorage.getItem('users') || '{}');
       
       if (users[email]) {
         const newPassword = prompt("Enter your new password (min 6 characters):");
         if (newPassword && newPassword.length >= 6) {
           users[email].password = newPassword;
           localStorage.setItem('users', JSON.stringify(users));
-          alert("Password updated successfully. Please login with your new password.");
+          showNotification('Password updated successfully. Please login with your new password.');
         } else {
-          alert("Password must be at least 6 characters.");
+          showNotification('Password must be at least 6 characters.', 'error');
         }
       } else {
-        alert("Account not found. Please check your email/phone and try again.");
+        showNotification('Account not found. Please check your email and try again.', 'error');
       }
-    }
-
-    // Social login mock function
-    function socialLogin(provider) {
-      alert(`Mock ${provider} login (OAuth not implemented)`);
     }
   </script>
 </body>

@@ -18,18 +18,21 @@
  
 <style>
   :root {
-    --primary-color: #e16bff;
-    --secondary-color: #4ecdc4;
-    --accent-color: #ffbe76;
-    --dark-color: #2d3436;
-    --light-color: #f7f1e3;
-    --text-color: #2d3436;
-    --text-light: #636e72;
-    --bg-color: #ffffff;
-    --section-bg: #f9f9f9;
-    --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    /* Updated Color Palette with consistent naming */
+    --primary: #e16bff;       /* Vibrant purple */
+    --primary-light: #b388ff; /* Lighter purple */
+    --primary-dark: #5c2dba;  /* Darker purple */
+    --secondary: #e16bff;     /* Teal accent */
+    --accent: #ff6b6b;        /* Coral accent */
+    --light: #f8f4ff;        /* Very light purple */
+    --dark: #2d3436;         /* Dark gray */
+    --text: #4a4a4a;         /* Dark text */
+    --text-light: #7e7e7e;   /* Light text */
+    --bg: #ffffff;           /* White background */
+    --section-bg: #f9f9f9;   /* Light gray background */
+    --shadow: 0 4px 20px rgba(138, 79, 255, 0.15);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
   }
 
   * {
@@ -44,8 +47,8 @@
 
   body {
     font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--bg);
+    color: var(--text);
     line-height: 1.6;
     overflow-x: hidden;
   }
@@ -147,7 +150,7 @@
 
   .cta-button {
     background: white;
-    color: var(--primary-color);
+    color: var(--primary);
     padding: 1rem 2.5rem;
     font-size: 1.2rem;
     border: none;
@@ -162,7 +165,7 @@
   }
 
   .cta-button:hover {
-    background: var(--light-color);
+    background: var(--light);
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
   }
@@ -192,17 +195,23 @@
     border-radius: 2px;
   }
 
-  /* Food Items */
+  /* Food Items - Reduced Size */
   .food-items {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
     margin-top: 3rem;
+  }
+
+  .food-items {
+    display: inline-flex;
+    gap: 2rem;
+    padding: 0.5rem 1rem;
   }
 
   .food-card {
     background: white;
-    border-radius: 16px;
+    border-radius: 12px;
     box-shadow: var(--shadow);
     overflow: hidden;
     transition: var(--transition);
@@ -210,64 +219,63 @@
   }
 
   .food-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
   }
 
   .food-card img {
     width: 100%;
-    height: 350px;
+    height: 300px; /* Reduced height */
     object-fit: cover;
-    transition: transform 0.5s ease;
-}
+    transition: transform 0.4s ease;
+  }
 
-.food-card:hover img {
-    transform: scale(1.05); /* Slight zoom on hover */
-}
+  .food-card:hover img {
+    transform: scale(1.03);
+  }
 
   .food-card-content {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .food-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     margin-bottom: 0.5rem;
-    color: var(--dark-color);
+    color: var(--dark);
   }
 
   .food-card p {
     color: var(--text-light);
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
   }
 
   .food-card .price {
     font-weight: 600;
-    color: var(--primary-color);
-    font-size: 1.2rem;
+    color: var(--primary);
+    font-size: 1rem;
+    margin: 0.5rem 0;
   }
 
   .food-card .rating {
-    color: var(--accent-color);
+    color: var(--accent);
     margin-bottom: 0.5rem;
+    font-size: 0.8rem;
   }
 
   .food-card .add-to-cart {
     background: var(--gradient);
     color: white;
     border: none;
-    padding: 0.6rem 1.5rem;
-    border-radius: 30px;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
     font-weight: 500;
     cursor: pointer;
     transition: var(--transition);
     margin-top: 0.5rem;
     width: 100%;
-  }
-
-  .food-card .add-to-cart:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    font-size: 0.85rem;
   }
 
   /* Scrollable Section */
@@ -277,12 +285,12 @@
     padding-bottom: 1.5rem;
     margin-top: 2rem;
     scrollbar-width: thin;
-    scrollbar-color: var(--primary-color) #f1f1f1;
+    scrollbar-color: var(--primary) #f1f1f1;
   }
 
   .scroll-content {
     display: inline-flex;
-    gap: 2rem;
+    gap: 1.5rem; /* Reduced gap between cards */
     padding: 0.5rem;
   }
 
@@ -291,7 +299,7 @@
   }
 
   .scroll-container::-webkit-scrollbar-thumb {
-    background-color: var(--primary-color);
+    background-color: var(--primary);
     border-radius: 10px;
   }
 
@@ -326,7 +334,7 @@
 
   .feature-icon {
     font-size: 2.5rem;
-    color: var(--primary-color);
+    color: var(--primary);
     margin-bottom: 1.5rem;
   }
 
@@ -367,7 +375,7 @@
 
   .contact-icon {
     font-size: 2rem;
-    color: var(--primary-color);
+    color: var(--primary);
     margin-bottom: 1rem;
   }
 
@@ -377,28 +385,34 @@
   }
 
   .contact-card a {
-    color: var(--secondary-color);
+    color: var(--secondary);
     text-decoration: none;
     transition: var(--transition);
   }
 
   .contact-card a:hover {
-    color: var(--primary-color);
+    color: var(--primary);
     text-decoration: underline;
   }
 
-  /* Footer */
+   /* Footer with 3 Columns */
   footer {
-    background: var(--dark-color);
+    background: var(--dark);
     color: white;
     padding: 3rem 2rem 1.5rem;
   }
 
   .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* Explicit 3 columns */
     gap: 2rem;
     margin-bottom: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+  }
+
+  .footer-column {
+    padding: 0 1rem;
   }
 
   .footer-column h3 {
@@ -415,7 +429,7 @@
     left: 0;
     width: 40px;
     height: 3px;
-    background: var(--primary-color);
+    background: var(--primary);
   }
 
   .footer-column ul {
@@ -433,38 +447,48 @@
   }
 
   .footer-column a:hover {
-    color: var(--primary-color);
+    color: var(--primary);
     padding-left: 5px;
   }
 
-  .social-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.2rem;
+}
 
-  .social-links a {
+.social-links a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: #f0f0f0;
-  border-radius: 50%; /* Makes it circular */
-  color: #555;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.social-links a:hover {
-  background: #ff6b6b; /* Change color on hover */
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
   color: white;
-  transform: translateY(-3px); /* Slight lift effect */
+  text-decoration: none;
+  transition: var(--transition);
+  position: relative;
 }
 
-/* Font Awesome icons adjustment */
+/* Only color change on hover - no transform */
+.social-links a:hover {
+  background: var(--primary);
+}
+
+/* Touch devices - only color change */
+@media (hover: none) {
+  .social-links a:active {
+    background: rgba(225, 107, 255, 0.7);
+  }
+}
+
 .social-links i {
   font-size: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
   .copyright {
@@ -535,7 +559,7 @@
   }
 
   .close-btn:hover {
-    color: var(--primary-color);
+    color: var(--primary);
     transform: rotate(90deg);
   }
 
@@ -551,13 +575,13 @@
     border-radius: 50%;
     margin-bottom: 1.5rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border: 3px solid var(--primary-color);
+    border: 3px solid var(--primary);
   }
 
   .user-info h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    color: var(--dark-color);
+    color: var(--dark);
   }
 
   .user-info p {
@@ -587,8 +611,8 @@
 
   .dashboard-btn.logout {
     background: white;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    color: var(--primary);
+    border: 2px solid var(--primary);
   }
 
   .dashboard-btn.logout:hover {
@@ -614,20 +638,20 @@
     gap: 1rem;
     padding: 0.8rem 1rem;
     border-radius: 8px;
-    color: var(--text-color);
+    color: var(--text);
     text-decoration: none;
     transition: var(--transition);
   }
 
   .dashboard-link:hover {
-    background: rgba(78, 205, 196, 0.1);
+    background: rgba(225, 107, 255, 0.1);
     transform: translateX(5px);
   }
 
   .dashboard-link i {
     width: 24px;
     text-align: center;
-    color: var(--primary-color);
+    color: var(--primary);
     font-size: 1.2rem;
   }
 
@@ -663,7 +687,7 @@
     right: 2rem;
     width: 50px;
     height: 50px;
-    background: var(--dark-color);
+    background: var(--dark);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -684,7 +708,7 @@
   }
 
   .back-to-top:hover {
-    background: var(--primary-color);
+    background: var(--primary);
     transform: translateY(-3px);
   }
 
@@ -1011,20 +1035,20 @@
     </div>
   </section>
 
-  <footer>
+   <footer>
     <div class="footer-content">
-  <div class="footer-column">
-    <h3>DelishBite</h3>
-    <p>Bringing gourmet dining experiences to your home since 2020.</p>
-    <div class="social-links">
-      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-    </div>
-  </div>
-</div>
+      <div class="footer-column">
+        <h3>DelishBite</h3>
+        <p>Bringing gourmet dining experiences to your home since 2020.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
       
+      <!-- Column 2 -->
       <div class="footer-column">
         <h3>Quick Links</h3>
         <ul>
@@ -1035,6 +1059,7 @@
         </ul>
       </div>
       
+      <!-- Column 3 -->
       <div class="footer-column">
         <h3>Information</h3>
         <ul>
@@ -1043,15 +1068,6 @@
           <li><a href="#">Privacy Policy</a></li>
           <li><a href="#">Terms of Service</a></li>
         </ul>
-      </div>
-      
-      <div class="footer-column">
-        <h3>Newsletter</h3>
-        <p>Subscribe to get updates on special offers and new dishes.</p>
-        <form class="newsletter-form">
-          <input type="email" placeholder="Your Email" required>
-          <button type="submit">Subscribe</button>
-        </form>
       </div>
     </div>
     

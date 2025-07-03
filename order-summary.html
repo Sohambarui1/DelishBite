@@ -7,23 +7,29 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
   <style>
   :root {
-    --primary: #e16bff;  /* Warm coral for primary actions */
-    --primary-dark: #E05555;  /* Darker shade for hover */
-    --secondary: #4ECDC4;  /* Fresh teal for accents */
-    --light-bg: #F7FFF7;  /* Very light green background */
-    --card-bg: #fdfcf6;  /* Pure white cards */
-    --text-dark: #2D3748;  /* Dark gray for text */
-    --text-light: #6B7280;  /* Medium gray for secondary text */
-    --border: #E2E8F0;
-    --success: #4CAF50;  /* Green for confirmation */
-    --error: #FF5252;
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    /* Updated Color Palette to match Menu */
+    --primary: #e16bff;       /* Vibrant purple */
+    --primary-light: #b388ff; /* Lighter purple */
+    --primary-dark: #5c2dba;  /* Darker purple */
+    --secondary: #e16bff;     /* Teal accent */
+    --accent: #ff6b6b;        /* Coral accent */
+    --light: #f8f4ff;        /* Very light purple */
+    --dark: #2d3436;         /* Dark gray */
+    --text: #4a4a4a;         /* Dark text */
+    --text-light: #7e7e7e;   /* Light text */
+    --bg: #ffffff;           /* White background */
+    --section-bg: #f9f9f9;   /* Light gray background */
+    --border: #e0e0e0;       /* Light border color */
+    --success: #4CAF50;      /* Green for success */
+    --error: #FF5252;        /* Red for errors */
+    --shadow: 0 4px 20px rgba(138, 79, 255, 0.15);
     --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
     --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
   }
 
   * {
@@ -34,20 +40,21 @@
 
   body {
     font-family: 'Poppins', sans-serif;
-    background: var(--light-bg);
-    color: var(--text-dark);
+    background: var(--light);
+    color: var(--text);
     line-height: 1.6;
+    padding-bottom: 2rem;
   }
 
   header {
-    background-color: var(--primary);
+    background: var(--gradient);
     color: white;
     padding: 1.2rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -69,20 +76,20 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     padding: 0.5rem 1rem;
     border-radius: var(--radius-sm);
   }
 
   header a:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
     transform: translateY(-1px);
   }
 
   .container {
     max-width: 800px;
     margin: 2rem auto;
-    background: var(--card-bg);
+    background: var(--bg);
     padding: 2.5rem;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow);
@@ -122,7 +129,7 @@
   }
 
   .order-item:hover {
-    background: rgba(255, 107, 107, 0.03);
+    background: rgba(225, 107, 255, 0.03);
   }
 
   .order-item:last-child {
@@ -133,42 +140,57 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex: 1;
+    min-width: 0;
   }
 
   .item-img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: var(--radius-sm);
     object-fit: cover;
     box-shadow: var(--shadow-sm);
-    background-color: #f0f0f0;
+    background-color: var(--section-bg);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-light);
-    font-size: 1.5rem;
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .item-details {
+    min-width: 0;
   }
 
   .item-details h3 {
     font-weight: 500;
-    color: var(--text-dark);
+    color: var(--text);
     margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .item-details p {
     font-size: 0.9rem;
     color: var(--text-light);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .item-price {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
+    flex-shrink: 0;
+    margin-left: 1rem;
   }
 
   .price {
     font-weight: 600;
-    color: var(--text-dark);
+    color: var(--text);
     min-width: 80px;
     text-align: right;
   }
@@ -184,7 +206,7 @@
     height: 28px;
     border-radius: 50%;
     border: 1px solid var(--border);
-    background: white;
+    background: var(--bg);
     color: var(--primary);
     font-weight: bold;
     cursor: pointer;
@@ -209,11 +231,13 @@
     background: none;
     border: none;
     color: var(--error);
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: var(--transition);
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     opacity: 0.7;
+    line-height: 1;
+    padding: 0.25rem;
   }
 
   .remove-btn:hover {
@@ -249,6 +273,8 @@
     cursor: pointer;
     transition: var(--transition);
     box-shadow: var(--shadow-sm);
+    text-decoration: none;
+    display: inline-block;
   }
 
   .empty-btn:hover {
@@ -285,7 +311,7 @@
   }
 
   .total-label {
-    color: var(--text-dark);
+    color: var(--text);
     font-weight: 600;
   }
 
@@ -300,7 +326,7 @@
   }
 
   .proceed-btn {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: var(--gradient);
     color: white;
     font-size: 1.1rem;
     font-weight: 600;
@@ -313,10 +339,11 @@
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
+    text-decoration: none;
   }
 
   .proceed-btn:hover {
-    background: linear-gradient(135deg, var(--primary), #D14A4A);
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     transform: translateY(-3px);
     box-shadow: var(--shadow);
   }
@@ -324,6 +351,23 @@
   .proceed-btn:active {
     transform: translateY(0);
   }
+
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    color: white;
+    background-color: var(--dark);
+    box-shadow: var(--shadow);
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  .toast.success { background-color: var(--success); }
+  .toast.error { background-color: var(--error); }
+  .toast.fade-out { opacity: 0; }
 
   @media (max-width: 768px) {
     header {
@@ -345,6 +389,8 @@
     .item-price {
       width: 100%;
       justify-content: space-between;
+      margin-left: 0;
+      margin-top: 0.5rem;
     }
     
     .proceed-btn {
@@ -440,34 +486,63 @@
     </div>
 
     <div class="proceed-section">
-      <a href="order_checkout.html" class="proceed-btn" id="proceedBtn" onclick="proceedOrder()" style="display: none;">
+      <a href="order_checkout.html" class="proceed-btn" id="proceedBtn" style="display: none;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="10" cy="20.5" r="1"/><circle cx="18" cy="20.5" r="1"/>
           <path d="M2.5 2.5h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6l1.6-8.4H7.1"/>
         </svg>
         Proceed to Checkout
-      </button>
+      </a>
     </div>
   </div>
 
 <script>
-  // Food icon and image mappings
-  const foodIcons = {
-    'pizza': '🍕', 'burger': '🍔', 'pasta': '🍝', 'salad': '🥗',
-    'sushi': '🍣', 'sandwich': '🥪', 'taco': '🌮', 'burrito': '🌯',
-    'ramen': '🍜', 'curry': '🍛', 'fried chicken': '🍗', 'steak': '🥩',
-    'soup': '🍲', 'ice cream': '🍨', 'cake': '🍰', 'default': '🍽️'
+
+  // Updated food image mappings with proper aspect ratio and higher quality
+  const foodImages = {
+    'pizza': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&h=300&fit=crop&auto=format',
+    'burger': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&h=300&fit=crop&auto=format',
+    'pasta': 'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=300&h=300&fit=crop&auto=format',
+    'salad': 'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=300&h=300&fit=crop&auto=format',
+    'sushi': 'https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=300&h=300&fit=crop&auto=format',
+    'sandwich': 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=300&h=300&fit=crop&auto=format',
+    'taco': 'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=300&h=300&fit=crop&auto=format',
+    'burrito': 'https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=300&h=300&fit=crop&auto=format',
+    'ramen': 'https://images.unsplash.com/photo-1623341214825-9f4f963727da?w=300&h=300&fit=crop&auto=format',
+    'curry': 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=300&h=300&fit=crop&auto=format',
+    'fried chicken': 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=300&h=300&fit=crop&auto=format',
+    'steak': 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=300&h=300&fit=crop&auto=format',
+    'soup': 'https://images.unsplash.com/photo-1547592180-85f173990554?w=300&h=300&fit=crop&auto=format',
+    'ice cream': 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=300&h=300&fit=crop&auto=format',
+    'cake': 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&h=300&fit=crop&auto=format',
+    'biryani': 'https://images.unsplash.com/photo-1701579231305-d84d8af9a3fd?auto=format&fit=crop&q=60',
+    'default': 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300&h=300&fit=crop&auto=format'
   };
 
-  const foodImages = {
-    'pizza': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&auto=format&fit=crop',
-    'burger': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&auto=format&fit=crop',
-    'pasta': 'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=300&auto=format&fit=crop',
-    'salad': 'https://images.unsplash.com/photo-1546793665-c74683f339c1?w=300&auto=format&fit=crop',
-    'sushi': 'https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=300&auto=format&fit=crop',
-    'sandwich': 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=300&auto=format&fit=crop',
-    
-  };
+  // Updated CSS for perfect image display
+  const style = document.createElement('style');
+  style.textContent = `
+    .item-img-container {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .item-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .order-item:hover .item-img {
+      transform: scale(1.05);
+    }
+  `;
+  document.head.appendChild(style);
+
 
   // Safe localStorage access with fallbacks
   function getLocalStorage(key, fallback = null) {
@@ -512,67 +587,23 @@
     }
   }
 
-  // Get food image or icon with fallbacks
+  // Modified getFoodImage function to ensure proper image matching
   function getFoodImage(itemName) {
     if (!itemName || typeof itemName !== 'string') return foodImages.default;
+    
     const lowerName = itemName.toLowerCase();
+    // Check for exact matches first
+    if (foodImages[lowerName]) return foodImages[lowerName];
+    
+    // Then check for partial matches
     for (const [key, value] of Object.entries(foodImages)) {
       if (lowerName.includes(key)) return value;
     }
+    
     return foodImages.default;
   }
 
-  function getFoodIcon(itemName) {
-    if (!itemName || typeof itemName !== 'string') return foodIcons.default;
-    const lowerName = itemName.toLowerCase();
-    for (const [key, value] of Object.entries(foodIcons)) {
-      if (lowerName.includes(key)) return value;
-    }
-    return foodIcons.default;
-  }
-
-  // Initialize the page based on type
-  function initPage() {
-    const { orderKey, cartKey, menuKey } = getUserKeys();
-    
-    if (document.querySelector('.food-item')) {
-      // This is the menu page
-      initMenuPage();
-    } else if (document.getElementById('orderDetails')) {
-      // This is the summary page
-      initSummaryPage();
-    }
-    
-    setupNavigationState();
-  }
-
-  // Initialize menu page
-  function initMenuPage() {
-    const { cartKey, totalKey } = getUserKeys();
-    
-    // Restore cart state
-    restoreCart();
-    
-    // Setup event listeners
-    const orderBtn = document.querySelector('.place-order-btn');
-    if (orderBtn) {
-      orderBtn.addEventListener('click', placeOrder);
-    }
-    
-    // Setup quantity buttons
-    document.querySelectorAll('.increase-btn').forEach(btn => {
-      btn.addEventListener('click', () => increase(btn));
-    });
-    
-    document.querySelectorAll('.decrease-btn').forEach(btn => {
-      btn.addEventListener('click', () => decrease(btn));
-    });
-    
-    // Save initial menu state
-    saveMenuState();
-  }
-
-  // Initialize summary page
+  // Initialize the summary page
   function initSummaryPage() {
     const { orderKey } = getUserKeys();
     const order = getLocalStorage(orderKey, []);
@@ -614,13 +645,12 @@
       itemEl.className = 'order-item';
       
       const foodImage = getFoodImage(item.name);
-      const foodIcon = getFoodIcon(item.name);
       const itemTotal = (item.price * item.qty).toFixed(2);
       
       itemEl.innerHTML = `
         <div class="item-info">
-          <div class="item-img" style="background-image: url('${foodImage}'); background-size: cover;">
-            ${foodIcon}
+          <div class="item-img-container">
+            <img src="${foodImage}" alt="${item.name}" class="item-img" onerror="this.src='${foodImages.default}'">
           </div>
           <div class="item-details">
             <h3>${item.name}</h3>
@@ -648,269 +678,6 @@
     if (subtotalEl) subtotalEl.textContent = `₹${subtotal.toFixed(2)}`;
     if (taxEl) taxEl.textContent = `₹${tax.toFixed(2)}`;
     if (totalEl) totalEl.textContent = `₹${total.toFixed(2)}`;
-  }
-
-  // Handle navigation state
-  function setupNavigationState() {
-    window.addEventListener('pageshow', function(event) {
-      if (event.persisted) {
-        // Page was restored from bfcache, refresh data
-        location.reload();
-      }
-    });
-
-    // Save state before leaving menu page
-    window.addEventListener('beforeunload', function() {
-      if (document.querySelector('.food-item')) {
-        saveMenuState();
-      }
-    });
-  }
-
-  // Save current menu state
-  function saveMenuState() {
-    try {
-      const { menuKey } = getUserKeys();
-      const state = {};
-      
-      document.querySelectorAll('.food-item').forEach(item => {
-        const nameElement = item.querySelector('h3');
-        const priceElement = item.querySelector('.price');
-        if (nameElement && priceElement) {
-          state[nameElement.textContent.trim()] = {
-            qty: parseInt(priceElement.dataset.qty || 0),
-            price: parseInt(item.getAttribute('data-price')) || 0
-          };
-        }
-      });
-      
-      setLocalStorage(menuKey, state);
-    } catch (e) {
-      console.error("Error saving menu state:", e);
-    }
-  }
-
-  // Restore cart from storage
-  function restoreCart() {
-    try {
-      const { cartKey, totalKey, menuKey } = getUserKeys();
-      const cart = getLocalStorage(cartKey, {});
-      const total = getLocalStorage(totalKey, 0);
-      const menuState = getLocalStorage(menuKey, {});
-      let itemCount = 0;
-      
-      // First restore from menu state if available
-      document.querySelectorAll('.food-item').forEach(item => {
-        try {
-          const nameElement = item.querySelector('h3');
-          const priceElement = item.querySelector('.price');
-          
-          if (!nameElement || !priceElement) return;
-          
-          const name = nameElement.textContent.trim();
-          const price = parseInt(item.getAttribute('data-price')) || 0;
-          
-          // Prefer cart data over menu state
-          let qty = 0;
-          if (cart[name]) {
-            qty = parseInt(cart[name].qty) || 0;
-          } else if (menuState[name]) {
-            qty = parseInt(menuState[name].qty) || 0;
-          }
-          
-          priceElement.dataset.qty = qty;
-          priceElement.textContent = qty > 0 ? `Qty: ${qty}` : 'Qty: 0';
-          itemCount += qty;
-        } catch (e) {
-          console.error("Error restoring item:", e);
-        }
-      });
-      
-      // Update UI
-      const totalElement = document.getElementById('totalAmount');
-      const countElement = document.getElementById('itemCount');
-      
-      if (totalElement) totalElement.textContent = total;
-      if (countElement) countElement.textContent = itemCount;
-      
-      // If cart is empty, ensure total is 0
-      if (itemCount === 0) {
-        resetCartUI();
-      }
-    } catch (e) {
-      console.error("Restore cart error:", e);
-      resetCartUI();
-    }
-  }
-
-  // Quantity increase function
-  function increase(btn) {
-    if (!btn) return;
-    
-    try {
-      const container = btn.closest('.price-bar');
-      if (!container) return;
-      
-      const span = container.querySelector('.price');
-      if (!span) return;
-      
-      let qty = parseInt(span.dataset.qty || 0) + 1;
-      if (isNaN(qty)) qty = 1;
-      
-      span.dataset.qty = qty;
-      span.textContent = `Qty: ${qty}`;
-      updateCartAndTotal();
-      
-      btn.classList.add('pulse');
-      setTimeout(() => btn.classList.remove('pulse'), 300);
-    } catch (e) {
-      console.error("Increase quantity error:", e);
-      showToast("Error increasing quantity", "error");
-    }
-  }
-
-  // Quantity decrease function
-  function decrease(btn) {
-    if (!btn) return;
-    
-    try {
-      const container = btn.closest('.price-bar');
-      if (!container) return;
-      
-      const span = container.querySelector('.price');
-      if (!span) return;
-      
-      let qty = parseInt(span.dataset.qty || 0);
-      if (isNaN(qty)) qty = 0;
-      if (qty > 0) qty--;
-      
-      span.dataset.qty = qty;
-      span.textContent = qty > 0 ? `Qty: ${qty}` : 'Qty: 0';
-      updateCartAndTotal();
-    } catch (e) {
-      console.error("Decrease quantity error:", e);
-      showToast("Error decreasing quantity", "error");
-    }
-  }
-
-  // Update cart and total
-  function updateCartAndTotal() {
-    try {
-      const { cartKey, totalKey, orderKey } = getUserKeys();
-      let total = 0;
-      let itemCount = 0;
-      const cart = {};
-      const orderItems = [];
-      
-      document.querySelectorAll('.food-item').forEach(item => {
-        try {
-          const nameElement = item.querySelector('h3');
-          const priceElement = item.querySelector('.price');
-          
-          if (!nameElement || !priceElement) return;
-          
-          const name = nameElement.textContent.trim();
-          const price = parseInt(item.getAttribute('data-price')) || 0;
-          const qty = parseInt(priceElement.dataset.qty || 0);
-          
-          if (qty > 0) {
-            cart[name] = { qty, price };
-            orderItems.push({ name, qty, price });
-            total += qty * price;
-            itemCount += qty;
-          }
-        } catch (e) {
-          console.error("Error processing item:", e);
-        }
-      });
-      
-      // Update UI
-      const totalElement = document.getElementById('totalAmount');
-      const countElement = document.getElementById('itemCount');
-      
-      if (totalElement) totalElement.textContent = total;
-      if (countElement) countElement.textContent = itemCount;
-      
-      // Save to storage
-      setLocalStorage(cartKey, cart);
-      setLocalStorage(totalKey, total);
-      setLocalStorage(orderKey, orderItems);
-      saveMenuState();
-      
-      // If cart is empty, ensure total is 0
-      if (itemCount === 0) {
-        resetCartUI();
-      }
-    } catch (e) {
-      console.error("Update cart error:", e);
-      showToast("Error updating cart", "error");
-      resetCartUI();
-    }
-  }
-
-  // Place order function
-  function placeOrder() {
-    try {
-      const { orderKey, totalKey } = getUserKeys();
-      const orderItems = [];
-      let total = 0;
-      let itemCount = 0;
-      
-      document.querySelectorAll('.food-item').forEach(item => {
-        try {
-          const nameElement = item.querySelector('h3');
-          const priceElement = item.querySelector('.price');
-          
-          if (!nameElement || !priceElement) return;
-          
-          const name = nameElement.textContent.trim();
-          const qty = parseInt(priceElement.dataset.qty || 0);
-          const price = parseInt(item.getAttribute('data-price')) || 0;
-          
-          if (qty > 0) {
-            orderItems.push({ name, qty, price });
-            total += qty * price;
-            itemCount += qty;
-          }
-        } catch (e) {
-          console.error("Error processing order item:", e);
-        }
-      });
-      
-      if (orderItems.length === 0) {
-        showToast("🛑 Your cart is empty. Please add items before placing an order.", "error");
-        return;
-      }
-      
-      // Calculate total with tax and delivery
-      const tax = total * 0.05;
-      total = total + tax + 49; // 49 is delivery fee
-      
-      // Save order with error handling
-      const success = setLocalStorage(orderKey, orderItems) &&
-                     setLocalStorage(totalKey, total);
-      
-      if (success) {
-        // Show loading state
-        const btn = document.querySelector('.place-order-btn');
-        if (btn) {
-          const originalText = btn.innerHTML;
-          btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-          btn.disabled = true;
-          
-          setTimeout(() => {
-            window.location.href = 'order-summary.html';
-          }, 800);
-        } else {
-          window.location.href = 'order-summary.html';
-        }
-      } else {
-        showToast("⚠️ Failed to save your order. Please try again.", "error");
-      }
-    } catch (e) {
-      console.error("Place order error:", e);
-      showToast("⚠️ An unexpected error occurred. Please try again.", "error");
-    }
   }
 
   // Update quantity in summary page
@@ -946,7 +713,11 @@
       setLocalStorage(orderKey, order);
       setLocalStorage(cartKey, cart);
       
-      location.reload();
+      // Show feedback to user
+      showToast(`Updated quantity for ${order[index].name} to ${newQty}`, "success");
+      
+      // Reload to show updated cart
+      setTimeout(() => location.reload(), 300);
     } catch (e) {
       console.error("Update quantity error:", e);
       showToast("⚠️ Failed to update quantity. Please try again.", "error");
@@ -954,171 +725,42 @@
   }
 
   // Remove item from summary page
-  
-  // Remove item from summary page - FINAL FIXED VERSION
-function removeItem(index) {
+  function removeItem(index) {
   try {
-    const { orderKey, cartKey, menuKey, totalKey } = getUserKeys();
+    const { orderKey, cartKey } = getUserKeys();
     const order = getLocalStorage(orderKey, []);
     if (!order[index]) return;
 
     const removedItem = order.splice(index, 1)[0];
     
-    // Rebuild cart and calculate new totals
+    // Update cart
     const cart = {};
-    let subtotal = 0;
     order.forEach(item => {
       cart[item.name] = { qty: item.qty, price: item.price };
-      subtotal += item.price * item.qty;
     });
     
-    // Calculate new total with tax and delivery
-    const tax = subtotal * 0.05;
-    const total = subtotal ; // 
-    
-    // Update menu state
-    const menuState = getLocalStorage(menuKey, {});
-    if (menuState[removedItem.name]) {
-      menuState[removedItem.name].qty = 0;
-      setLocalStorage(menuKey, menuState);
-    }
-    
-    // Save all changes
+    // Save changes
     setLocalStorage(orderKey, order);
     setLocalStorage(cartKey, cart);
-    setLocalStorage(totalKey, total);
     
-    // Broadcast changes to other tabs
-    broadcastCartUpdate();
+    // Trigger update notification
+    localStorage.setItem('cartUpdated', Date.now());
     
-    // Reload to show updated cart
-    location.reload();
+    // Show feedback and reload
+    showToast(`Removed ${removedItem.name} from your order`, "success");
+    setTimeout(() => location.reload(), 300);
   } catch (e) {
     console.error("Remove item error:", e);
     showToast("⚠️ Failed to remove item. Please try again.", "error");
   }
 }
 
-// Update menu totals - STANDALONE FUNCTION
-function updateMenuTotals() {
-  try {
-    const { cartKey, totalKey } = getUserKeys();
-    const cart = getLocalStorage(cartKey, {});
-    const total = getLocalStorage(totalKey, 0);
-    
-    let itemCount = 0;
-    Object.values(cart).forEach(item => {
-      itemCount += item.qty || 0;
-    });
-    
-    const totalElement = document.getElementById('totalAmount');
-    const countElement = document.getElementById('itemCount');
-    
-    if (totalElement) totalElement.textContent = total;
-    if (countElement) countElement.textContent = itemCount;
-    
-    // Update individual item quantities
-    document.querySelectorAll('.food-item').forEach(item => {
-      const nameElement = item.querySelector('h3');
-      const priceElement = item.querySelector('.price');
-      if (nameElement && priceElement) {
-        const name = nameElement.textContent.trim();
-        const qty = cart[name]?.qty || 0;
-        priceElement.dataset.qty = qty;
-        priceElement.textContent = qty > 0 ? `Qty: ${qty}` : 'Qty: 0';
-      }
-    });
-  } catch (e) {
-    console.error("Update menu totals error:", e);
-  }
-}
-
-// Initialize the page - CORRECTED VERSION
-function initPage() {
-  try {
-    const { orderKey, cartKey } = getUserKeys();
-    
-    if (document.querySelector('.food-item')) {
-      // Menu page initialization
-      initMenuPage();
-      setupCartUpdateListener();
-    } else if (document.getElementById('orderDetails')) {
-      // Summary page initialization
-      initSummaryPage();
-    }
-    
-    setupNavigationState();
-  } catch (e) {
-    console.error("Page initialization error:", e);
-  }
-}
-
-// Broadcast cart updates to other tabs
-function broadcastCartUpdate() {
-  try {
-    const { cartKey } = getUserKeys();
-    // Dispatch custom event
-    window.dispatchEvent(new CustomEvent('cartUpdated', {
-      detail: { cartKey }
-    }));
-    // Use localStorage event for cross-tab communication
-    localStorage.setItem('cartUpdateTrigger', Date.now().toString());
-  } catch (e) {
-    console.error("Broadcast cart update error:", e);
-  }
-}
-
-// Setup cart update listeners
-function setupCartUpdateListener() {
-  try {
-    // Listen for custom events
-    window.addEventListener('cartUpdated', (event) => {
-      const { cartKey } = getUserKeys();
-      if (event.detail.cartKey === cartKey) {
-        updateMenuTotals();
-      }
-    });
-    
-    // Listen for storage events
-    window.addEventListener('storage', (event) => {
-      if (event.key === 'cartUpdateTrigger') {
-        updateMenuTotals();
-      }
-    });
-  } catch (e) {
-    console.error("Cart update listener setup error:", e);
-  }
-}
-
-  // Reset cart UI
-  function resetCartUI() {
-    try {
-      const { cartKey, totalKey, orderKey } = getUserKeys();
-      
-      const totalElement = document.getElementById('totalAmount');
-      const countElement = document.getElementById('itemCount');
-      
-      if (totalElement) totalElement.textContent = '0';
-      if (countElement) countElement.textContent = '0';
-      
-      // Reset all quantity displays
-      document.querySelectorAll('.price').forEach(priceElement => {
-        priceElement.dataset.qty = '0';
-        priceElement.textContent = 'Qty: 0';
-      });
-      
-      // Clear storage
-      setLocalStorage(cartKey, {});
-      setLocalStorage(totalKey, 0);
-      setLocalStorage(orderKey, []);
-    } catch (e) {
-      console.error("Reset cart UI error:", e);
-    }
-  }
-
   // Show toast notification
   function showToast(message, type = 'success') {
     try {
+      // Remove existing toasts
+      document.querySelectorAll('.toast').forEach(toast => toast.remove());
+      
       const toast = document.createElement('div');
       toast.className = `toast ${type}`;
       toast.textContent = message;
@@ -1135,32 +777,7 @@ function setupCartUpdateListener() {
   }
 
   // Initialize when DOM is loaded
-  document.addEventListener('DOMContentLoaded', initPage);
-
-  // Add CSS for toast notifications if not already present
-  if (!document.querySelector('style#toast-styles')) {
-    const style = document.createElement('style');
-    style.id = 'toast-styles';
-    style.textContent = `
-      .toast {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        padding: 12px 24px;
-        border-radius: 4px;
-        color: white;
-        background-color: #333;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        z-index: 1000;
-        opacity: 1;
-        transition: opacity 0.5s;
-      }
-      .toast.success { background-color: #4CAF50; }
-      .toast.error { background-color: #F44336; }
-      .toast.fade-out { opacity: 0; }
-    `;
-    document.head.appendChild(style);
-  }
+  document.addEventListener('DOMContentLoaded', initSummaryPage);
 </script>
 </body>
 </html>
