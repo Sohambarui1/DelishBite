@@ -827,6 +827,47 @@
       transform: translateY(0);
     }
   }
+
+  /* Add these to your existing CSS */
+
+  /* Enhanced 3D card effect */
+  .food-card {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                box-shadow 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    perspective: 1000px;
+    position: relative;
+  }
+
+  .food-card:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.03);
+    box-shadow: 0 20px 40px rgba(138, 79, 255, 0.3);
+  }
+
+  .food-card img {
+    transform: translateZ(20px);
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .food-card:hover img {
+    transform: translateZ(30px) scale(1.05);
+  }
+
+  /* 3D floating effect for hero section */
+  .hero-content {
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateZ(20px);
+    }
+    50% {
+      transform: translateY(-20px) translateZ(30px);
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -836,7 +877,7 @@
     <nav>
       <a href="#" class="active">Home</a>
       <a href="menu.html">Menu</a>
-      <a href="#">Order</a>
+      <a href="order-summary.html">MyCart</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="profile-icon" onclick="openDashboard()">
@@ -872,7 +913,7 @@
             <h3>Truffle Mushroom Pizza</h3>
             <p>Wood-fired crust with wild mushrooms and truffle oil</p>
             <div class="price">₹499</div>
-            <button class="add-to-cart">Add to Cart</button>
+            <button class="add-to-cart" onclick="addToCartAndRedirect('Truffle Mushroom Pizza', 499, 'https://images.unsplash.com/photo-1598023696416-0193a0bcd302?auto=format&fit=crop&q=60')">Add to Cart</button>
           </div>
         </div>
         
@@ -890,7 +931,7 @@
             <h3>Gourmet Chicken Burger</h3>
             <p>Angus chicken patty with aged cheddar and caramelized onions</p>
             <div class="price">₹399</div>
-            <button class="add-to-cart">Add to Cart</button>
+            <button class="add-to-cart" onclick="addToCartAndRedirect('Gourmet Chicken Burger', 399, 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&q=80')">Add to Cart</button>
           </div>
         </div>
         
@@ -908,7 +949,7 @@
             <h3>Truffle Cream Pasta</h3>
             <p>Handmade pasta with wild mushrooms and truffle cream sauce</p>
             <div class="price">₹449</div>
-            <button class="add-to-cart">Add to Cart</button>
+            <button class="add-to-cart" onclick="addToCartAndRedirect('Truffle Cream Pasta', 449, 'https://media.istockphoto.com/id/1084512928/photo/pasta.jpg?b=1&s=170667a&w=0&k=20&c=ITXDgHyer1qHrlJJkE5baeOf9tKR0gPwNXeUSCgWd30=')">Add to Cart</button>
           </div>
         </div>
         
@@ -926,7 +967,7 @@
             <h3>Chocolate Soufflé</h3>
             <p>Warm chocolate soufflé with vanilla bean ice cream</p>
             <div class="price">₹349</div>
-            <button class="add-to-cart">Add to Cart</button>
+            <button class="add-to-cart" onclick="addToCartAndRedirect('Chocolate Soufflé', 349, 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=60')">Add to Cart</button>
           </div>
         </div>
         
@@ -944,7 +985,7 @@
             <h3>Hyderabadi Dum Biryani</h3>
             <p>Authentic Hyderabadi biryani with raita and mirchi ka salan</p>
             <div class="price">₹379</div>
-            <button class="add-to-cart">Add to Cart</button>
+            <button class="add-to-cart" onclick="addToCartAndRedirect('Hyderabadi Dum Biryani', 379, 'https://images.unsplash.com/photo-1701579231305-d84d8af9a3fd?auto=format&fit=crop&q=60')">Add to Cart</button>
           </div>
         </div>
         
@@ -962,7 +1003,7 @@
             <h3>Mediterranean Salad</h3>
             <p>Fresh greens with feta, olives, and balsamic glaze</p>
             <div class="price">₹299</div>
-            <button class="add-to-cart">Add to Cart</button>
+            <button class="add-to-cart" onclick="addToCartAndRedirect('Mediterranean Salad', 299, 'https://images.unsplash.com/photo-1631215060641-b9e8e55859a8?auto=format&fit=crop&q=80')">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -1107,7 +1148,7 @@
       <div class="dashboard-divider"></div>
 
       <div class="dashboard-links">
-        <a href="#" class="dashboard-link">
+        <a href="order-history.html" class="dashboard-link">
           <i class="fas fa-history"></i>
           <span>Order History</span>
         </a>
@@ -1147,6 +1188,45 @@
     });
   } catch (e) {
     console.error("AOS initialization failed:", e);
+  }
+
+  // Function to add item to cart and redirect
+  function addToCartAndRedirect(itemName, itemPrice, itemImage) {
+    try {
+      // Get current user or use guest
+      const user = JSON.parse(localStorage.getItem('delishUser')) || {};
+      const userId = user.email || 'guest';
+      
+      // Get existing cart or create new one
+      const cartKey = `delishCart_${userId}`;
+      let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+      
+      // Add new item to cart
+      const newItem = {
+        id: Date.now().toString(),
+        name: itemName,
+        price: itemPrice,
+        image: itemImage,
+        quantity: 1
+      };
+      
+      cart.push(newItem);
+      
+      // Save updated cart
+      localStorage.setItem(cartKey, JSON.stringify(cart));
+      
+      // Calculate and save total
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      localStorage.setItem(`delishTotal_${userId}`, total.toString());
+      
+      // Redirect to order summary page
+      window.location.href = 'order-summary.html';
+      
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      // Fallback: Just redirect if cart functionality fails
+      window.location.href = 'order-summary.html';
+    }
   }
 
   // Dashboard Panel Functions with enhanced safety
@@ -1285,6 +1365,13 @@
     }
   }
 
+  const user = JSON.parse(localStorage.getItem('delishUser'));
+if (user) {
+  // Optionally redirect or show personalized info
+  console.log("Logged in as:", user.email);
+}
+
+
   // Auto-scroll with safety checks
   function setupAutoScroll() {
     try {
@@ -1394,6 +1481,7 @@
     }
   }
 
+
   // Initialize everything safely
   document.addEventListener('DOMContentLoaded', function() {
     try {
@@ -1440,8 +1528,6 @@
     transition: transform 0.2s, color 0.2s;
   }
 </style>
-
-
 
 </body>
 </html>

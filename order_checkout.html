@@ -6,7 +6,7 @@
   <title>Checkout - DelishBite</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <script src="https://checkout.razorpay.com/v1/order_checkout.js"></script>
   <style>
   :root {
     /* Updated color palette with better contrast */
@@ -577,6 +577,8 @@
     color: var(--text-light);
     font-size: 1rem;
   }
+
+  
 </style>
 </head>
 <body>
@@ -732,23 +734,23 @@
   // Safe localStorage access with fallbacks
   function getLocalStorage(key, fallback = null) {
     try {
-      const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : fallback;
+        const item = localStorage.getItem(key);
+        return item ? JSON.parse(item) : fallback;
     } catch (e) {
-      console.error(`Error reading ${key} from localStorage:`, e);
-      return fallback;
+        console.error(`Error reading ${key} from localStorage:`, e);
+        return fallback;
     }
-  }
+}
 
-  function setLocalStorage(key, value) {
+function setLocalStorage(key, value) {
     try {
-      localStorage.setItem(key, JSON.stringify(value));
-      return true;
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
     } catch (e) {
-      console.error(`Error writing to ${key} in localStorage:`, e);
-      return false;
+        console.error(`Error writing to ${key} in localStorage:`, e);
+        return false;
     }
-  }
+}
 
   // Calculate order totals from cart/order data
   function calculateOrderTotals() {
@@ -943,74 +945,199 @@
       console.error("Payment selection error:", e);
     }
   }
+  async function confirmOrder() {
+  try {
+    if (!validateAddress() || !validatePayment()) return;
 
-  // Order confirmation
-async function confirmOrder() {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const payment = document.getElementById('payment').value;
+    const save = document.getElementById('saveAddress').checked;
+
+    const { subtotal, deliveryFee, tax, total } = calculateOrderTotals();
+    
+    if (save) {
+      setLocalStorage("delishAddress", { name, phone, address });
+    }
+
+    const user = getLocalStorage("delishUser", { email: 'guest_' + Date.now().toString(36).slice(-8) });
+    const userId = user.id || 'guest';
+    const cartKey = `delishCart_v2_${user.email}`;
+    const cartItems = Object.values(getLocalStorage(cartKey, {}));
+
+    if (cartItems.length === 0) {
+      showNotification("Your cart is empty", "error");
+      return;
+    }
+
+    const orderData = {
+    userId: user.id,
+    items: cartItems,
+    total: total,
+    deliveryAddress: document.getElementById('address').value.trim(), // Make sure this matches your form field
+    paymentMethod: document.getElementById('payment').value // Make sure this matches your payment selection
+  };
+
+  console.log("Submitting order data:", orderData); // Debug log
+
+  const response = await fetch('http://localhost:3000/order', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(orderData)
+  });
+
+    if (!response.ok) {
+      throw new Error('Failed to save order to server');
+    }
+
+    // Save to local history as fallback
+    const savedOrder = saveOrderToHistory(orderData);
+    
+    // Clear cart
+    localStorage.removeItem(cartKey);
+    localStorage.removeItem(`delishTotal_v2_${user.email}`);
+    
+    // Show success
+    document.getElementById('orderSuccessAnimation').classList.add('active');
+    
+    setTimeout(() => {
+      window.location.href = `menu.html?orderId=${savedOrder.orderId}`;
+    }, 3000);
+    
+  } catch (error) {
+    console.error("Order confirmation failed:", error);
+    showNotification("Failed to process your order. Please try again.", "error");
+  }
+}
+
+// Keep only one version of saveOrderToHistory (remove any duplicates)
+function saveOrderToHistory(orderDetails) {
     try {
-        // Validate inputs
-        if (!validateAddress() || !validatePayment()) return;
+        // Get or create user account
+        let user = getLocalStorage("delishUser");
         
-        // Get form values
-        const name = document.getElementById('name').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const address = document.getElementById('address').value.trim();
-        const payment = document.getElementById('payment').value;
-        const save = document.getElementById('saveAddress').checked;
-        
-        // Calculate totals
-        const { subtotal, deliveryFee, tax, total } = calculateOrderTotals();
-        
-        // Save address if requested
-        if (save) {
-            setLocalStorage("delishAddress", { name, phone, address });
+        // If no user exists (guest checkout), create a temporary guest user
+        if (!user) {
+            user = {
+                email: 'guest_' + Date.now().toString(36).slice(-8),
+                name: 'Guest Customer',
+                guest: true
+            };
+            setLocalStorage("delishUser", user);
         }
-        
-        // Process payment
-        if (payment === 'upi') {
-            const upiId = document.getElementById('upiId').value.trim();
-            const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
-            
-            if (isMobile) {
-                window.location.href = `upi://pay?pa=${upiId}&pn=DelishBite&tn=DelishBite%20Order&am=${total}&cu=INR`;
-                return;
-            } else {
-                showNotification("UPI payments require a mobile device. Please use your phone or choose another method.", "error");
-                return;
-            }
+
+        // Validate required order details
+        if (!orderDetails) {
+            throw new Error('No order details provided');
         }
+
+        // Validate items array
+        if (!Array.isArray(orderDetails.items) || orderDetails.items.length === 0) {
+            throw new Error('Order must contain at least one item');
+        }
+
+        // Create complete order object
+        const order = {
+            orderId: 'DB-' + Date.now().toString().slice(-6) + Math.floor(Math.random() * 90 + 10),
+            orderDate: new Date().toISOString(),
+            status: orderDetails.paymentMethod === 'cod' ? 'Processing' : 'Paid',
+            items: orderDetails.items.map(item => ({
+                id: item.id || 'item_' + Math.random().toString(36).substring(2, 8),
+                name: item.name || 'Unnamed Item',
+                price: parseFloat(item.price) || 0,
+                quantity: parseInt(item.quantity) || 1,
+                image: item.image || 'https://via.placeholder.com/70?text=Food',
+                notes: item.notes || ''
+            })),
+            subtotal: parseFloat(orderDetails.subtotal || 0),
+            deliveryFee: parseFloat(orderDetails.deliveryFee || 0),
+            discount: parseFloat(orderDetails.discount || 0),
+            tax: parseFloat(orderDetails.tax || 0),
+            total: parseFloat(orderDetails.total || 0),
+            deliveryAddress: typeof orderDetails.deliveryAddress === 'string' ? 
+                orderDetails.deliveryAddress : 
+                JSON.stringify(orderDetails.deliveryAddress),
+            paymentMethod: orderDetails.paymentMethod || 'Not specified'
+        };
+
+        // Get existing orders or initialize new array
+        const orderHistoryKey = `delishOrderHistory_${user.email}`;
+        const existingOrders = getLocalStorage(orderHistoryKey, []);
         
-        // Save order details
-        const user = getLocalStorage("delishUser", { email: 'guest' });
-        const userId = user.email || 'guest';
-        const orderKey = `delishOrder_v2_${userId}`;
-        const cartKey = `delishCart_v2_${userId}`;
+        // Add new order to beginning of array (most recent first)
+        const updatedOrders = [order, ...existingOrders];
         
-        const order = getLocalStorage(orderKey, []);
-        const cart = getLocalStorage(cartKey, {});
+        // Save to localStorage
+        setLocalStorage(orderHistoryKey, updatedOrders);
         
-        setLocalStorage("lastOrder", {
-            items: order.length ? order : Object.values(cart),
-            total,
-            address: { name, phone, address },
-            paymentMethod: payment,
-            date: new Date().toISOString()
-        });
-        
-        // Clear cart
-        localStorage.removeItem(cartKey);
-        localStorage.removeItem(`delishTotal_v2_${userId}`);
-        
-        // Show success animation
-        document.getElementById('orderSuccessAnimation').classList.add('active');
-        
-        // Redirect after delay
-        setTimeout(() => {
-            window.location.href = 'menu.html'; // Change this to your menu page URL
-        }, 3000);
+        console.log('Order saved successfully:', order);
+        return order;
         
     } catch (error) {
-        console.error("Order confirmation failed:", error);
-        showNotification("Failed to process your order. Please try again.", "error");
+        console.error('Failed to save order:', error);
+        showNotification('Failed to save your order. Please contact support if this persists.', 'error');
+        return null;
+    }
+}
+ 
+/**
+ * Handles order confirmation and saving
+ */
+async function confirmAndSaveOrder() {
+    try {
+        // 1. Get the current user
+        const user = JSON.parse(localStorage.getItem('delishUser')) || { 
+            email: 'guest_' + Date.now().toString(36).slice(-8),
+            guest: true
+        };
+
+        // 2. Get cart items
+        const cartKey = `delishCart_${user.email}`;
+        const cartItems = JSON.parse(localStorage.getItem(cartKey)) || [];
+        
+        if (cartItems.length === 0) {
+            alert('Your cart is empty. Please add items before checking out.');
+            return;
+        }
+
+        // 3. Calculate order totals (implement this according to your logic)
+        const orderTotals = calculateOrderTotals(cartItems);
+        
+        // 4. Get delivery address and payment method (from your form)
+        const deliveryAddress = getDeliveryAddressFromForm(); // Implement this
+        const paymentMethod = getPaymentMethodFromForm(); // Implement this
+
+        // 5. Prepare order details
+        const orderDetails = {
+            items: cartItems,
+            subtotal: orderTotals.subtotal,
+            deliveryFee: orderTotals.deliveryFee,
+            tax: orderTotals.tax,
+            discount: orderTotals.discount,
+            total: orderTotals.total,
+            deliveryAddress: deliveryAddress,
+            paymentMethod: paymentMethod
+        };
+
+        // 6. Save the order to history
+        const savedOrder = saveOrderToHistory(orderDetails);
+        
+        if (savedOrder) {
+            // 7. Clear the cart
+            localStorage.removeItem(cartKey);
+            
+            // 8. Redirect to order confirmation
+            window.location.href = `order-confirmation.html?orderId=${savedOrder.orderId}`;
+        } else {
+            alert('There was an issue saving your order. Please try again.');
+        }
+        
+    } catch (error) {
+        console.error('Order confirmation failed:', error);
+        alert('Failed to process your order. Please try again.');
     }
 }
 
@@ -1060,6 +1187,6 @@ async function confirmOrder() {
     this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(?=\d)/g, '$1/');
   });
   </script>
-
+  
 </body>
 </html>

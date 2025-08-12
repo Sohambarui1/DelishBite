@@ -629,58 +629,66 @@
 
     // Form submission
     async function handleFormSubmit(e) {
-      e.preventDefault();
-      
-      if (!validateForm()) return;
-      
-      // Show loading state
-      submitBtn.classList.add('loading');
-      btnText.style.visibility = 'hidden';
-      
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      const email = emailInput.value.trim();
-      const password = passwordInput.value;
-      let users = JSON.parse(localStorage.getItem('users') || '{}');
+  e.preventDefault();
 
-      if (isLogin) {
-        // Login logic
-        if (users[email] && users[email].password === password) {
-          loginSuccess(users[email]);
-        } else {
-          showNotification('Invalid email or password.', 'error');
-        }
-      } else {
-        // Signup logic
-        const name = document.getElementById('nameInput').value.trim();
-        if (users[email]) {
-          showNotification('This email is already registered. Please login.', 'error');
-        } else {
-          users[email] = { name, email, password };
-          localStorage.setItem('users', JSON.stringify(users));
-          showNotification('Account created successfully!', 'success');
-          setTimeout(() => {
-            loginSuccess(users[email]);
-          }, 1500);
-        }
-      }
-      
-      // Reset loading state
-      submitBtn.classList.remove('loading');
-      btnText.style.visibility = 'visible';
+  if (!validateForm()) return;
+
+  // Show loading state
+  submitBtn.classList.add('loading');
+  btnText.style.visibility = 'hidden';
+
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+
+  try {
+    let response;
+    if (isLogin) {
+      // 🔐 Login request
+      response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+    } else {
+      // 👤 Sign-up request
+      const name = document.getElementById('nameInput').value.trim();
+      response = await fetch('http://localhost:3000/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
+      });
     }
+
+    const result = await response.json();
+
+    if (response.ok && result.success) {
+      showNotification(isLogin ? 'Login successful!' : 'Account created!', 'success');
+      setTimeout(() => loginSuccess(result.user), 1000);
+    } else {
+      showNotification(result.error || 'Something went wrong.', 'error');
+    }
+  } catch (error) {
+    console.error("Login/Signup error:", error);
+    showNotification('⚠️ Server error. Please try again.', 'error');
+  }
+
+  // Reset loading state
+  submitBtn.classList.remove('loading');
+  btnText.style.visibility = 'visible';
+}
+
 
     // Handle successful login
     function loginSuccess(user) {
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('delishUser', JSON.stringify(user));
-      // Show success animation before redirect
-      submitBtn.style.background = 'var(--success)';
-      setTimeout(() => {
-        window.location.href = 'index.html';
-      }, 800);
-    }
+  localStorage.setItem('isLoggedIn', 'true');
+  localStorage.setItem('delishUser', JSON.stringify(user));
+
+  submitBtn.style.background = 'var(--success)';
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 800);
+}
+
 
     // Forgot password modal
     function showForgotPasswordModal() {
@@ -703,5 +711,6 @@
       }
     }
   </script>
+
 </body>
 </html>

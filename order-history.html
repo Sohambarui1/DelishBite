@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order History | DelishBite</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #e16bff;
+      --primary-light: #b388ff;
+      --primary-dark: #5c2dba;
+      --secondary: #e16bff;
+      --accent: #ff6b6b;
+      --light: #f8f4ff;
+      --dark: #2d3436;
+      --text: #4a4a4a;
+      --text-light: #7e7e7e;
+      --bg: #ffffff;
+      --section-bg: #f9f9f9;
+      --shadow: 0 4px 20px rgba(138, 79, 255, 0.15);
+      --border-radius: 8px;
+      --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --success-color: #2ed573;
+      --warning-color: #ffa502;
+      --danger-color: #ff4757;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--gradient);
+      color: white;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    header a {
+      color: white;
+      font-weight: 500;
+      text-decoration: none;
+      transition: var(--transition);
+      padding: 0.5rem 1.2rem;
+      border-radius: var(--border-radius);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    header a:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .order-history-section {
+      padding: 3rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--primary-dark);
+      font-size: 2.2rem;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 4px;
+    }
+
+    .no-orders {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .no-orders i {
+      font-size: 3rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .no-orders h3 {
+      font-size: 1.5rem;
+      color: var(--primary-dark);
+    }
+
+    .no-orders p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .order-card {
+      background: var(--bg);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: var(--transition);
+      margin-bottom: 2rem;
+    }
+
+    .order-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(138, 79, 255, 0.2);
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(138, 79, 255, 0.1);
+    }
+
+    .order-header h3 {
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .order-date {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .order-status {
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .order-status.processing {
+      background-color: rgba(255, 165, 2, 0.2);
+      color: var(--warning-color);
+    }
+
+    .order-status.completed {
+      background-color: rgba(46, 213, 115, 0.2);
+      color: var(--success-color);
+    }
+
+    .order-status.cancelled {
+      background-color: rgba(255, 71, 87, 0.2);
+      color: var(--danger-color);
+    }
+
+    .order-status.delivered {
+      background-color: rgba(30, 144, 255, 0.2);
+      color: dodgerblue;
+    }
+
+    .order-summary {
+      display: flex;
+      padding: 1.5rem;
+      gap: 2rem;
+    }
+
+    .order-items {
+      flex: 2;
+    }
+
+    .order-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(138, 79, 255, 0.1);
+      padding-bottom: 1rem;
+    }
+
+    .order-item-img-container {
+      width: 80px;
+      height: 80px;
+      min-width: 80px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-right: 1.2rem;
+    }
+
+    .order-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .order-item h4 {
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+    }
+
+    .order-item p,
+    .item-notes {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .item-notes {
+      font-style: italic;
+    }
+
+    .order-totals {
+      flex: 1;
+      background: rgba(138, 79, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      border: 1px solid rgba(138, 79, 255, 0.1);
+    }
+
+    .order-total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+
+    .order-total-row.total {
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed rgba(138, 79, 255, 0.3);
+    }
+
+    .order-details {
+      padding: 1.5rem;
+      background: rgba(138, 79, 255, 0.05);
+      border-top: 1px solid rgba(138, 79, 255, 0.1);
+    }
+
+    .detail-row {
+      display: flex;
+      margin-bottom: 1rem;
+      align-items: flex-start;
+    }
+
+    .detail-row span:first-child {
+      min-width: 160px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .detail-row span:last-child {
+      color: var(--text-light);
+      flex: 1;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      background: var(--gradient);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(138, 79, 255, 0.2);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(138, 79, 255, 0.3);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--dark);
+      color: white;
+      padding: 12px 24px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    .toast.error { background: var(--danger-color); }
+    .toast.success { background: var(--success-color); }
+    .toast.info { background: var(--primary); }
+
+    @media (max-width: 768px) {
+      .order-summary { flex-direction: column; }
+      .order-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+      .order-actions { justify-content: center; flex-wrap: wrap; }
+      .detail-row { flex-direction: column; gap: 0.3rem; }
+      .detail-row span:first-child { min-width: auto; }
+    }
+
+    @media (max-width: 480px) {
+      header { flex-direction: column; align-items: center; text-align: center; gap: 0.8rem; padding: 1rem; }
+      .section-title { font-size: 1.6rem; }
+      .section-title::after { width: 60px; height: 3px; }
+      .order-item { flex-direction: column; align-items: flex-start; }
+      .order-item-img-container { margin-right: 0; margin-bottom: 0.8rem; }
+    }
+</style>
+
+</head>
+<body>
+  <header data-aos="fade-down">
+    <h1>DelishBite</h1>
+    <a href="index.html">← Back to Home</a>
+  </header>
+
+  <section class="order-history-section">
+    <h2 class="section-title" data-aos="fade-up">Your Order History</h2>
+    
+    <div class="order-history-container" id="orderHistoryContainer">
+      <div class="no-orders" data-aos="fade-up">
+        <i class="fas fa-history"></i>
+        <h3>No orders yet</h3>
+        <p>Your completed orders will appear here</p>
+        <a href="menu.html" class="cta-button">Browse Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+// ✅ AOS animation
+AOS.init({ duration: 800, once: true });
+
+// ✅ Food image map
+const foodImages = {
+  'cheesy pizza': 'https://images.unsplash.com/photo-1598023696416-0193a0bcd302?auto=format&fit=crop&q=60',
+  'classic burger': 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&q=80',
+  'italian pasta': 'https://media.istockphoto.com/id/1084512928/photo/pasta.jpg?b=1&s=170667a&w=0&k=20&c=ITXDgHyer1qHrlJJkE5baeOf9tKR0gPwNXeUSCgWd30=',
+  'fresh sushi': 'https://media.istockphoto.com/photos/sushi-picture-id135849804?b=1&k=20&m=135849804&s=170667a&w=0&h=ssJ24AIse0ExehHxPRlM_eSP_b5oEAtNYd8McXXY-Yo=',
+  'garden salad': 'https://images.unsplash.com/photo-1631215060641-b9e8e55859a8?auto=format&fit=crop&q=80',
+  'chocolate cake': 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=max&q=80',
+  'spicy biryani': 'https://images.unsplash.com/photo-1701579231305-d84d8af9a3fd?auto=format&fit=crop&q=60',
+  'choco milkshake': 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&q=80',
+  'veggie wrap': 'https://images.media-allrecipes.com/userphotos/4548031.jpg',
+  'paneer tikka': 'https://media.istockphoto.com/id/1252422687/photo/tandoori-paneer-tikka.jpg?b=1&s=170667a&w=0&k=20&c=GGUHmRBCjjNaXuEiptrN2_5BUGInLF1xEq8aScSDAUE=',
+  'veg fried rice': 'https://images.unsplash.com/photo-1665332111329-dd9d7fa46c74?auto=format&fit=crop&q=60',
+  'chicken wings': 'https://media.istockphoto.com/photos/chicken-wings-picture-id532607409?b=1&k=20&m=532607409&s=170667a&w=0&h=e3HUexMEWPDUXjMxwdG-osA8TMR9K8Y-VM2mHUzpvhU=',
+  'strawberry smoothie': 'https://media.istockphoto.com/photos/strawberry-smoothies-juice-picture-id951214942?b=1&k=20&m=951214942&s=170667a&w=0&h=PQqwkOXhBATUh6KN5YtiYM3H4JmdAXJABMwXzPQMyaE=',
+  'default': 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300&h=300&fit=crop&auto=format'
+};
+
+function getItemImage(itemName) {
+  const lower = (itemName || '').toLowerCase();
+  for (const key in foodImages) {
+    if (lower.includes(key)) return foodImages[key];
+  }
+  return foodImages.default;
+}
+
+function getValidUser() {
+  try {
+    const userStr = localStorage.getItem('delishUser');
+    const user = JSON.parse(userStr);
+    return (user && user.id) ? user : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+let currentUserEmail = '';
+
+function showNoOrdersState(message = "No orders found") {
+  const container = document.getElementById('orderHistoryContainer');
+  container.innerHTML = `
+    <div class="no-orders" data-aos="fade-up">
+      <i class="fas ${message.includes('error') ? 'fa-exclamation-triangle' : 'fa-history'}"></i>
+      <h3>${message}</h3>
+      ${message.includes('log in') 
+        ? '<a href="login.html" class="cta-button">Log In</a>' 
+        : '<a href="menu.html" class="cta-button">Browse Menu</a>'}
+    </div>`;
+}
+
+function formatOrderDate(dateString) {
+  try {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-IN', {
+      day: 'numeric', month: 'short', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+  } catch {
+    return 'Date not available';
+  }
+}
+
+async function loadOrderHistory() {
+  const container = document.getElementById('orderHistoryContainer');
+  container.innerHTML = `
+    <div class="no-orders" data-aos="fade-up">
+      <i class="fas fa-spinner fa-spin"></i>
+      <h3>Loading your orders...</h3>
+    </div>`;
+
+  const user = getValidUser();
+  if (!user) return showNoOrdersState("Please log in to view your orders.");
+
+  try {
+    const res = await fetch(`http://localhost:3000/orders/${user.id}`);
+    if (!res.ok) throw new Error("Failed to fetch orders");
+    const data = await res.json();
+    if (!data.success || !data.orders?.length) {
+      return showNoOrdersState("You haven't placed any orders yet.");
+    }
+
+    container.innerHTML = data.orders.map((order, i) => {
+      const items = order.items || [];
+      const subtotal = items.reduce((sum, item) => sum + item.qty * item.price, 0);
+      const total = order.total || subtotal + 49;
+
+      return `
+        <div class="order-card" data-aos="fade-up" data-aos-delay="${i * 100}">
+          <div class="order-header">
+            <div>
+              <h3>Order #${order.id || 'N/A'}</h3>
+              <p class="order-date">${order.formatted_date || formatOrderDate(order.date)}</p>
+            </div>
+            <div class="order-status completed">Completed</div>
+          </div>
+
+          <div class="order-summary">
+            <div class="order-items">
+              ${items.map(item => `
+                <div class="order-item">
+                  <div class="order-item-img-container">
+                    <img src="${item.image || getItemImage(item.name)}" alt="${item.name}" 
+                         onerror="this.onerror=null;this.src='${foodImages.default}'">
+                  </div>
+                  <div>
+                    <h4>${item.name}</h4>
+                    <p>${item.qty} × ₹${item.price.toFixed(2)} = ₹${(item.qty * item.price).toFixed(2)}</p>
+                    ${item.notes ? `<p class="item-notes">Notes: ${item.notes}</p>` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="order-totals">
+              <div class="order-total-row"><span>Subtotal:</span><span>₹${subtotal.toFixed(2)}</span></div>
+              <div class="order-total-row"><span>Delivery:</span><span>₹49.00</span></div>
+              <div class="order-total-row total"><span>Total:</span><span>₹${total.toFixed(2)}</span></div>
+            </div>
+          </div>
+
+          <div class="order-details">
+            <div class="detail-row"><span><i class="fas fa-map-marker-alt"></i> Delivery Address:</span><span>${order.formatted_address || 'Not specified'}</span></div>
+            <div class="detail-row"><span><i class="fas fa-credit-card"></i> Payment Method:</span><span>${order.formatted_payment || 'Not specified'}</span></div>
+          </div>
+        </div>`;
+    }).join('');
+  } catch (err) {
+    console.error(err);
+    showNoOrdersState("Failed to load orders. Please try again later.");
+  }
+}
+
+function reorderItems(orderId) {
+  const user = getValidUser();
+  if (!user) return;
+
+  const history = JSON.parse(localStorage.getItem(`delishOrderHistory_${user.email}`)) || [];
+  const order = history.find(o => o.orderId === orderId);
+  if (!order) return showToast('Order not found', 'error');
+
+  const cart = {};
+  let total = 0;
+
+  order.items.forEach(item => {
+    cart[item.name] = {
+      qty: item.quantity,
+      price: item.price,
+      image: item.image || getItemImage(item.name)
+    };
+    total += item.price * item.quantity;
+  });
+
+  localStorage.setItem(`delishCart_v2_${user.email}`, JSON.stringify(cart));
+  localStorage.setItem(`delishTotal_v2_${user.email}`, total);
+  showToast('Items added to cart!', 'success');
+  setTimeout(() => location.href = 'menu.html', 1000);
+}
+
+function cancelOrder(orderId) {
+  const user = getValidUser();
+  if (!user) return;
+
+  let history = JSON.parse(localStorage.getItem(`delishOrderHistory_${user.email}`)) || [];
+  history = history.map(o => o.orderId === orderId ? { ...o, status: 'Cancelled' } : o);
+  localStorage.setItem(`delishOrderHistory_${user.email}`, JSON.stringify(history));
+  showToast('Order cancelled', 'success');
+  loadOrderHistory();
+}
+
+function trackOrder(orderId) {
+  showToast(`Tracking order #${orderId}...`, 'info');
+}
+
+function showToast(msg, type = 'info') {
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `<i class="fas ${type === 'error' ? 'fa-exclamation-circle' : type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i><span>${msg}</span>`;
+  document.body.appendChild(toast);
+
+  setTimeout(() => toast.classList.add('show'), 10);
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+// ✅ One-time DOM ready logic
+document.addEventListener('DOMContentLoaded', () => {
+  const user = getValidUser();
+  if (!user) return showNoOrdersState("Please log in to view your orders.");
+  currentUserEmail = user.email;
+  loadOrderHistory();
+
+  // Refresh every 10 seconds
+  setInterval(() => {
+    if (document.visibilityState === 'visible') {
+      loadOrderHistory();
+    }
+  }, 10000);
+});
+
+// ✅ Detect user change from other tabs
+window.addEventListener('storage', e => {
+  if (e.key === 'delishUser') {
+    const user = getValidUser();
+    if (user?.email !== currentUserEmail) {
+      currentUserEmail = user?.email;
+      loadOrderHistory();
+    }
+  }
+});
+
+/* 
+// ✅ Optional debug utility (for dev only)
+async function debugOrderLoading() {
+  const user = getValidUser();
+  if (!user) return;
+  const response = await fetch(`http://localhost:3000/orders/${user.id}`);
+  const text = await response.text();
+  console.log("Raw:", text);
+  console.log("Parsed:", JSON.parse(text));
+}
+debugOrderLoading();
+*/
+</script>
+</body>
+</html>
